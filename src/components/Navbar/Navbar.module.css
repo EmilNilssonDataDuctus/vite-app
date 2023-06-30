@@ -1,0 +1,31 @@
+.navbar {
+  background-color: rgba(255, 255, 255, 0.111);
+
+  box-shadow: 0 0 10px black;
+}
+
+.ul {
+  list-style: none;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.li {
+  display: inline-block;
+  margin-right: 40px;
+}
+
+.link {
+  padding: 4px 8px;
+  background-color: aqua;
+  border-radius: 20px;
+
+  transition: all 100ms;
+
+  &:hover {
+    border-radius: 10px;
+    background-color: blue;
+    color: white;
+  }
+}
