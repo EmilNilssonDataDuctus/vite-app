@@ -1,0 +1,30 @@
+.container {
+  display: block;
+  background-color: rgb(204, 204, 236);
+  border-radius: 10px 60px 40px;
+  padding: 8px 20px;
+  cursor: pointer;
+
+  &:hover {
+    .heading {
+      background-color: white;
+      color: black;
+      letter-spacing: 5px;
+    }
+    .text {
+      background-color: white;
+      color: black;
+    }
+  }
+}
+.heading {
+  display: inline-block;
+  background-color: blue;
+
+  transition: all 100ms;
+}
+.text {
+  background-color: blue;
+
+  transition: all 100ms 50ms;
+}
