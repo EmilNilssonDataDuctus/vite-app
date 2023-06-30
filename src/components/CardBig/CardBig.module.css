@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  justify-items: center;
+}
+.btn {
+  align-self: center;
+  box-shadow: 4px 4px 14px white;
+
+  transition: all 300ms;
+
+  &:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 4px 4px 14px rgba(255, 255, 255, 0.2);
+  }
+}
+.container {
+  margin: 0 16px;
+  background-color: rgb(204, 204, 236);
+  border-radius: 10px 60px 40px;
+  padding: 8px 20px;
+}
+.heading {
+  display: inline-block;
+  background-color: blue;
+
+  transition: all 100ms;
+}
+.text {
+  background-color: blue;
+
+  transition: all 100ms 50ms;
+}
