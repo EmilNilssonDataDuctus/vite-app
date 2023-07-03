@@ -1,7 +1,10 @@
 .navbar {
-  background-color: rgba(255, 255, 255, 0.111);
-
+  background-color: rgb(59, 59, 59);
   box-shadow: 0 0 10px black;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  top: 0;
 }
 
 .ul {
@@ -9,6 +12,9 @@
 
   display: flex;
   flex-direction: row;
+
+  margin: 0;
+  padding: 16px;
 }
 
 .li {
@@ -20,12 +26,17 @@
   padding: 4px 8px;
   background-color: aqua;
   border-radius: 20px;
+  color: black;
+  font-weight: 900;
+  padding: 8px 16px;
 
-  transition: all 100ms;
+  transition: border-radius 400ms, background-color 400ms, color 400ms,
+    box-shadow 400ms;
 
   &:hover {
-    border-radius: 10px;
-    background-color: blue;
-    color: white;
+    border-radius: 0;
+    background-color: black;
+    color: aqua;
+    box-shadow: 0 0 10px white;
   }
 }

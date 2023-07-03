@@ -8,6 +8,12 @@ function CardBig() {
   const [next, setNext] = useState();
   console.log("card: ", card);
 
+  const [showFront, setShowFront] = useState(true);
+
+  const toggleSprite = () => {
+    setShowFront(() => !showFront);
+  };
+
   const fetchData = async (string) => {
     console.log("string: ", string);
     const res = await fetch(string);
@@ -45,19 +51,35 @@ function CardBig() {
   return (
     <div className={styles.wrapper}>
       {prev && (
-        <a className={styles.btn} href={`/card/${prev.name}`}>
-          Prev
+        <a className={styles.btnPrev} href={`/card/${prev.name}`}>
+          <span className={styles.nextLink}>&lt;</span>
+        </a>
+      )}
+      {next && (
+        <a className={styles.btnNext} href={`/card/${next.name}`}>
+          <span className={styles.nextLink}>&gt;</span>
         </a>
       )}
       <div className={styles.container}>
         <h2 className={styles.heading}>{card?.name}</h2>
-        <p className={styles.text}>World</p>
+        <p
+          className={styles["toggle-back"]}
+          onMouseOver={() => toggleSprite()}
+          onMouseLeave={() => toggleSprite()}
+        >
+          Show back
+        </p>
+        <div>
+          <img
+            src={
+              showFront
+                ? card?.sprites["front_default"]
+                : card?.sprites["back_default"]
+            }
+            alt={card?.name}
+          />
+        </div>
       </div>
-      {next && (
-        <a className={styles.btn} href={`/card/${next.name}`}>
-          Next
-        </a>
-      )}
     </div>
   );
 }
