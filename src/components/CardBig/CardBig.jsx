@@ -27,8 +27,19 @@ function CardBig() {
       // Set state
       setCard(card);
 
-      // Get links to neighboring pokemon
+      // Promise.all([
+      //   fetchPokemon(card?.id - 1),
+      //   fetchPokemon(card?.id + 1),
+      // ]).then((data) => {
+      //   setPrev(data[0]);
+      //   setNext(data[1]);
+      // });
 
+      // TODO: I tried to replace the code below with a Promise.all call (as seen above)
+      // but when you navigate to bulbasaur there is no previous pokemon
+      // this causes one of the fetches to crash and rejects the entire Promise.all call
+
+      // Get links to neighboring pokemon
       fetchPokemon(card?.id - 1)
         .then((card) => {
           setPrev(card);
