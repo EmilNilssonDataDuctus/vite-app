@@ -6,7 +6,6 @@ function CardBig() {
   const [card, setCard] = useState();
   const [prev, setPrev] = useState();
   const [next, setNext] = useState();
-  console.log("card: ", card);
 
   const [showFront, setShowFront] = useState(true);
 
@@ -15,34 +14,35 @@ function CardBig() {
   };
 
   const fetchData = async (string) => {
-    console.log("string: ", string);
     const res = await fetch(string);
-    console.log("res: ", res);
     const json = await res.json();
-    console.log("json: ", json);
     return json;
   };
 
+  const fetchPokemon = (id) =>
+    fetchData("https://pokeapi.co/api/v2/pokemon/" + id);
+
   useEffect(() => {
-    const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
-    console.log("url: ", url);
-    fetchData(url).then((card) => {
+    fetchPokemon(name).then((card) => {
       // Set state
       setCard(card);
 
       // Get links to neighboring pokemon
-      fetchData(`https://pokeapi.co/api/v2/pokemon/${card?.id - 1}`)
+
+      fetchPokemon(card?.id - 1)
         .then((card) => {
           setPrev(card);
         })
         .catch((error) => {
+          console.log("error: ", error);
           setPrev(null);
         });
-      fetchData(`https://pokeapi.co/api/v2/pokemon/${card?.id + 1}`)
+      fetchPokemon(card?.id + 1)
         .then((card) => {
           setNext(card);
         })
         .catch((error) => {
+          console.log("error: ", error);
           setPrev(null);
         });
     });
