@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
 export const MainWrapper = styled.main`
-  margin-top: 56px;
+  margin: 56px auto 0;
 `;

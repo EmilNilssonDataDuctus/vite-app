@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { MainWrapper } from "../../Shared/Page.styled";
 import "./Home.css";
-import { MainWrapper } from "./Home.styled";
 
 export function Home() {
   const [count, setCount] = useState(0);

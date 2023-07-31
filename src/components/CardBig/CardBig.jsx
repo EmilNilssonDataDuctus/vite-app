@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { fetchPokemonByID } from "../../Shared/FetchPokemon";
 import styles from "./CardBig.module.css";
 function CardBig() {
   const { name } = useParams();
@@ -13,17 +14,8 @@ function CardBig() {
     setShowFront(() => !showFront);
   };
 
-  const fetchData = async (string) => {
-    const res = await fetch(string);
-    const json = await res.json();
-    return json;
-  };
-
-  const fetchPokemon = (id) =>
-    fetchData("https://pokeapi.co/api/v2/pokemon/" + id);
-
   useEffect(() => {
-    fetchPokemon(name).then((card) => {
+    fetchPokemonByID(name).then((card) => {
       // Set state
       setCard(card);
 
@@ -40,7 +32,7 @@ function CardBig() {
       // this causes one of the fetches to crash and rejects the entire Promise.all call
 
       // Get links to neighboring pokemon
-      fetchPokemon(card?.id - 1)
+      fetchPokemonByID(card?.id - 1)
         .then((card) => {
           setPrev(card);
         })
@@ -48,7 +40,7 @@ function CardBig() {
           console.log("error: ", error);
           setPrev(null);
         });
-      fetchPokemon(card?.id + 1)
+      fetchPokemonByID(card?.id + 1)
         .then((card) => {
           setNext(card);
         })

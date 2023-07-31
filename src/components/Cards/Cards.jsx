@@ -1,33 +1,27 @@
 import { useEffect, useState } from "react";
-import Card from "../Card/Card";
+import { fetchManyPokemon } from "../../Shared/FetchPokemon";
+import { MainWrapper } from "../../Shared/Page.styled";
+import Card from "./Card/Card";
+import { CardsLibrary } from "./Cards.styled";
 
 function Cards() {
   const [cards, setCards] = useState([]);
 
-  const fetchData = async () => {
-    const res = await fetch("https://pokeapi.co/api/v2/pokemon/");
-    console.log("res: ", res);
-    const json = await res.json();
-    console.log("json: ", json);
-    return json.results;
-  };
-
   useEffect(() => {
-    fetchData().then((cards) => {
-      setCards(cards);
-      console.log("cards: ", cards);
+    fetchManyPokemon().then((cards) => {
+      setCards(cards.results);
     });
   }, []);
 
   return (
-    <>
+    <MainWrapper>
       <h1>Cards</h1>
-      <div>
+      <CardsLibrary>
         {cards?.map((card) => (
           <Card key={card.name} card={card} />
         ))}
-      </div>
-    </>
+      </CardsLibrary>
+    </MainWrapper>
   );
 }
 
