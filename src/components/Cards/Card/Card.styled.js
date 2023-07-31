@@ -1,34 +1,11 @@
 import { styled } from "styled-components";
+import { CommonLink } from "../../../Shared/Links.styled";
 
-/*
-const animateBorder = keyframes`
- 0% {
-       border-radius: 20px 60px 40px 60px;
-  }
- 25% {
-       border-radius: 10px 60px 40px 60px;
-  }
-40% {
-      border-radius: 50px;
-}
- 50% {
-       border-radius: 10px 10px 40px 60px;
-  }
- 75% {
-       border-radius: 10px 10px 10px 60px;
-  }
- 100% {
-       border-radius: 10px;
-   }
-`; 
-*/
-
-export const CardContainer = styled.a`
+export const CardContainer = styled.div`
   display: block;
   background-color: rgb(204, 204, 236);
-  border-radius: 20px 60px 40px 60px;
+  border-radius: 20px 60px 40px 5px;
   padding: 8px 20px;
-  cursor: pointer;
   box-shadow: 0 0 15px 4px white;
   transition: box-shadow 100ms ease-in-out, border-radius 200ms ease-in-out;
 
@@ -45,6 +22,14 @@ export const CardContainer = styled.a`
       background-color: white;
       color: black;
     }
+
+    a {
+      box-shadow: 0 0 15px 4px black;
+
+      &:hover {
+        box-shadow: 0 0 5px 4px grey;
+      }
+    }
   }
 `;
 
@@ -58,4 +43,15 @@ export const CardHeading = styled.h2`
 export const CardCopy = styled.p`
   background-color: blue;
   transition: all 100ms 50ms;
+`;
+
+export const CardLink = styled(CommonLink)`
+  color: black;
+  background-color: white;
+  padding: 4px 8px;
+
+  &:hover {
+    color: white;
+    background-color: black;
+  }
 `;
