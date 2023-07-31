@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchPokemonByID } from "../../../Shared/FetchPokemon";
-import styles from "./Card.module.css";
+import { CardContainer, CardCopy, CardHeading } from "./Card.styled.js";
 function Card({ card: cardProp }) {
   const [card, setCard] = useState();
 
@@ -12,16 +12,16 @@ function Card({ card: cardProp }) {
   }, [cardProp]);
 
   return (
-    <a className={styles.container} href={`/card/${card?.name}`}>
-      <h2 className={styles.heading}>{card?.name}</h2>
+    <CardContainer href={`/card/${card?.name}`}>
+      <CardHeading>{card?.name}</CardHeading>
       <img
         width="96"
         height="96"
         src={card?.sprites["front_default"]}
         alt={"Pokemon called: " + card?.name}
       />
-      <p className={styles.text}>World</p>
-    </a>
+      <CardCopy>World</CardCopy>
+    </CardContainer>
   );
 }
 
