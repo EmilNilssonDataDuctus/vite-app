@@ -5,7 +5,7 @@ export const CardContainer = styled.div`
   display: block;
   background-color: rgb(204, 204, 236);
   border-radius: 20px 60px 40px 5px;
-  padding: 8px 20px;
+  padding: 16px 20px;
   box-shadow: 0 0 15px 4px white;
   transition: box-shadow 100ms ease-in-out, border-radius 200ms ease-in-out;
 
@@ -46,12 +46,9 @@ export const CardCopy = styled.p`
 `;
 
 export const CardLink = styled(CommonLink)`
-  color: black;
   background-color: white;
-  padding: 4px 8px;
 
   &:hover {
     color: white;
-    background-color: black;
   }
 `;

@@ -1,16 +1,19 @@
 import { styled } from "styled-components";
 
-export const CommonLink = styled.a`
-  padding: 4px 8px;
-  background-color: aqua;
-  border-radius: 20px;
-  color: black;
-  font-weight: 900;
-  padding: 8px 16px;
-  text-decoration: none;
+const transitionDuration = "400ms";
+const transitionDelay = "150ms";
 
-  transition: border-radius 400ms, background-color 400ms, color 400ms,
-    box-shadow 400ms 100ms;
+export const CommonLink = styled.a`
+  text-decoration: none;
+  color: black;
+  background-color: aqua;
+  font-weight: 900;
+  border-radius: 20px;
+  padding: 8px 16px;
+
+  transition: border-radius ${transitionDuration},
+    background-color ${transitionDuration}, color ${transitionDuration},
+    box-shadow ${transitionDuration} ${transitionDelay};
 
   &:hover {
     border-radius: 0;
