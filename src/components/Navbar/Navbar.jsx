@@ -1,7 +1,7 @@
 import { CommonLink } from "../../Shared/Links.styled.js";
 import { ListItem, NavbarList, NavbarWrapper } from "./Navbar.styled.js";
 
-function Navbar() {
+function Navbar({ themeToggler }) {
   return (
     <NavbarWrapper>
       <NavbarList>
@@ -12,6 +12,7 @@ function Navbar() {
           <CommonLink href="/cards">Cards</CommonLink>
         </ListItem>
       </NavbarList>
+      <button onClick={() => themeToggler()}>Toggle Dark mode</button>
     </NavbarWrapper>
   );
 }

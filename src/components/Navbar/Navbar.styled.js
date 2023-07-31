@@ -7,6 +7,9 @@ export const NavbarWrapper = styled.nav`
   position: fixed;
   z-index: 2;
   top: 0;
+
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const NavbarList = styled.ul`
