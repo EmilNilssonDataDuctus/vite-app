@@ -41,7 +41,11 @@ export const MemoryGame = () => {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
 
+  const [gameOver, setGameOver] = useState(false);
+
   useEffect(() => {
+    setGameOver(false);
+    setSavedClicks([]);
     const fetchData = async () => {
       try {
         const arrOfRandomNumbers = getRandomNumbers(NO_CARDS_EASY);
@@ -55,8 +59,8 @@ export const MemoryGame = () => {
     };
     fetchData();
 
-    shuffleCards;
-  }, []);
+    shuffleCards();
+  }, [gameOver]);
 
   const shuffleCards = () => {
     let newList = [];
@@ -71,19 +75,29 @@ export const MemoryGame = () => {
   // store amount of clicks
   const recordClick = (id) => {
     console.log("id: ", id);
-    console.log("pokemonList: ", pokemonList);
-    if (savedClicks.find((storedId) => storedId === id)) {
-      // game over
-      console.log("You lose");
+    console.log("savedClicks: ", savedClicks);
+    const oldSavedClicks = [...savedClicks];
+    const isDuplicate = oldSavedClicks.find((x) => x === id);
+    if (!isDuplicate) {
+      setSavedClicks(() => [...oldSavedClicks, id]);
     } else {
-      setSavedClicks(() => [...savedClicks, id]);
+      setGameOver(true);
     }
-    console.log("pokemonList: ", pokemonList);
+    console.log("savedClicks: ", savedClicks);
 
-    setCurrentScore(() => currentScore + 1);
+    // console.log("pokemonList: ", pokemonList);
+    // if (savedClicks.find((storedId) => storedId === id)) {
+    //   // game over
+    //   console.log("You lose");
+    // } else {
+    //   setSavedClicks(() => [...savedClicks, id]);
+    // }
+    // console.log("pokemonList: ", pokemonList);
 
-    setPokemonList(() => shuffleArray(pokemonList));
-    console.log("pokemonList: ", pokemonList);
+    // setCurrentScore(() => currentScore + 1);
+
+    // setPokemonList(() => shuffleArray(pokemonList));
+    // console.log("pokemonList: ", pokemonList);
   };
 
   // handle event where user clicks on a card, store that in list of clicks
