@@ -5,6 +5,8 @@ import { MemoryCard } from "./MemoryCard/MemoryCard";
 import { CardContainer, ScoreCounter } from "./MemoryGame.styled";
 
 const MAX_POKEMON_ID = 150;
+const NO_CARDS_EASY = 3;
+const NO_CARDS_HARD = 20;
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
@@ -42,7 +44,7 @@ export const MemoryGame = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const arrOfRandomNumbers = getRandomNumbers(20);
+        const arrOfRandomNumbers = getRandomNumbers(NO_CARDS_EASY);
         const responses = await Promise.all(
           arrOfRandomNumbers.map((id) => fetchPokemonByID(id))
         );
@@ -58,8 +60,8 @@ export const MemoryGame = () => {
 
   const shuffleCards = () => {
     let newList = [];
-    while (newList.length < 20) {
-      let index = getRandomIntInclusive(1, 20);
+    while (newList.length < NO_CARDS_EASY) {
+      let index = getRandomIntInclusive(1, NO_CARDS_EASY);
       if (newList.find((num) => num === index)) return;
       newList.push(index);
     }
@@ -93,8 +95,12 @@ export const MemoryGame = () => {
     <MainWrapper>
       <h1>Memory</h1>
       <ScoreCounter>
-        <p>Current score: {currentScore}/20</p>
-        <p>Best score: {bestScore}/20</p>
+        <p>
+          Current score: {currentScore}/{NO_CARDS_EASY}
+        </p>
+        <p>
+          Best score: {bestScore}/{NO_CARDS_EASY}
+        </p>
       </ScoreCounter>
       <CardContainer>
         {pokemonList.map((pokemon) => {
