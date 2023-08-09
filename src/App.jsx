@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components";
 import CardBig from "./components/CardBig/CardBig";
 import Cards from "./components/Cards/Cards";
 import { Home } from "./components/Home/Home";
+import { KCSummerLeaguePage } from "./components/KCSummerLeaguePage/KCSummerLeaguePage";
 import Navbar from "./components/Navbar/Navbar";
 import { darkTheme, lightTheme } from "./components/Themes";
 import { GlobalStyles } from "./components/globalStyles";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/cards" element={<Cards />} />
           <Route path="/card/:name" element={<CardBig />} />
+          <Route path="/kc-summerleague" element={<KCSummerLeaguePage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

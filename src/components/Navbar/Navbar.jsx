@@ -11,6 +11,9 @@ function Navbar({ themeToggler }) {
         <ListItem>
           <CommonLink href="/cards">Cards</CommonLink>
         </ListItem>
+        <ListItem>
+          <CommonLink href="/kc-summerleague">KC Summerleague</CommonLink>
+        </ListItem>
       </NavbarList>
       <button onClick={() => themeToggler()}>Toggle Dark mode</button>
     </NavbarWrapper>
