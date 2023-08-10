@@ -8,6 +8,7 @@ import { GeneratePage } from "./components/GeneratePage/GeneratePage";
 import { Home } from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import { darkTheme, lightTheme } from "./components/Themes";
+import { TracerPage } from "./components/TracerPage/TracerPage";
 import { GlobalStyles } from "./components/globalStyles";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/cards" element={<Cards />} />
           <Route path="/card/:name" element={<CardBig />} />
           <Route path="/generate" element={<GeneratePage />} />
+          <Route path="/tracing" element={<TracerPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

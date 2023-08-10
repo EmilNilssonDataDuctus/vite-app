@@ -14,6 +14,9 @@ function Navbar({ themeToggler }) {
         <ListItem>
           <CommonLink href="/generate">Generator</CommonLink>
         </ListItem>
+        <ListItem>
+          <CommonLink href="/tracing">Tracing</CommonLink>
+        </ListItem>
       </NavbarList>
       <button onClick={() => themeToggler()}>Toggle Dark mode</button>
     </NavbarWrapper>
