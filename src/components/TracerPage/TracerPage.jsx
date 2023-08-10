@@ -8,6 +8,7 @@ import {
   DisplayContainerWrapper,
   ShowDiv,
   ShowDivSmall,
+  ShowDivSmallSmooth,
 } from "./TracerPage.styled";
 
 export const TracerPage = () => {
@@ -57,7 +58,7 @@ export const TracerPage = () => {
     }
 
     let shake_offset = getRandomIntInclusive(10, 20);
-    if (mouseIsDown) shake_offset = 5;
+    if (mouseIsDown) shake_offset = 2;
 
     setLeftShiftSmallBot(
       () =>
@@ -86,10 +87,10 @@ export const TracerPage = () => {
             onMouseLeave={detectMouseLeave}
           ></DisplayContainerReader>
           <DisplayContainerSmall>
-            <ShowDivSmall
+            <ShowDivSmallSmooth
               $left={leftShiftSmall}
               $top={topShiftSmall}
-            ></ShowDivSmall>
+            ></ShowDivSmallSmooth>
           </DisplayContainerSmall>
           <DisplayContainerSmallCopy>
             <ShowDivSmall

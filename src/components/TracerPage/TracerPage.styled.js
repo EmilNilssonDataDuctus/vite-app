@@ -55,3 +55,7 @@ export const ShowDivSmall = styled.div`
   left: ${(props) => props.$left};
   top: ${(props) => props.$top};
 `;
+
+export const ShowDivSmallSmooth = styled(ShowDivSmall)`
+  transition: left 100ms, top 100ms;
+`;
