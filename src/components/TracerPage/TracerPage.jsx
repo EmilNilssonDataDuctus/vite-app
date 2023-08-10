@@ -2,7 +2,9 @@ import { useState } from "react";
 import { MainWrapper } from "../../Shared/Page.styled";
 import {
   DisplayContainer,
+  DisplayContainerReader,
   DisplayContainerSmall,
+  DisplayContainerSmallCopy,
   DisplayContainerWrapper,
   ShowDiv,
   ShowDivSmall,
@@ -41,13 +43,21 @@ export const TracerPage = () => {
       <section>
         <h2>Opaque div on div generator</h2>
         <DisplayContainerWrapper>
-          <DisplayContainer onMouseMove={detectMouse}></DisplayContainer>
+          <DisplayContainerReader
+            onMouseMove={detectMouse}
+          ></DisplayContainerReader>
           <DisplayContainerSmall>
             <ShowDivSmall
               $left={leftShiftSmall}
               $top={topShiftSmall}
             ></ShowDivSmall>
           </DisplayContainerSmall>
+          <DisplayContainerSmallCopy>
+            <ShowDivSmall
+              $left={leftShiftSmall}
+              $top={topShiftSmall}
+            ></ShowDivSmall>
+          </DisplayContainerSmallCopy>
           <DisplayContainer>
             <ShowDiv $left={leftShift} $top={topShift}></ShowDiv>
           </DisplayContainer>
