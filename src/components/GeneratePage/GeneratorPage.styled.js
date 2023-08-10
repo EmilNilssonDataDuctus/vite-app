@@ -11,3 +11,10 @@ export const NestedDiv = styled.div`
   height: 90px;
   background-color: ${(props) => `rgba(0, 0, 0, ${props.$accent})`};
 `;
+
+export const InputLabel = styled.label`
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(255, 0, 0, 0.1);
+`;
