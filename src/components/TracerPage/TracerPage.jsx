@@ -11,11 +11,25 @@ import {
 } from "./TracerPage.styled";
 
 export const TracerPage = () => {
+  const [mouseIsDown, setMouseIsDown] = useState(false);
+
   const [leftShift, setLeftShift] = useState("310px");
   const [topShift, setTopShift] = useState("160px");
 
   const [leftShiftSmall, setLeftShiftSmall] = useState("160px");
   const [topShiftSmall, setTopShiftSmall] = useState("10px");
+
+  const [leftShiftSmallBot, setLeftShiftSmallBot] = useState("260px");
+  const [topShiftSmallBot, setTopShiftSmallBot] = useState("50px");
+
+  const detectMouseClick = (e) => {
+    console.log(e.target);
+    setMouseIsDown(() => !mouseIsDown);
+  };
+
+  const detectMouseLeave = () => {
+    setMouseIsDown(false);
+  };
 
   const detectMouse = (e) => {
     const offsetX = e.target.getBoundingClientRect().x;
@@ -35,6 +49,28 @@ export const TracerPage = () => {
 
     setLeftShiftSmall(() => pixelOffsetXSmall + "px");
     setTopShiftSmall(() => pixelOffsetYSmall + "px");
+
+    function getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+    }
+
+    let shake_offset = getRandomIntInclusive(10, 20);
+    if (mouseIsDown) shake_offset = 5;
+
+    setLeftShiftSmallBot(
+      () =>
+        pixelOffsetXSmall +
+        getRandomIntInclusive(-shake_offset, shake_offset) +
+        "px"
+    );
+    setTopShiftSmallBot(
+      () =>
+        pixelOffsetYSmall +
+        getRandomIntInclusive(-shake_offset, shake_offset) +
+        "px"
+    );
   };
 
   return (
@@ -45,6 +81,9 @@ export const TracerPage = () => {
         <DisplayContainerWrapper>
           <DisplayContainerReader
             onMouseMove={detectMouse}
+            onMouseDown={detectMouseClick}
+            onMouseUp={detectMouseClick}
+            onMouseLeave={detectMouseLeave}
           ></DisplayContainerReader>
           <DisplayContainerSmall>
             <ShowDivSmall
@@ -54,8 +93,8 @@ export const TracerPage = () => {
           </DisplayContainerSmall>
           <DisplayContainerSmallCopy>
             <ShowDivSmall
-              $left={leftShiftSmall}
-              $top={topShiftSmall}
+              $left={leftShiftSmallBot}
+              $top={topShiftSmallBot}
             ></ShowDivSmall>
           </DisplayContainerSmallCopy>
           <DisplayContainer>

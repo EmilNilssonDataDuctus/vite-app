@@ -4,6 +4,7 @@ export const DisplayContainerWrapper = styled.div`
   margin: 0 64px;
 
   display: grid;
+  align-items: center;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 16px;
