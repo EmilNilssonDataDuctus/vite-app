@@ -9,27 +9,30 @@ import {
 } from "./TracerPage.styled";
 
 export const TracerPage = () => {
-  const [leftShift, setLeftShift] = useState(0);
-  const [topShift, setTopShift] = useState(0);
+  const [leftShift, setLeftShift] = useState("310px");
+  const [topShift, setTopShift] = useState("160px");
 
-  const [leftShiftSmall, setLeftShiftSmall] = useState(0);
-  const [topShiftSmall, setTopShiftSmall] = useState(0);
+  const [leftShiftSmall, setLeftShiftSmall] = useState("160px");
+  const [topShiftSmall, setTopShiftSmall] = useState("10px");
 
   const detectMouse = (e) => {
     const offsetX = e.target.getBoundingClientRect().x;
     const offsetY = e.target.getBoundingClientRect().y;
 
-    const coordX = Math.floor(e.clientX - offsetX);
-    const coordY = Math.floor(e.clientY - offsetY);
+    const localCoordX = e.clientX - offsetX;
+    const localCoordY = e.clientY - offsetY;
 
-    setLeftShift(() => coordX + "px");
-    setTopShift(() => coordY + "px");
+    const pixelOffsetX = Math.floor(localCoordX);
+    const pixelOffsetY = Math.floor(localCoordY);
 
-    const coordXSmall = Math.floor((e.clientX - offsetX) / 2);
-    const coordYSmall = Math.floor((e.clientY - offsetY) / 2);
+    setLeftShift(() => pixelOffsetX + "px");
+    setTopShift(() => pixelOffsetY + "px");
 
-    setLeftShiftSmall(() => coordXSmall + "px");
-    setTopShiftSmall(() => coordYSmall + "px");
+    const pixelOffsetXSmall = Math.floor(localCoordX / 2);
+    const pixelOffsetYSmall = Math.floor(localCoordY / 2);
+
+    setLeftShiftSmall(() => pixelOffsetXSmall + "px");
+    setTopShiftSmall(() => pixelOffsetYSmall + "px");
   };
 
   return (
