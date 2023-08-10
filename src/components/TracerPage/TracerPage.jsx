@@ -23,8 +23,7 @@ export const TracerPage = () => {
   const [leftShiftSmallBot, setLeftShiftSmallBot] = useState("260px");
   const [topShiftSmallBot, setTopShiftSmallBot] = useState("50px");
 
-  const detectMouseClick = (e) => {
-    console.log(e.target);
+  const detectMouseClick = () => {
     setMouseIsDown(() => !mouseIsDown);
   };
 
