@@ -11,18 +11,12 @@ export const TracerPage = () => {
   const [topShift, setTopShift] = useState(0);
 
   const detectMouse = (e) => {
-    console.log(e);
-    console.log(e.target);
-    console.log(e.target.getBoundingClientRect());
     const offsetX = e.target.getBoundingClientRect().x;
     const offsetY = e.target.getBoundingClientRect().y;
 
-    console.log(e.clientX);
-    console.log(e.clientY);
-    console.log(e.clientY - offsetY);
-    console.log(e.clientX - offsetX);
     const coordX = Math.floor(e.clientX - offsetX);
     const coordY = Math.floor(e.clientY - offsetY);
+
     setLeftShift(() => coordX + "px");
     setTopShift(() => coordY + "px");
   };
