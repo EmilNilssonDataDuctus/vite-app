@@ -9,15 +9,15 @@ export const DisplayContainerWrapper = styled.div`
   grid-template-rows: 1fr 1fr;
   gap: 16px;
   grid-template-areas:
-    "reader top right"
-    "reader bot right";
+    "reader top topright"
+    "reader bot botright";
 `;
 
 export const DisplayContainer = styled.div`
   width: 600px;
   height: 600px;
   background-color: rgba(0, 0, 0, 0.4);
-  grid-area: right;
+  /* grid-area: right; */
 `;
 
 export const DisplayContainerReader = styled(DisplayContainer)`
@@ -45,6 +45,15 @@ export const DisplayContainerSmall = styled.div`
 
 export const DisplayContainerSmallCopy = styled(DisplayContainerSmall)`
   grid-area: bot;
+`;
+
+export const DisplayContainerSmallCopyTopRight = styled(DisplayContainerSmall)`
+  transform: rotate(180deg);
+  grid-area: topright;
+`;
+
+export const DisplayContainerSmallCopyBotRight = styled(DisplayContainerSmall)`
+  grid-area: botright;
 `;
 
 export const ShowDivSmall = styled.div`

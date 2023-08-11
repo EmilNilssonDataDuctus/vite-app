@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { MainWrapper } from "../../Shared/Page.styled";
 import {
-  DisplayContainer,
   DisplayContainerReader,
   DisplayContainerSmall,
   DisplayContainerSmallCopy,
+  DisplayContainerSmallCopyTopRight,
   DisplayContainerWrapper,
-  ShowDiv,
   ShowDivSmall,
   ShowDivSmallSmooth,
 } from "./TracerPage.styled";
@@ -97,9 +96,15 @@ export const TracerPage = () => {
               $top={topShiftSmallBot}
             ></ShowDivSmall>
           </DisplayContainerSmallCopy>
-          <DisplayContainer>
+          <DisplayContainerSmallCopyTopRight>
+            <ShowDivSmallSmooth
+              $left={leftShiftSmallBot}
+              $top={topShiftSmallBot}
+            ></ShowDivSmallSmooth>
+          </DisplayContainerSmallCopyTopRight>
+          {/* <DisplayContainer>
             <ShowDiv $left={leftShift} $top={topShift}></ShowDiv>
-          </DisplayContainer>
+          </DisplayContainer> */}
         </DisplayContainerWrapper>
       </section>
     </MainWrapper>
