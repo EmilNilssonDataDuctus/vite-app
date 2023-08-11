@@ -77,7 +77,7 @@ export const TracerPage = () => {
     <MainWrapper>
       <h1>Time to trace</h1>
       <section>
-        <h2>Opaque div on div generator</h2>
+        <h2>Move mouse below to see effects on other outputs</h2>
         <DisplayContainerWrapper>
           <DisplayContainerReader
             onMouseMove={detectMouse}
