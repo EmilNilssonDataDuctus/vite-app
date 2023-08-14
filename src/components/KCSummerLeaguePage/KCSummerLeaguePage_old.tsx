@@ -36,9 +36,14 @@ type Boulder = {
   boulderId: number;
 };
 
+type BoulderClimbed = {
+  boulderId: number;
+  completed: boolean;
+};
+
 type Climber = {
   name: string;
-  completedBoulders?: number[];
+  completedBoulders?: BoulderClimbed[];
 };
 
 const initialBoulderData: Boulder[] = [
@@ -150,6 +155,7 @@ const initialClimbersData: Climber[] = [
 function climbersReducer(climbers, action) {
   switch (action.type) {
     case "add_new_climber": {
+      localStorage.setItem("climbersData", JSON.stringify([climbers]));
       return [
         ...climbers,
         {
@@ -158,6 +164,19 @@ function climbersReducer(climbers, action) {
         },
       ];
     }
+    case "delete_climber": {
+      return climbers.filter((climber) => climber.name === action.name);
+    }
+    // case "toggle_boulder_completion": {
+    //   return climbers.map((c: Climber) => {
+    //     if (c.name === action.name) {
+    //       return {
+    //         name: c.name,
+
+    //       }
+    //     }
+    //   })
+    // }
   }
 }
 
@@ -167,7 +186,10 @@ export const KCSummerLeaguePage = () => {
 
   const [newClimberName, setNewClimberName] = useState("");
 
-  const [climbers, dispatch] = useReducer(climbersReducer, initialClimbersData);
+  const [climbers, dispatch] = useReducer(
+    climbersReducer,
+    JSON.parse(localStorage.getItem("climbersData")) || initialClimbersData
+  );
   console.log(typeof climbers);
   console.log(climbers);
 
@@ -180,6 +202,16 @@ export const KCSummerLeaguePage = () => {
     setNewClimberName(e.target.value);
   };
 
+  const TickBoulderProblem = (e) => {
+    dispatch({
+      type: "toggle_boulder_completion",
+      name: e.dataset.climber,
+      boulderId: e.dataset.boulderid,
+    });
+  };
+
+  const DeleteClimber = (e) => {};
+
   const AddNewClimber = (e) => {
     e.preventDefault();
 
@@ -187,14 +219,6 @@ export const KCSummerLeaguePage = () => {
       type: "add_new_climber",
       name: newClimberName,
     });
-
-    // localStorage.setItem(
-    //   "climbersData",
-    //   JSON.stringify([
-    //     ...JSON.parse(localStorage.getItem("climbersData")),
-    //     newClimber,
-    //   ])
-    // );
 
     // setClimbersData(JSON.parse(localStorage.getItem("climbersData")));
     setNewClimberName("");
@@ -234,12 +258,16 @@ export const KCSummerLeaguePage = () => {
   };
 
   const handleDeleteUser = (e) => {
-    console.log(e.target.parentNode.parentNode.firstChild.textContent);
+    const climberName = e.target.parentNode.parentNode.firstChild.textContent;
+
+    dispatch({
+      type: "delete_climber",
+      name: climberName,
+    });
   };
 
   useEffect(() => {
     setBoulderData(JSON.parse(localStorage.getItem("boulderData")));
-    // setClimbersData(JSON.parse(localStorage.getItem("climbersData")));
   }, []);
   return (
     <MainWrapper>
@@ -293,9 +321,9 @@ export const KCSummerLeaguePage = () => {
                             (boulder) => currentBoulder.boulderId === boulder
                           )
                         }
-                        onChange={toggleBoulderCompleted}
+                        onChange={TickBoulderProblem}
                         data-boulderno={currentBoulder.boulderId}
-                        data-user={climberItem.name}
+                        data-climber={climberItem.name}
                       />
                     </td>
                   );
