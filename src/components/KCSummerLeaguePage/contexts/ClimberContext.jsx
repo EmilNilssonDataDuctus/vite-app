@@ -10,7 +10,10 @@ export const ClimberProvider = ({ children }) => {
   const addClimber = (newClimber) => {
     console.log(newClimber);
 
-    setClimbers(() => [...climbers, newClimber]);
+    setClimbers(() => [
+      ...climbers,
+      { name: newClimber, completedBoulders: [] },
+    ]);
   };
 
   const deleteClimber = (climberId) => {

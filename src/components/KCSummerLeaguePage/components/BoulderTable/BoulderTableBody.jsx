@@ -8,7 +8,10 @@ export const BoulderTableBody = () => {
       {climbers?.map((climberItem) => {
         console.log(climberItem);
         return (
-          <BoulderTableBodyRow key={climberItem} climberItem={climberItem} />
+          <BoulderTableBodyRow
+            key={climberItem.name}
+            climberItem={climberItem}
+          />
         );
       })}
     </tbody>
