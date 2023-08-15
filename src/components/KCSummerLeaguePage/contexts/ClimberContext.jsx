@@ -1,11 +1,17 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const ClimberContext = createContext();
 
 export const useClimberContext = () => useContext(ClimberContext);
 
 export const ClimberProvider = ({ children }) => {
-  const [climbers, setClimbers] = useState([]);
+  const [climbers, setClimbers] = useState(
+    JSON.parse(localStorage.getItem("climbersdata")) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("climbersdata", JSON.stringify(climbers));
+  }, [climbers]);
 
   const addClimber = (newClimber) => {
     console.log(newClimber);

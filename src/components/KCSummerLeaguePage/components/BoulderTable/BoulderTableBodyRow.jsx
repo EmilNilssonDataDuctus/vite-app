@@ -11,12 +11,12 @@ export const BoulderTableBodyRow = ({ climberItem }) => {
   };
 
   const handleCheckboxToggle = (e) => {
-    e.target.checked
-      ? toggleRemoveBoulder(
-          e.target.dataset.climber,
-          e.target.dataset.boulderno
-        )
-      : toggleAddBoulder(e.target.dataset.climber, e.target.dataset.boulderno);
+    const boulderId = parseInt(e.target.dataset.boulderno, 10);
+    const isChecked = e.target.checked;
+
+    isChecked
+      ? toggleRemoveBoulder(climberItem.name, boulderId)
+      : toggleAddBoulder(e.target.dataset.climber, boulderId);
   };
 
   return (
@@ -31,9 +31,9 @@ export const BoulderTableBodyRow = ({ climberItem }) => {
             <input
               type="checkbox"
               checked={
-                !!climberItem.completedBoulders?.find(
-                  (boulder) => currentBoulder.boulderId === boulder
-                )
+                climberItem.completedBoulders.includes(
+                  currentBoulder.boulderId
+                ) || false
               }
               onChange={handleCheckboxToggle}
               data-boulderno={currentBoulder.boulderId}
