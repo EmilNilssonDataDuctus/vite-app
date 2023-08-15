@@ -12,6 +12,7 @@ function Navbar({ themeToggler }) {
           <CommonLink href="/cards">Cards</CommonLink>
         </ListItem>
         <ListItem>
+          <CommonLink href="/kc-summerleague">KC Summerleague</CommonLink>
           <CommonLink href="/memory-game">Memory Game</CommonLink>
           <CommonLink href="/generate">Generator</CommonLink>
         </ListItem>
