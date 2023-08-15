@@ -13,6 +13,15 @@ function Navbar({ themeToggler }) {
         </ListItem>
         <ListItem>
           <CommonLink href="/kc-summerleague">KC Summerleague</CommonLink>
+          <CommonLink href="/memory-game">Memory Game</CommonLink>
+          <CommonLink href="/generate">Generator</CommonLink>
+        </ListItem>
+        <ListItem>
+          <CommonLink href="/tracing">Tracing</CommonLink>
+          <CommonLink href="/hover-move">Hover effects</CommonLink>
+        </ListItem>
+        <ListItem>
+          <CommonLink href="/hover-move2">Hover effects 2</CommonLink>
         </ListItem>
       </NavbarList>
       <button onClick={() => themeToggler()}>Toggle Dark mode</button>
