@@ -8,6 +8,7 @@ import CardBig from "./components/CardBig/CardBig";
 import Cards from "./components/Cards/Cards";
 import { GeneratePage } from "./components/GeneratePage/GeneratePage";
 import { Home } from "./components/Home/Home";
+import { HoverCardsPage } from "./components/HoverCardsPage/HoverCardsPage";
 import { KCSummerLeaguePage } from "./components/KCSummerLeaguePage/KCSummerLeaguePage";
 import { MemoryGame } from "./components/MemoryGame/MemoryGame";
 import Navbar from "./components/Navbar/Navbar";
@@ -32,6 +33,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cards" element={<Cards />} />
+          <Route path="/memory-game" element={<MemoryGame />} />
+          <Route path="/card/:name" element={<CardBig />} />
+          <Route path="/hover-cards" element={<HoverCardsPage />} />
           <Route path="/game" element={<GamePage />} />
           <Route path="/memory-game" element={<MemoryGame />} />
           <Route path="/card/:name" element={<CardBig />} />

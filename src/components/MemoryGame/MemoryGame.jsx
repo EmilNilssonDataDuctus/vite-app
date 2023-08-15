@@ -40,9 +40,8 @@ export const MemoryGame = () => {
   const [savedClicks, setSavedClicks] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-
   const [gameOver, setGameOver] = useState(false);
-
+  
   useEffect(() => {
     setGameOver(false);
     setSavedClicks([]);
@@ -58,7 +57,6 @@ export const MemoryGame = () => {
       }
     };
     fetchData();
-
     shuffleCards();
   }, [gameOver]);
 
@@ -75,6 +73,19 @@ export const MemoryGame = () => {
   // store amount of clicks
   const recordClick = (id) => {
     console.log("id: ", id);
+    console.log("pokemonList: ", pokemonList);
+    if (savedClicks.find((storedId) => storedId === id)) {
+      // game over
+      console.log("You lose");
+    } else {
+      setSavedClicks(() => [...savedClicks, id]);
+    }
+    console.log("pokemonList: ", pokemonList);
+
+    setCurrentScore(() => currentScore + 1);
+
+    setPokemonList(() => shuffleArray(pokemonList));
+    console.log("pokemonList: ", pokemonList);
     console.log("savedClicks: ", savedClicks);
     const oldSavedClicks = [...savedClicks];
     const isDuplicate = oldSavedClicks.find((x) => x === id);
