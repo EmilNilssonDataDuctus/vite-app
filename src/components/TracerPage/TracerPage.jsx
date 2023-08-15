@@ -10,6 +10,8 @@ import {
   ShowDivSmallSmooth,
 } from "./TracerPage.styled";
 
+import { throttle } from "../../utils/throttle";
+
 export const TracerPage = () => {
   const [mouseIsDown, setMouseIsDown] = useState(false);
 
@@ -79,7 +81,7 @@ export const TracerPage = () => {
         <h2>Move mouse below to see effects on other outputs</h2>
         <DisplayContainerWrapper>
           <DisplayContainerReader
-            onMouseMove={detectMouse}
+            onMouseMove={throttle(detectMouse, 200)}
             onMouseDown={detectMouseClick}
             onMouseUp={detectMouseClick}
             onMouseLeave={detectMouseLeave}
