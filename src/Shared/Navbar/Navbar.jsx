@@ -1,4 +1,4 @@
-import { CommonLink } from "../../Shared/Links.styled.js";
+import { CommonLink } from "../Links.styled.js";
 import { ListItem, NavbarList, NavbarWrapper } from "./Navbar.styled.js";
 
 function Navbar({ themeToggler }) {
