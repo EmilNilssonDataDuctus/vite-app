@@ -1,5 +1,5 @@
-import { MainWrapper } from "../../../Shared/Page.styled";
-import { GameComponent } from "../../GameComponent/GameComponent";
+import { MainWrapper } from "../../Shared/Page.styled";
+import { GameComponent } from "../../components/GameComponent/GameComponent";
 
 export const GamePage = () => {
   return (
