@@ -12,6 +12,10 @@ function Navbar({ themeToggler }) {
           <CommonLink href="/cards">Cards</CommonLink>
         </ListItem>
         <ListItem>
+          <CommonLink href="/generate">Generator</CommonLink>
+        </ListItem>
+        <ListItem>
+          <CommonLink href="/tracing">Tracing</CommonLink>
           <CommonLink href="/hover-move">Hover effects</CommonLink>
         </ListItem>
         <ListItem>
