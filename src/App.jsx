@@ -11,6 +11,7 @@ import { Home } from "./components/Home/Home";
 import { KCSummerLeaguePage } from "./components/KCSummerLeaguePage/KCSummerLeaguePage";
 import { MemoryGame } from "./components/MemoryGame/MemoryGame";
 import Navbar from "./components/Navbar/Navbar";
+import { GamePage } from "./components/Pages/Game/Game";
 import { darkTheme, lightTheme } from "./components/Themes";
 import { TracerPage } from "./components/TracerPage/TracerPage";
 import { GlobalStyles } from "./components/globalStyles";
@@ -31,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cards" element={<Cards />} />
+          <Route path="/game" element={<GamePage />} />
           <Route path="/memory-game" element={<MemoryGame />} />
           <Route path="/card/:name" element={<CardBig />} />
           <Route path="/kc-summerleague" element={<KCSummerLeaguePage />} />
