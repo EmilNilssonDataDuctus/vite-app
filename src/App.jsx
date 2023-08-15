@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
+import { HoverEffectsPage } from "./Pages/HoverEffectsPage/HoverEffectsPage";
+import { HoverEffectsPage2 } from "./Pages/HoverEffectsPage2/HoverEffectsPage2";
 import CardBig from "./components/CardBig/CardBig";
 import Cards from "./components/Cards/Cards";
 import { GeneratePage } from "./components/GeneratePage/GeneratePage";
@@ -30,6 +32,8 @@ function App() {
           <Route path="/card/:name" element={<CardBig />} />
           <Route path="/generate" element={<GeneratePage />} />
           <Route path="/tracing" element={<TracerPage />} />
+          <Route path="/hover-move" element={<HoverEffectsPage />} />
+          <Route path="/hover-move2" element={<HoverEffectsPage2 />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
