@@ -5,6 +5,8 @@ import { MemoryCard } from "./MemoryCard/MemoryCard";
 import { CardContainer, ScoreCounter } from "./MemoryGame.styled";
 
 const MAX_POKEMON_ID = 150;
+const NO_CARDS_EASY = 3;
+const NO_CARDS_HARD = 20;
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
@@ -38,11 +40,14 @@ export const MemoryGame = () => {
   const [savedClicks, setSavedClicks] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-
+  const [gameOver, setGameOver] = useState(false);
+  
   useEffect(() => {
+    setGameOver(false);
+    setSavedClicks([]);
     const fetchData = async () => {
       try {
-        const arrOfRandomNumbers = getRandomNumbers(20);
+        const arrOfRandomNumbers = getRandomNumbers(NO_CARDS_EASY);
         const responses = await Promise.all(
           arrOfRandomNumbers.map((id) => fetchPokemonByID(id))
         );
@@ -52,14 +57,13 @@ export const MemoryGame = () => {
       }
     };
     fetchData();
-
-    shuffleCards;
-  }, []);
+    shuffleCards();
+  }, [gameOver]);
 
   const shuffleCards = () => {
     let newList = [];
-    while (newList.length < 20) {
-      let index = getRandomIntInclusive(1, 20);
+    while (newList.length < NO_CARDS_EASY) {
+      let index = getRandomIntInclusive(1, NO_CARDS_EASY);
       if (newList.find((num) => num === index)) return;
       newList.push(index);
     }
@@ -82,6 +86,29 @@ export const MemoryGame = () => {
 
     setPokemonList(() => shuffleArray(pokemonList));
     console.log("pokemonList: ", pokemonList);
+    console.log("savedClicks: ", savedClicks);
+    const oldSavedClicks = [...savedClicks];
+    const isDuplicate = oldSavedClicks.find((x) => x === id);
+    if (!isDuplicate) {
+      setSavedClicks(() => [...oldSavedClicks, id]);
+    } else {
+      setGameOver(true);
+    }
+    console.log("savedClicks: ", savedClicks);
+
+    // console.log("pokemonList: ", pokemonList);
+    // if (savedClicks.find((storedId) => storedId === id)) {
+    //   // game over
+    //   console.log("You lose");
+    // } else {
+    //   setSavedClicks(() => [...savedClicks, id]);
+    // }
+    // console.log("pokemonList: ", pokemonList);
+
+    // setCurrentScore(() => currentScore + 1);
+
+    // setPokemonList(() => shuffleArray(pokemonList));
+    // console.log("pokemonList: ", pokemonList);
   };
 
   // handle event where user clicks on a card, store that in list of clicks
@@ -93,8 +120,12 @@ export const MemoryGame = () => {
     <MainWrapper>
       <h1>Memory</h1>
       <ScoreCounter>
-        <p>Current score: {currentScore}/20</p>
-        <p>Best score: {bestScore}/20</p>
+        <p>
+          Current score: {currentScore}/{NO_CARDS_EASY}
+        </p>
+        <p>
+          Best score: {bestScore}/{NO_CARDS_EASY}
+        </p>
       </ScoreCounter>
       <CardContainer>
         {pokemonList.map((pokemon) => {
