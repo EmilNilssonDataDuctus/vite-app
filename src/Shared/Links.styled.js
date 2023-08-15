@@ -11,6 +11,7 @@ export const CommonLink = styled.a`
   border-radius: 20px;
   padding: 8px 16px;
 
+  white-space: nowrap;
   transition: border-radius ${transitionDuration},
     background-color ${transitionDuration}, color ${transitionDuration},
     box-shadow ${transitionDuration} ${transitionDelay};

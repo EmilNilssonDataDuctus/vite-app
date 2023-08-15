@@ -16,7 +16,8 @@ export const NavbarList = styled.ul`
   list-style: none;
 
   display: flex;
-  flex-direction: row;
+  gap: 16px 32px;
+  flex-wrap: wrap;
 
   margin: 0;
   padding: 16px;
@@ -24,5 +25,4 @@ export const NavbarList = styled.ul`
 
 export const ListItem = styled.li`
   display: inline-block;
-  margin-right: 40px;
 `;
