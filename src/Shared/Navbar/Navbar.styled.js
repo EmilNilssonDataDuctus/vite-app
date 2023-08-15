@@ -10,17 +10,24 @@ export const NavbarWrapper = styled.nav`
 
   display: flex;
   justify-content: space-between;
+
+  &:hover {
+    ul {
+      flex-wrap: wrap;
+    }
+  }
 `;
 
 export const NavbarList = styled.ul`
   list-style: none;
 
   display: flex;
-  gap: 16px 32px;
-  flex-wrap: wrap;
+  gap: 32px;
 
   margin: 0;
-  padding: 16px;
+  padding: 32px 16px;
+
+  transition: flex-wrap 200ms;
 `;
 
 export const ListItem = styled.li`
