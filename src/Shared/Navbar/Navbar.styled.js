@@ -11,7 +11,8 @@ export const NavbarWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     ul {
       flex-wrap: wrap;
     }
