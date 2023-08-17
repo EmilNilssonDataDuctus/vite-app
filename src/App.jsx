@@ -7,6 +7,7 @@ import { GeneratePage } from "./Pages/GeneratePage/GeneratePage";
 import { Home } from "./Pages/Home/Home";
 import { HoverEffectsPage } from "./Pages/HoverEffectsPage/HoverEffectsPage";
 import { HoverEffectsPage2 } from "./Pages/HoverEffectsPage2/HoverEffectsPage2";
+import { SpeedCalculator } from "./Pages/SpeedCalculator/SpeedCalculator";
 import Navbar from "./Shared/Navbar/Navbar";
 import CardBig from "./components/CardBig/CardBig";
 import Cards from "./components/Cards/Cards";
@@ -44,6 +45,7 @@ function App() {
           <Route path="/tracing" element={<TracerPage />} />
           <Route path="/hover-move" element={<HoverEffectsPage />} />
           <Route path="/hover-move2" element={<HoverEffectsPage2 />} />
+          <Route path="/speed-calculator" element={<SpeedCalculator />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
