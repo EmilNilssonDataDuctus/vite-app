@@ -3,6 +3,9 @@ import { MainWrapper } from "../../Shared/Page.styled";
 import { SectionContainer } from "./SpeedCalculator.styled";
 
 export const SpeedCalculator = () => {
+  const [outputArray, setOutputArray] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+
   const [defaultRuntime, setDefaultRuntime] = useState(60);
   const [updatedRuntime, setUpdatedRuntime] = useState(defaultRuntime);
   const speedTransformer = (originalRunTime, speedModifier) => {
@@ -24,6 +27,18 @@ export const SpeedCalculator = () => {
     setUpdatedRuntime(transformedSpeed);
   };
 
+  const runFunctions = () => {
+    // accept input
+    const input = inputValue;
+
+    // shortcircuit
+    if (!input) return;
+
+    // print to screen
+    setOutputArray([input, ...outputArray]);
+    setInputValue("");
+  };
+
   // Naive approach
   const speedTransformerNaive = (originalRunTime, speedModifier = 1.5) => {
     let transformedSpeed = originalRunTime / speedModifier;
@@ -35,6 +50,22 @@ export const SpeedCalculator = () => {
   return (
     <MainWrapper>
       <h1>Calculate how much time you save by speeding up a video</h1>
+      <SectionContainer>
+        <h2>My new demo</h2>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <br />
+        <button onClick={() => runFunctions()}>Click to run function</button>
+        <br />
+        <ul className="outputcontainer">
+          {outputArray.map((thing) => (
+            <li>{thing}</li>
+          ))}
+        </ul>
+      </SectionContainer>
       <SectionContainer>
         <h2>Demo 2x speed</h2>
         <p>Original runtime: {defaultRuntime}</p>
