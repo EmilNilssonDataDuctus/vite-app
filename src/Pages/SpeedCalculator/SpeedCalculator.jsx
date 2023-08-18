@@ -27,6 +27,8 @@ export const SpeedCalculator = () => {
     setUpdatedRuntime(transformedSpeed);
   };
 
+  const typeDeclarer = (input) => `${input}: <${typeof input}>`;
+
   const runFunctions = () => {
     // accept input
     let input = inputValue;
@@ -39,8 +41,7 @@ export const SpeedCalculator = () => {
     if (!isNaN(inputToNumber)) input = inputToNumber;
 
     // typecheck
-    const typeOfInput = typeof input;
-    input = `${input}<${typeOfInput}>`;
+    input = typeDeclarer(input);
 
     // print to screen
     setOutputArray([input, ...outputArray]);
