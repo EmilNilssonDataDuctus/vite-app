@@ -29,10 +29,12 @@ export const SpeedCalculator = () => {
 
   const runFunctions = () => {
     // accept input
-    const input = inputValue;
+    let input = inputValue;
 
     // shortcircuit
     if (!input) return;
+    const typeOfInput = typeof input;
+    input = `${input}<${typeOfInput}>`;
 
     // print to screen
     setOutputArray([input, ...outputArray]);
