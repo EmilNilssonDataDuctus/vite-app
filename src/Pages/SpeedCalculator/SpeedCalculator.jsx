@@ -27,18 +27,49 @@ export const SpeedCalculator = () => {
     setUpdatedRuntime(transformedSpeed);
   };
 
-  const typeDeclarer = (input) => `: <${typeof input}>`;
   const doubleInput = (input) => input * 2;
-  const transformNumber = (input) =>
-    `input: ${input}; doubled input: ${doubleInput(input)}`;
 
-  const runFunctions = () => {
+  const transformToString = {
+    append: {
+      typeDeclarer: (input) => `: <${typeof input}>`,
+      btnSource: (e) => `: (source: ${e.target.dataset.btntype})`,
+    },
+    transformNumber: (input) =>
+      `input: ${input}; doubled input: ${doubleInput(input)}`,
+    transformNumberClean: (input) =>
+      `${input} doubled => ${doubleInput(input)}`,
+  };
+
+  const findRuntimeFromDoubleSpeed = (runtime) => {
+    // log runtime
+    console.log("runtime: ", runtime);
+  };
+
+  const runFunctions = (e) => {
+    const validateSource = (e) => {
+      console.log("btn: ", e.target.dataset.btntype);
+      switch (e.target.dataset.btntype) {
+        case "test-function": {
+          output += transformToString.append.typeDeclarer(input);
+          output += transformToString.append.btnSource(e);
+          break;
+        }
+        case "doubling-function": {
+          output += transformToString.transformNumberClean(input);
+          break;
+        }
+        default:
+          break;
+      }
+    };
+
     // accept input
     let input = inputValue;
     let output = "";
-
     // shortcircuit
     if (!input) return;
+
+    validateSource(e);
 
     // attempt to find number in input
     const inputToNumber = parseInt(input, 10);
@@ -46,14 +77,11 @@ export const SpeedCalculator = () => {
       // change type of input
       input = inputToNumber;
 
-      // format output
-      output = transformNumber(input);
-    } else {
-      output = input;
+      // show runtime
+      findRuntimeFromDoubleSpeed(inputToNumber);
     }
 
     // append type at end of input
-    output += typeDeclarer(input);
 
     // print to screen
     setOutputArray([output, ...outputArray]);
@@ -74,12 +102,20 @@ export const SpeedCalculator = () => {
       <SectionContainer>
         <h2>My new demo</h2>
         <input
-          type="text"
+          type="number"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
         <br />
-        <button onClick={() => runFunctions()}>Click to run function</button>
+        {/* <button data-btntype="test-function" onClick={(e) => runFunctions(e)}>
+          Click to run test function
+        </button> */}
+        <button
+          data-btntype="doubling-function"
+          onClick={(e) => runFunctions(e)}
+        >
+          Click to double input
+        </button>
         <br />
         <ul className="outputcontainer">
           {outputArray.map((thing, i) => (
