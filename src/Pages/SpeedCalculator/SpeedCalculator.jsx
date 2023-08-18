@@ -2,15 +2,70 @@ import { useState } from "react";
 import { MainWrapper } from "../../Shared/Page.styled";
 import { SectionContainer } from "./SpeedCalculator.styled";
 
+const pasteFromClipboard = async () => await navigator.clipboard.readText();
+
+const clickToCopy = (textToCopy) => {
+  const copyThis = navigator.clipboard.writeText(textToCopy);
+  return (
+    <div
+      style={{
+        border: "1px solid green",
+        display: "flex",
+        gap: "8px",
+        height: "48px",
+      }}
+    >
+      <button onClick={copyThis}>Click to Copy</button>
+      <span style={{ alignSelf: "center" }}>{textToCopy}</span>
+    </div>
+  );
+};
+
+const ClickToCopySmall = ({ textToCopy }) => {
+  const copyThis = navigator.clipboard.writeText(textToCopy);
+  console.log(textToCopy);
+  return (
+    <div
+      style={{
+        border: "1px solid green",
+        display: "flex",
+        gap: "4px",
+      }}
+    >
+      <button onClick={copyThis}>Copy</button>
+      <span style={{ alignSelf: "center" }}>{textToCopy}</span>
+    </div>
+  );
+};
+
+const CopyComponent = ({ textToCopy }) => {
+  console.log(textToCopy);
+  return (
+    <li style={{ display: "flex" }}>
+      Original: <ClickToCopySmall textToCopy={textToCopy} /> {"=>"} Doubled{" "}
+      <ClickToCopySmall textToCopy={doubleInput(textToCopy)} />
+    </li>
+  );
+};
+const doubleInput = (input) => input * 2;
+
 export const SpeedCalculator = () => {
   const [outputArray, setOutputArray] = useState([]);
   const [inputValue, setInputValue] = useState("");
+
+  const [pastedValue, setPastedValue] = useState("");
 
   const [defaultRuntime, setDefaultRuntime] = useState(60);
   const [updatedRuntime, setUpdatedRuntime] = useState(defaultRuntime);
   const speedTransformer = (originalRunTime, speedModifier) => {
     let transformedSpeed = 10;
     return transformedSpeed;
+  };
+
+  const clickToPaste = async () => {
+    const fromClipBoard = await pasteFromClipboard();
+    console.log(fromClipBoard);
+    setPastedValue(fromClipBoard);
   };
 
   const speedTransformerDoubleSpeed = (originalRunTime) => {
@@ -26,8 +81,6 @@ export const SpeedCalculator = () => {
     transformedSpeed = parseInt(transformedSpeed, 10);
     setUpdatedRuntime(transformedSpeed);
   };
-
-  const doubleInput = (input) => input * 2;
 
   const transformToString = {
     append: {
@@ -70,18 +123,22 @@ export const SpeedCalculator = () => {
     if (!input) return;
 
     validateSource(e);
-
+    console.log(input);
+    console.log(typeof input);
     // attempt to find number in input
     const inputToNumber = parseInt(input, 10);
-    if (!isNaN(inputToNumber)) {
-      // change type of input
-      input = inputToNumber;
+    console.log(typeof inputToNumber);
+    // if (!isNaN(inputToNumber)) {
+    //   // change type of input
+    //   input = inputToNumber;
 
-      // show runtime
-      findRuntimeFromDoubleSpeed(inputToNumber);
-    }
+    //   // show runtime
+    //   findRuntimeFromDoubleSpeed(inputToNumber);
+    // }
 
     // append type at end of input
+
+    output = <CopyComponent textToCopy={input} />;
 
     // print to screen
     setOutputArray([output, ...outputArray]);
@@ -100,28 +157,52 @@ export const SpeedCalculator = () => {
     <MainWrapper>
       <h1>Calculate how much time you save by speeding up a video</h1>
       <SectionContainer>
-        <h2>My new demo</h2>
-        <input
-          type="number"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-        />
-        <br />
-        {/* <button data-btntype="test-function" onClick={(e) => runFunctions(e)}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-around",
+          }}
+        >
+          <div>
+            <h2>My new demo</h2>
+            <input
+              type="number"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <br />
+            {/* <button data-btntype="test-function" onClick={(e) => runFunctions(e)}>
           Click to run test function
         </button> */}
-        <button
-          data-btntype="doubling-function"
-          onClick={(e) => runFunctions(e)}
-        >
-          Click to double input
-        </button>
-        <br />
-        <ul className="outputcontainer">
-          {outputArray.map((thing, i) => (
-            <li key={i}>{thing}</li>
-          ))}
-        </ul>
+            <button
+              data-btntype="doubling-function"
+              onClick={(e) => runFunctions(e)}
+            >
+              Click to double input
+            </button>
+          </div>
+          <div>
+            <h3>Click to paste</h3>
+            <button
+              style={{ padding: "8px", width: "100%" }}
+              data-btntype="doubling-function"
+              onClick={() => clickToPaste()}
+            >
+              Click
+            </button>
+            <br />
+            <input value={pastedValue} type="text" />
+          </div>
+          <ul
+            className="outputcontainer"
+            style={{ maxHeight: "300px", overflowY: "scroll" }}
+          >
+            {outputArray.map((thing, i) => (
+              <li key={i}>{thing}</li>
+            ))}
+          </ul>
+        </div>
       </SectionContainer>
       <SectionContainer>
         <h2>Demo 2x speed</h2>
