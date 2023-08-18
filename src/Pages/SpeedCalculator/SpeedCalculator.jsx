@@ -40,7 +40,7 @@ export const SpeedCalculator = () => {
     const inputToNumber = parseInt(input, 10);
     if (!isNaN(inputToNumber)) input = inputToNumber;
 
-    // typecheck
+    // append type at end of input
     input = typeDeclarer(input);
 
     // print to screen
