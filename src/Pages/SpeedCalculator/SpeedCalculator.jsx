@@ -27,24 +27,36 @@ export const SpeedCalculator = () => {
     setUpdatedRuntime(transformedSpeed);
   };
 
-  const typeDeclarer = (input) => `${input}: <${typeof input}>`;
+  const typeDeclarer = (input) => `: <${typeof input}>`;
+  const doubleInput = (input) => input * 2;
+  const transformNumber = (input) =>
+    `input: ${input}; doubled input: ${doubleInput(input)}`;
 
   const runFunctions = () => {
     // accept input
     let input = inputValue;
+    let output = "";
 
     // shortcircuit
     if (!input) return;
 
     // attempt to find number in input
     const inputToNumber = parseInt(input, 10);
-    if (!isNaN(inputToNumber)) input = inputToNumber;
+    if (!isNaN(inputToNumber)) {
+      // change type of input
+      input = inputToNumber;
+
+      // format output
+      output = transformNumber(input);
+    } else {
+      output = input;
+    }
 
     // append type at end of input
-    input = typeDeclarer(input);
+    output += typeDeclarer(input);
 
     // print to screen
-    setOutputArray([input, ...outputArray]);
+    setOutputArray([output, ...outputArray]);
     setInputValue("");
   };
 
@@ -70,8 +82,8 @@ export const SpeedCalculator = () => {
         <button onClick={() => runFunctions()}>Click to run function</button>
         <br />
         <ul className="outputcontainer">
-          {outputArray.map((thing) => (
-            <li>{thing}</li>
+          {outputArray.map((thing, i) => (
+            <li key={i}>{thing}</li>
           ))}
         </ul>
       </SectionContainer>
