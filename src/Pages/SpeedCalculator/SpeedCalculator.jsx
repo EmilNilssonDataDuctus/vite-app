@@ -33,6 +33,12 @@ export const SpeedCalculator = () => {
 
     // shortcircuit
     if (!input) return;
+
+    // attempt to find number in input
+    const inputToNumber = parseInt(input, 10);
+    if (!isNaN(inputToNumber)) input = inputToNumber;
+
+    // typecheck
     const typeOfInput = typeof input;
     input = `${input}<${typeOfInput}>`;
 
