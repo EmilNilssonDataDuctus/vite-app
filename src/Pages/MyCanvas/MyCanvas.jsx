@@ -1,4 +1,5 @@
 import { MainWrapper } from "../../Shared/Page.styled";
+import "./MyCanvas.css";
 
 export const MyCanvas = () => {
   return (
