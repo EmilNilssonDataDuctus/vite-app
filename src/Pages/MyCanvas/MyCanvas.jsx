@@ -3,22 +3,59 @@ import { MainWrapper } from "../../Shared/Page.styled";
 import "./MyCanvas.css";
 
 export const MyCanvas = () => {
+  const handleClick = () => {};
   useEffect(() => {
     const paper = document.querySelector("#myPaper");
-    console.log(paper);
     const pen = paper.getContext("2d");
-    console.log(pen);
-    console.log(paper.width);
-    console.log(paper.height);
+
+    const drawBottomLine = (lineStart, lineEnd) => {
+      pen.strokeStyle = "white";
+      pen.lineWidth = 6;
+
+      pen.beginPath();
+      pen.moveTo(lineStart.x, lineStart.y);
+      pen.lineTo(lineEnd.x, lineEnd.y);
+      pen.stroke();
+    };
+
+    const drawArc = (
+      arcCenter,
+      arcRadius,
+      start = Math.PI,
+      end = 2 * Math.PI,
+      style = "stroke",
+      fillStyle = "white"
+    ) => {
+      pen.beginPath();
+      pen.arc(arcCenter.x, arcCenter.y, arcRadius, start, end);
+      if (style === "stroke") {
+        pen.stroke();
+      } else {
+        pen.fillStyle = fillStyle;
+        pen.fill();
+      }
+    };
+
+    const positionOnArc = (center, radius, angle) => ({
+      x: center.x + radius + Math.cos(angle),
+      y: center.y + radius + Math.sin(angle),
+    });
+
+    const drawCircleOnArc = (arcCenter, arcRadius) => {
+      const position = positionOnArc(arcCenter, arcRadius, angle);
+      console.log(arcRadius);
+      drawArc(arcCenter, arcRadius, Math.PI, Math.PI * 2, "fill");
+    };
+
     paper.width = paper.clientWidth;
     paper.height = paper.clientHeight;
 
     const startTime = new Date().getTime();
 
     const draw = () => {
-      console.log("drawing");
       const currentTime = new Date().getTime();
       const elapsedTime = (currentTime - startTime) / 1000;
+      console.log(elapsedTime);
 
       // Bottom line
       const lineStart = {
@@ -33,26 +70,26 @@ export const MyCanvas = () => {
 
       const lineLength = lineEnd.x - lineStart.x;
 
-      pen.strokeStyle = "white";
-      pen.lineWidth = 6;
-
-      pen.beginPath();
-      pen.moveTo(lineStart.x, lineStart.y);
-      pen.lineTo(lineEnd.x, lineEnd.y);
-      pen.stroke();
+      drawBottomLine(lineStart, lineEnd);
       // Bottom line
 
-      // Arc
-      const arcRadius = lineLength * 0.05;
-      const arcCenter = {
+      // Arcs
+      const center = {
         x: paper.width * 0.5,
         y: paper.height * 0.9,
       };
 
-      pen.beginPath();
-      pen.arc(arcCenter.x, arcCenter.y, arcRadius, Math.PI, 2 * Math.PI);
-      pen.stroke();
-      // Arc
+      // const arcData = [
+      //   { radius: lineLength * 0.05 },
+      //   { radius: lineLength * 0.1 },
+      //   { radius: lineLength * 0.15 },
+      //   { radius: lineLength * 0.2 },
+      //   { radius: lineLength * 0.25 },
+      //   { radius: lineLength * 0.3 },
+      //   { radius: lineLength * 0.35 },
+      // ];
+
+      // Arcs
 
       // Dot on arc
       const velocity = 0.4;
@@ -63,26 +100,36 @@ export const MyCanvas = () => {
       let adjustedDistance =
         modDistance >= Math.PI ? modDistance : maxAngle - modDistance;
 
-      const smallDotArcCenter = {
-        x: arcCenter.x + arcRadius * Math.cos(adjustedDistance),
-        y: arcCenter.y + arcRadius * Math.sin(adjustedDistance),
+      const smallDotCoordinates = {
+        x: center.x + radius * Math.cos(adjustedDistance),
+        y: center.y + 10 * Math.sin(adjustedDistance),
       };
 
-      pen.beginPath();
-      pen.arc(
-        smallDotArcCenter.x,
-        smallDotArcCenter.y,
-        arcRadius * 0.2,
-        0,
-        2 * Math.PI
-      );
-      pen.fillStyle = "white";
-      pen.fill();
-      pen.fillStyle = "black";
-      pen.fill();
+      const NUMBER_OF_ARCS = 5;
+      const RADIUS_SPACING = lineLength / NUMBER_OF_ARCS / 2;
+      for (let i = 0; i < NUMBER_OF_ARCS; i++) {
+        const radius = i * RADIUS_SPACING;
+        const radiusDot = lineLength * 0.01;
+        drawArc(center, radius);
+        drawCircleOnArc(smallDotCoordinates, radiusDot);
+      }
+      // const smallDotArcCenter = {
+      //   x: elapsedTime * 10,
+      //   y: elapsedTime * 20,
+      // };
+
+      // pen.beginPath();
+      // pen.arc(
+      //   smallDotArcCenter.x,
+      //   smallDotArcCenter.y,
+      //   arcData[0] * 0.2,
+      //   0,
+      //   2 * Math.PI
+      // );
       // Dot on arc
 
-      requestAnimationFrame(draw);
+      // // pen.clearRect(100, 100, paper.width, paper.height);
+      // requestAnimationFrame(draw);
     };
 
     draw();
@@ -91,6 +138,7 @@ export const MyCanvas = () => {
   return (
     <MainWrapper>
       <h1>My canvas</h1>
+      <button onClick={handleClick}>Click me</button>
       <canvas id="myPaper"></canvas>
     </MainWrapper>
   );
