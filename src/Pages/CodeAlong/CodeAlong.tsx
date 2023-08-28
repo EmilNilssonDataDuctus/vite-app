@@ -123,6 +123,7 @@ const ImageToggleOnMouseOver = ({ primaryImg = "", secondaryImg = "" }) => {
 
 const ImageToggleOnScroll = ({ primaryImg = "", secondaryImg = "" }) => {
   const [inView, setInView] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const imageRef: null | any = useRef(null);
 
   const scrollHandler = () => {
@@ -135,8 +136,12 @@ const ImageToggleOnScroll = ({ primaryImg = "", secondaryImg = "" }) => {
   };
 
   useEffect(() => {
+    setIsLoading(false);
     console.log("useEffect add window scroll handler");
     window.addEventListener("scroll", scrollHandler);
+
+    // Set color to images in view
+    setInView(isInView());
 
     return () => {
       console.log("useEffect remove window scroll handler");
@@ -146,7 +151,10 @@ const ImageToggleOnScroll = ({ primaryImg = "", secondaryImg = "" }) => {
 
   return (
     <>
-      <img ref={imageRef} src={inView ? primaryImg : secondaryImg} />
+      <img
+        ref={imageRef}
+        src={isLoading ? primaryImg : inView ? primaryImg : secondaryImg}
+      />
     </>
   );
 };
