@@ -2,8 +2,12 @@ import leopardBw from "/leopard-bw.jpg";
 import leopard from "/leopard.jpg";
 import mountainBw from "/mountain-bw.jpg";
 import mountain from "/mountain.jpg";
+import skiLiftBw from "/ski-lift-bw.jpg";
+import skiLift from "/ski-lift.jpg";
+import trainTracksBw from "/train-tracks-bw.jpg";
+import trainTracks from "/train-tracks.jpg";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MainWrapper } from "../../Shared/Page.styled";
 
 export const CodeAlong = () => {
@@ -14,6 +18,14 @@ export const CodeAlong = () => {
     setValue(e.target.value);
     setHistory([e.target.value, ...history]);
   };
+
+  useEffect(() => {
+    console.log("useEffect render");
+
+    return () => {
+      console.log("useEffect cleanup");
+    };
+  }, []);
 
   return (
     <MainWrapper>
@@ -54,6 +66,27 @@ export const CodeAlong = () => {
           </div>
         </div>
       </section>
+      <section>
+        <h2>Useeffect hook</h2>
+        <div>
+          <ImageToggleOnScroll
+            primaryImg={trainTracks}
+            secondaryImg={trainTracksBw}
+          />
+        </div>
+        <div>
+          <ImageToggleOnScroll primaryImg={skiLift} secondaryImg={skiLiftBw} />
+        </div>
+        <div>
+          <ImageToggleOnScroll primaryImg={leopard} secondaryImg={leopardBw} />
+        </div>
+        <div>
+          <ImageToggleOnScroll
+            primaryImg={mountain}
+            secondaryImg={mountainBw}
+          />
+        </div>
+      </section>
     </MainWrapper>
   );
 };
@@ -72,6 +105,34 @@ const ImageToggleOnMouseOver = ({ primaryImg = "", secondaryImg = "" }) => {
           imageRef.current.src = secondaryImg;
         }}
       />
+    </>
+  );
+};
+
+const ImageToggleOnScroll = ({ primaryImg = "", secondaryImg = "" }) => {
+  const [inView, setInView] = useState(false);
+  const imageRef: null | any = useRef(null);
+
+  const scrollHandler = () => {
+    setInView(isInView());
+  };
+
+  const isInView = () => {
+    const rect = imageRef.current.getBoundingClientRect();
+    return rect.top >= 0 && rect.bottom <= window.innerHeight;
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", scrollHandler);
+
+    return () => {
+      window.removeEventListener("scroll", scrollHandler);
+    };
+  }, []);
+
+  return (
+    <>
+      <img ref={imageRef} src={inView ? primaryImg : secondaryImg} />
     </>
   );
 };
