@@ -13,6 +13,7 @@ import { MainWrapper } from "../../Shared/Page.styled";
 export const CodeAlong = () => {
   const [history, setHistory] = useState<string[]>([]);
   const [value, setValue] = useState("");
+  const [showScrollSection, setShowScrollSection] = useState(true);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -30,6 +31,9 @@ export const CodeAlong = () => {
   return (
     <MainWrapper>
       <h1>Code along with pluralsight</h1>
+      <button onClick={() => setShowScrollSection(!showScrollSection)}>
+        Show scroll section
+      </button>
       <section>
         <h2>Usestate hook</h2>
         <input
@@ -66,27 +70,35 @@ export const CodeAlong = () => {
           </div>
         </div>
       </section>
-      <section>
-        <h2>Useeffect hook</h2>
-        <div>
-          <ImageToggleOnScroll
-            primaryImg={trainTracks}
-            secondaryImg={trainTracksBw}
-          />
-        </div>
-        <div>
-          <ImageToggleOnScroll primaryImg={skiLift} secondaryImg={skiLiftBw} />
-        </div>
-        <div>
-          <ImageToggleOnScroll primaryImg={leopard} secondaryImg={leopardBw} />
-        </div>
-        <div>
-          <ImageToggleOnScroll
-            primaryImg={mountain}
-            secondaryImg={mountainBw}
-          />
-        </div>
-      </section>
+      {showScrollSection && (
+        <section>
+          <h2>Useeffect hook</h2>
+          <div>
+            <ImageToggleOnScroll
+              primaryImg={trainTracks}
+              secondaryImg={trainTracksBw}
+            />
+          </div>
+          <div>
+            <ImageToggleOnScroll
+              primaryImg={skiLift}
+              secondaryImg={skiLiftBw}
+            />
+          </div>
+          <div>
+            <ImageToggleOnScroll
+              primaryImg={leopard}
+              secondaryImg={leopardBw}
+            />
+          </div>
+          <div>
+            <ImageToggleOnScroll
+              primaryImg={mountain}
+              secondaryImg={mountainBw}
+            />
+          </div>
+        </section>
+      )}
     </MainWrapper>
   );
 };
@@ -123,9 +135,11 @@ const ImageToggleOnScroll = ({ primaryImg = "", secondaryImg = "" }) => {
   };
 
   useEffect(() => {
+    console.log("useEffect add window scroll handler");
     window.addEventListener("scroll", scrollHandler);
 
     return () => {
+      console.log("useEffect remove window scroll handler");
       window.removeEventListener("scroll", scrollHandler);
     };
   }, []);
