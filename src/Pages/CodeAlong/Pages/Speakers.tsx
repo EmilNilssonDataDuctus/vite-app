@@ -40,7 +40,11 @@ export const CodeAlongSpeakers = () => {
             resolve();
           }, 3000);
         }).then(() => {});
-        setSpeakers(speakers);
+        // setSpeakers(speakers);
+        dispatch({
+          type: "setSpeakerList",
+          data: speakers,
+        });
       } catch (error) {
         console.error(error);
       }
