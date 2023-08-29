@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 
 import { fetchSpeakers } from "../../../Shared/FetchSpeakers";
 import { MainWrapper } from "../../../Shared/Page.styled";
@@ -8,6 +8,16 @@ import { SpeakerDetail } from "../Components/SpeakerDetail/SpeakerDetail";
 
 export const CodeAlongSpeakers = () => {
   const [speakers, setSpeakers] = useState<any>([]);
+
+  const speakerReducer = (state, action) => {
+    return action;
+  };
+
+  const [speakersWReducer, setSpeakersWReducer] = useReducer(
+    speakerReducer,
+    []
+  );
+
   const [isLoading, setIsLoading] = useState(true);
 
   const [showSaturdaySpeakers, setShowSaturdaySpeakers] = useState(true);
