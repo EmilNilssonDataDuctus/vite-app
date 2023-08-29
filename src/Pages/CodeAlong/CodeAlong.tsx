@@ -1,3 +1,8 @@
+import React, { useEffect, useState } from "react";
+import { MainWrapper } from "../../Shared/Page.styled";
+import { ImageToggleOnMouseOver } from "./Components/ImageToggleOnMouseOver";
+import { ImageToggleOnScroll } from "./Components/ImageToggleOnScroll";
+
 import leopardBw from "/leopard-bw.jpg";
 import leopard from "/leopard.jpg";
 import mountainBw from "/mountain-bw.jpg";
@@ -7,13 +12,24 @@ import skiLift from "/ski-lift.jpg";
 import trainTracksBw from "/train-tracks-bw.jpg";
 import trainTracks from "/train-tracks.jpg";
 
-import React, { useEffect, useRef, useState } from "react";
-import { MainWrapper } from "../../Shared/Page.styled";
+const images = [
+  leopardBw,
+  leopard,
+  mountainBw,
+  mountain,
+  skiLiftBw,
+  skiLift,
+  trainTracksBw,
+  trainTracks,
+];
 
 export const CodeAlong = () => {
   const [history, setHistory] = useState<string[]>([]);
   const [value, setValue] = useState("");
   const [showScrollSection, setShowScrollSection] = useState(true);
+
+  const [currentSpeakerId, setCurrentSpeakerId] = useState(0);
+  const [mouseEventCount, setMouseEventCount] = useState(0);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -21,12 +37,9 @@ export const CodeAlong = () => {
   };
 
   useEffect(() => {
-    console.log("useEffect render");
-
-    return () => {
-      console.log("useEffect cleanup");
-    };
-  }, []);
+    window.document.title = `SpeakerId: ${currentSpeakerId}`;
+    console.log(`useEffect: setting title to ${currentSpeakerId}`);
+  }, [currentSpeakerId]);
 
   return (
     <MainWrapper>
@@ -73,88 +86,28 @@ export const CodeAlong = () => {
       {showScrollSection && (
         <section>
           <h2>Useeffect hook</h2>
-          <div>
-            <ImageToggleOnScroll
-              primaryImg={trainTracks}
-              secondaryImg={trainTracksBw}
-            />
-          </div>
-          <div>
-            <ImageToggleOnScroll
-              primaryImg={skiLift}
-              secondaryImg={skiLiftBw}
-            />
-          </div>
-          <div>
-            <ImageToggleOnScroll
-              primaryImg={leopard}
-              secondaryImg={leopardBw}
-            />
-          </div>
-          <div>
-            <ImageToggleOnScroll
-              primaryImg={mountain}
-              secondaryImg={mountainBw}
-            />
-          </div>
+          <div>mouseEventCount: {mouseEventCount}</div>
+          {images.map((imageId, index, array) => {
+            if (index % 2 === 0) return;
+
+            return (
+              <div
+                key={imageId}
+                onMouseOver={() => {
+                  setCurrentSpeakerId(imageId);
+                  setMouseEventCount(mouseEventCount + 1);
+                  console.log(`onMouseOver:${imageId}`);
+                }}
+              >
+                <ImageToggleOnScroll
+                  primaryImg={imageId}
+                  secondaryImg={array[index - 1]}
+                />
+              </div>
+            );
+          })}
         </section>
       )}
     </MainWrapper>
-  );
-};
-
-const ImageToggleOnMouseOver = ({ primaryImg = "", secondaryImg = "" }) => {
-  const imageRef: null | any = useRef(null);
-  return (
-    <>
-      <img
-        ref={imageRef}
-        src={primaryImg}
-        onMouseOver={() => {
-          imageRef.current.src = primaryImg;
-        }}
-        onMouseOut={() => {
-          imageRef.current.src = secondaryImg;
-        }}
-      />
-    </>
-  );
-};
-
-const ImageToggleOnScroll = ({ primaryImg = "", secondaryImg = "" }) => {
-  const [inView, setInView] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const imageRef: null | any = useRef(null);
-
-  const scrollHandler = () => {
-    setInView(isInView());
-  };
-
-  const isInView = () => {
-    const rect = imageRef.current.getBoundingClientRect();
-    return rect.top >= 0 && rect.bottom <= window.innerHeight;
-  };
-
-  useEffect(() => {
-    setIsLoading(false);
-    console.log("useEffect add window scroll handler");
-    window.addEventListener("scroll", scrollHandler);
-
-    // Set color to images in view
-    setInView(isInView());
-
-    return () => {
-      console.log("useEffect remove window scroll handler");
-      window.removeEventListener("scroll", scrollHandler);
-    };
-  }, []);
-
-  return (
-    <>
-      <img
-        ref={imageRef}
-        src={isLoading ? primaryImg : inView ? primaryImg : secondaryImg}
-      />
-    </>
   );
 };
