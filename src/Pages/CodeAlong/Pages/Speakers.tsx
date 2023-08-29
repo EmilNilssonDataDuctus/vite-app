@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ConfigContext } from "../../../App";
 import { fetchSpeakers } from "../../../Shared/FetchSpeakers";
 import { MainWrapper } from "../../../Shared/Page.styled";
 import { CodeAlongNav } from "../Components/CodeAlongNav";
@@ -10,6 +11,8 @@ export const CodeAlongSpeakers = () => {
 
   const [showSaturdaySpeakers, setShowSaturdaySpeakers] = useState(true);
   const [showSundaySpeakers, setShowSundaySpeakers] = useState(true);
+
+  const context = useContext(ConfigContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -65,22 +68,26 @@ export const CodeAlongSpeakers = () => {
     <MainWrapper>
       <CodeAlongNav></CodeAlongNav>
       <h1>Speakers page</h1>
-      <label>
-        <input
-          type="checkbox"
-          checked={showSaturdaySpeakers}
-          onChange={handleSaturdayChange}
-        />
-        Saturday Speakers
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={showSundaySpeakers}
-          onChange={handleSundayChange}
-        />
-        Sunday Speakers
-      </label>
+      {context.showSpeakerSpeakingDays === false ? null : (
+        <>
+          <label>
+            <input
+              type="checkbox"
+              checked={showSaturdaySpeakers}
+              onChange={handleSaturdayChange}
+            />
+            Saturday Speakers
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={showSundaySpeakers}
+              onChange={handleSundayChange}
+            />
+            Sunday Speakers
+          </label>
+        </>
+      )}
       {isLoading ? (
         <div>Loading...</div>
       ) : (
