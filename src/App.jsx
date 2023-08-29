@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { CodeAlong } from "./Pages/CodeAlong/CodeAlong";
+import { CodeAlongHome } from "./Pages/CodeAlong/Pages";
+import { CodeAlongSpeakers } from "./Pages/CodeAlong/Pages/Speakers";
 import { GamePage } from "./Pages/Game/Game";
 import { GeneratePage } from "./Pages/GeneratePage/GeneratePage";
 import { Home } from "./Pages/Home/Home";
@@ -50,6 +52,8 @@ function App() {
           <Route path="/chart" element={<MyChart />} />
           <Route path="/todo-list" element={<TodoPage />} />
           <Route path="/code-along" element={<CodeAlong />} />
+          <Route path="/code-along" element={<CodeAlongHome />} />
+          <Route path="/code-along/speakers" element={<CodeAlongSpeakers />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
