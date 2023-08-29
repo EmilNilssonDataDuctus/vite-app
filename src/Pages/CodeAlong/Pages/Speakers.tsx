@@ -38,9 +38,9 @@ export const CodeAlongSpeakers = () => {
         new Promise<void>(function (resolve) {
           setTimeout(function () {
             resolve();
-          }, 3000);
+          }, 1000);
         }).then(() => {
-          // setSpeakers(speakers);
+          // This then was empty by accident, now dispatch is called inside the then, as the setState function should have done from the start
           dispatch({
             type: "setSpeakerList",
             data: speakers,
