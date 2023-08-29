@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, { useCallback, useContext, useEffect, useReducer, useState } from "react";
 
 import { fetchSpeakers } from "../../../Shared/FetchSpeakers";
 import { MainWrapper } from "../../../Shared/Page.styled";
@@ -72,12 +72,12 @@ export const CodeAlongSpeakers = () => {
     };
   }, []);
 
-  const heartFavoriteHandler = (id, favoriteValue) => {
+  const heartFavoriteHandler = useCallback((id, favoriteValue) => {
     dispatch({
       type: favoriteValue ? "favorite" : "unfavorite",
       id,
     });
-  };
+  }, []);
 
   const handleSaturdayChange = () => {
     setShowSaturdaySpeakers(!showSaturdaySpeakers);
