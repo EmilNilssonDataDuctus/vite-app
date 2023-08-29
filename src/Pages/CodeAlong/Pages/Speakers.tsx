@@ -1,4 +1,11 @@
-import React, { useCallback, useContext, useEffect, useReducer, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+  useState,
+} from "react";
 
 import { fetchSpeakers } from "../../../Shared/FetchSpeakers";
 import { MainWrapper } from "../../../Shared/Page.styled";
@@ -87,12 +94,14 @@ export const CodeAlongSpeakers = () => {
     setShowSundaySpeakers(!showSundaySpeakers);
   };
 
-  const speakerListFiltered = isLoading
-    ? []
-    : speakersWReducer.filter(
-        ({ saturday, sunday }) =>
-          (showSaturdaySpeakers && saturday) || (showSundaySpeakers && sunday)
-      );
+  const newSpeakerList = useMemo(() => {
+    speakersWReducer.filter(
+      ({ saturday, sunday }) =>
+        (showSaturdaySpeakers && saturday) || (showSundaySpeakers && sunday)
+    );
+  }, [speakersWReducer, showSaturdaySpeakers, showSundaySpeakers]);
+
+  const speakerListFiltered: any = isLoading ? [] : newSpeakerList;
 
   return (
     <MainWrapper>
