@@ -39,11 +39,12 @@ export const CodeAlongSpeakers = () => {
           setTimeout(function () {
             resolve();
           }, 3000);
-        }).then(() => {});
-        // setSpeakers(speakers);
-        dispatch({
-          type: "setSpeakerList",
-          data: speakers,
+        }).then(() => {
+          // setSpeakers(speakers);
+          dispatch({
+            type: "setSpeakerList",
+            data: speakers,
+          });
         });
       } catch (error) {
         console.error(error);
@@ -77,7 +78,7 @@ export const CodeAlongSpeakers = () => {
 
   const speakerListFiltered = isLoading
     ? []
-    : speakers.filter(
+    : speakersWReducer.filter(
         ({ saturday, sunday }) =>
           (showSaturdaySpeakers && saturday) || (showSundaySpeakers && sunday)
       );
