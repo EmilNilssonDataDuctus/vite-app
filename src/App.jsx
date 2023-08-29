@@ -1,6 +1,6 @@
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { CodeAlong } from "./Pages/CodeAlong/CodeAlong";
 import { CodeAlongHome } from "./Pages/CodeAlong/Pages";
@@ -10,8 +10,6 @@ import { GeneratePage } from "./Pages/GeneratePage/GeneratePage";
 import { Home } from "./Pages/Home/Home";
 import { HoverEffectsPage } from "./Pages/HoverEffectsPage/HoverEffectsPage";
 import { HoverEffectsPage2 } from "./Pages/HoverEffectsPage2/HoverEffectsPage2";
-import { MyChart } from "./Pages/MyChart/MyChart";
-import { TodoPage } from "./Pages/TodoPage/TodoPage";
 import Navbar from "./Shared/Navbar/Navbar";
 import CardBig from "./components/CardBig/CardBig";
 import Cards from "./components/Cards/Cards";
@@ -22,6 +20,10 @@ import { darkTheme, lightTheme } from "./components/Themes";
 import { TracerPage } from "./components/TracerPage/TracerPage";
 import { GlobalStyles } from "./components/globalStyles";
 
+export const ConfigContext = React.createContext();
+
+const configValue = { showSpeakerSpeakingDays: true };
+
 function App() {
   const [theme, setTheme] = useState("light");
 
@@ -31,32 +33,35 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <GlobalStyles />
-      <Navbar themeToggler={themeToggler} />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cards" element={<Cards />} />
-          <Route path="/memory-game" element={<MemoryGame />} />
-          <Route path="/card/:name" element={<CardBig />} />
-          <Route path="/hover-cards" element={<HoverCardsPage />} />
-          <Route path="/game" element={<GamePage />} />
-          <Route path="/memory-game" element={<MemoryGame />} />
-          <Route path="/card/:name" element={<CardBig />} />
-          <Route path="/kc-summerleague" element={<KCSummerLeaguePage />} />
-          <Route path="/generate" element={<GeneratePage />} />
-          <Route path="/tracing" element={<TracerPage />} />
-          <Route path="/hover-move" element={<HoverEffectsPage />} />
-          <Route path="/hover-move2" element={<HoverEffectsPage2 />} />
-          <Route path="/chart" element={<MyChart />} />
-          <Route path="/todo-list" element={<TodoPage />} />
-          <Route path="/code-along" element={<CodeAlong />} />
-          <Route path="/code-along" element={<CodeAlongHome />} />
-          <Route path="/code-along/speakers" element={<CodeAlongSpeakers />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <ConfigContext.Provider value={configValue}>
+      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <GlobalStyles />
+        <Navbar themeToggler={themeToggler} />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cards" element={<Cards />} />
+            <Route path="/memory-game" element={<MemoryGame />} />
+            <Route path="/card/:name" element={<CardBig />} />
+            <Route path="/hover-cards" element={<HoverCardsPage />} />
+            <Route path="/game" element={<GamePage />} />
+            <Route path="/memory-game" element={<MemoryGame />} />
+            <Route path="/card/:name" element={<CardBig />} />
+            <Route path="/kc-summerleague" element={<KCSummerLeaguePage />} />
+            <Route path="/generate" element={<GeneratePage />} />
+            <Route path="/tracing" element={<TracerPage />} />
+            <Route path="/hover-move" element={<HoverEffectsPage />} />
+            <Route path="/hover-move2" element={<HoverEffectsPage2 />} />
+            <Route path="/code-along" element={<CodeAlong />} />
+            <Route path="/code-along" element={<CodeAlongHome />} />
+            <Route
+              path="/code-along/speakers"
+              element={<CodeAlongSpeakers />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </ConfigContext.Provider>
   );
 }
 
