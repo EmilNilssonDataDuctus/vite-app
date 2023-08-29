@@ -7,12 +7,27 @@ import { CodeAlongNav } from "../Components/CodeAlongNav";
 import { SpeakerDetail } from "../Components/SpeakerDetail/SpeakerDetail";
 
 export const CodeAlongSpeakers = () => {
-  const [speakers, setSpeakers] = useState<any>([]);
+  // const [speakers, setSpeakers] = useState<any>([]);
 
   const speakerReducer = (state, action) => {
+    const updateFavorite = (favoriteValue) => {
+      state.map((item, index) => {
+        if (index === action.id) {
+          item.favorite = favoriteValue;
+        }
+        return item;
+      });
+    };
+
     switch (action.type) {
       case "setSpeakerList":
         return action.data;
+
+      case "favoriteSpeaker":
+        return updateFavorite(true);
+
+      case "unfavoriteSpeaker":
+        return updateFavorite(false);
 
       default:
         return state;
@@ -58,14 +73,10 @@ export const CodeAlongSpeakers = () => {
   }, []);
 
   const heartFavoriteHandler = (id, favoriteValue) => {
-    setSpeakers(
-      speakers.map((speaker) => {
-        if (speaker.id === id) {
-          return { ...speaker, favorite: favoriteValue };
-        }
-        return speaker;
-      })
-    );
+    dispatch({
+      type: favoriteValue ? "favorite" : "unfavorite",
+      id,
+    });
   };
 
   const handleSaturdayChange = () => {
