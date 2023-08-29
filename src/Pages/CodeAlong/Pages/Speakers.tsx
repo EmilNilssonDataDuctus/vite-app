@@ -10,13 +10,16 @@ export const CodeAlongSpeakers = () => {
   const [speakers, setSpeakers] = useState<any>([]);
 
   const speakerReducer = (state, action) => {
-    return action;
+    switch (action.type) {
+      case "setSpeakerList":
+        return action.data;
+
+      default:
+        return state;
+    }
   };
 
-  const [speakersWReducer, setSpeakersWReducer] = useReducer(
-    speakerReducer,
-    []
-  );
+  const [speakersWReducer, dispatch] = useReducer(speakerReducer, []);
 
   const [isLoading, setIsLoading] = useState(true);
 
