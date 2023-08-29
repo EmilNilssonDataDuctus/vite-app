@@ -36,7 +36,13 @@ export const ImageToggleOnScroll = ({ primaryImg = "", secondaryImg = "" }) => {
     <>
       <img
         ref={imageRef}
-        src={isLoading ? secondaryImg : inView ? primaryImg : secondaryImg}
+        src={
+          isLoading
+            ? "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+            : inView
+            ? primaryImg
+            : secondaryImg
+        }
       />
     </>
   );
