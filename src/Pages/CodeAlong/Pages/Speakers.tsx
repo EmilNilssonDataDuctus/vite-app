@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ConfigContext } from "../../../App";
+
 import { fetchSpeakers } from "../../../Shared/FetchSpeakers";
 import { MainWrapper } from "../../../Shared/Page.styled";
+import { ConfigContext } from "../../../main";
 import { CodeAlongNav } from "../Components/CodeAlongNav";
 import { SpeakerDetail } from "../Components/SpeakerDetail/SpeakerDetail";
 

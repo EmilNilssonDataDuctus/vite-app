@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { ThemeProvider } from "styled-components";
@@ -20,10 +20,6 @@ import { darkTheme, lightTheme } from "./components/Themes";
 import { TracerPage } from "./components/TracerPage/TracerPage";
 import { GlobalStyles } from "./components/globalStyles";
 
-export const ConfigContext = React.createContext();
-
-const configValue = { showSpeakerSpeakingDays: true };
-
 function App() {
   const [theme, setTheme] = useState("light");
 
@@ -33,7 +29,6 @@ function App() {
   };
 
   return (
-    <ConfigContext.Provider value={configValue}>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <GlobalStyles />
         <Navbar themeToggler={themeToggler} />
@@ -52,7 +47,7 @@ function App() {
             <Route path="/tracing" element={<TracerPage />} />
             <Route path="/hover-move" element={<HoverEffectsPage />} />
             <Route path="/hover-move2" element={<HoverEffectsPage2 />} />
-            <Route path="/code-along" element={<CodeAlong />} />
+            <Route path="/code-along-old" element={<CodeAlong />} />
             <Route path="/code-along" element={<CodeAlongHome />} />
             <Route
               path="/code-along/speakers"
@@ -61,7 +56,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
-    </ConfigContext.Provider>
   );
 }
 
