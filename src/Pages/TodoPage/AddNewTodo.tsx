@@ -20,6 +20,7 @@ export const AddNewTodo = ({ addNewTodo }) => {
         Task description
         <input value={value} onChange={(e) => handleChange(e)} />
       </label>
+      <button type="submit">Add new todo</button>
     </form>
   );
 };
