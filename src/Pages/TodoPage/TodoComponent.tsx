@@ -60,6 +60,7 @@ export const TodoComponent = ({
           width: "24px",
           height: "24px",
           alignSelf: "center",
+          cursor: "pointer",
         }}
         onClick={() => handleDelete()}
       >
@@ -91,7 +92,7 @@ export const TodoComponent = ({
         type="checkbox"
         checked={completed}
         onChange={handleToggleTodo}
-        style={{ width: "24px" }}
+        style={{ width: "48px", cursor: "pointer" }}
       />
     </li>
   );
