@@ -1,8 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { MainWrapper } from "../../Shared/Page.styled";
+import { TodoComponent } from "./TodoComponent";
 
 export const TodoPage = () => {
-  const [todos, setTodos] = useState([{ task: "create rest of app" }]);
+  const [todos, setTodos] = useState([
+    { id: 1, task: "begin creating app", completed: true },
+    { id: 2, task: "create rest of app", completed: false },
+  ]);
+
+  const updateTodoStatus = (todoId, oldStatus) => {
+    const updatedTodo = todos.find((todo) => todo.id === todoId);
+    if (updatedTodo) {
+      updatedTodo.completed = !oldStatus;
+
+      // this is a black box
+      setTodos([
+        ...todos.map((todo) => {
+          if (todo.id === todoId) {
+            return {
+              ...todo,
+              complete: !oldStatus,
+            };
+          }
+          return todo;
+        }),
+      ]);
+    }
+  };
 
   useEffect(() => {
     console.log("use Effect called");
@@ -14,7 +38,11 @@ export const TodoPage = () => {
       <h1>Todo list</h1>
       <ul>
         {todos.map((todo) => (
-          <li>{todo.task}</li>
+          <TodoComponent
+            key={todo.id}
+            {...todo}
+            updateTodoStatus={updateTodoStatus}
+          />
         ))}
       </ul>
     </MainWrapper>
