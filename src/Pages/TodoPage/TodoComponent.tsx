@@ -32,7 +32,7 @@ export const TodoComponent = ({
     setTaskValue(e.target.value);
   };
   const handleTimeToDeliverChange = (e) => {
-    setTimeToDeliverValue(e.target.value);
+    setTimeToDeliverValue(parseInt(e.target.value, 10));
   };
 
   const handleTaskSubmitChange = () => {

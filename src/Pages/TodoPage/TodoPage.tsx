@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
 import { AddNewTodo } from "./AddNewTodo";
 import { TodosStatus } from "./DumbComponents/TodosStatus";
+import { TodosTotalTimeEstimated } from "./DumbComponents/TodosTotalTimeEstimated";
 import { TodoComponent } from "./TodoComponent";
 import { initialseStateOfTodos } from "./utils/initialseTodoApp";
 
@@ -148,6 +149,7 @@ export const TodoPage = () => {
           />
         ))}
       </ul>
+      <TodosTotalTimeEstimated todos={todos} />
     </MainWrapper>
   );
 };
