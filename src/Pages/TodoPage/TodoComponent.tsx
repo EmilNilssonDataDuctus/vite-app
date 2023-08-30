@@ -6,8 +6,10 @@ export const TodoComponent = ({ id, task, completed, updateTodoStatus }) => {
   };
   return (
     <li>
-      {task}{" "}
-      <input type="checkbox" checked={completed} onChange={handleChange} />
+      <label style={{ userSelect: "none" }}>
+        {task}
+        <input type="checkbox" checked={completed} onChange={handleChange} />
+      </label>
     </li>
   );
 };
