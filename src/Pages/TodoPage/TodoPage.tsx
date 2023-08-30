@@ -30,6 +30,10 @@ const todoReducer = (state, action) => {
       return [...state, action.payload];
     }
 
+    case "DELETE_TODO": {
+      return state.filter((todo) => todo.id !== action.payload);
+    }
+
     default: {
       return state;
     }
@@ -48,6 +52,13 @@ export const TodoPage = () => {
         id: uuidv4(),
         task,
       },
+    });
+  };
+
+  const deleteTodo = (todoId) => {
+    dispatch({
+      type: "DELETE_TODO",
+      payload: todoId,
     });
   };
 
@@ -96,6 +107,7 @@ export const TodoPage = () => {
             key={todo.id}
             {...todo}
             updateTodoStatus={updateTodoStatus}
+            deleteTodo={deleteTodo}
           />
         ))}
       </ul>
