@@ -14,10 +14,14 @@ const initialTodos = [
   { id: 2, task: "create rest of app", completed: false },
 ];
 
+const storedTodosFromLocalStorage = localStorage.getItem("storedTodos");
+
+const initialseStateOfTodos = storedTodosFromLocalStorage
+  ? JSON.parse(storedTodosFromLocalStorage)
+  : initialTodos;
+
 export const TodoPage = () => {
-  const [todos, setTodos] = useState<Array<TodoType>>(
-    JSON.parse(localStorage.getItem("storedTodos")!) || [...initialTodos]
-  );
+  const [todos, setTodos] = useState<Array<TodoType>>(initialseStateOfTodos);
 
   const updateTodoStatus = (todoId, oldStatus) => {
     const updatedTodo = todos.find((todo) => todo.id === todoId);
