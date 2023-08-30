@@ -1,6 +1,19 @@
 import React from "react";
+import { TodoType } from "./TodoPage";
 
-export const TodoComponent = ({ id, task, completed, updateTodoStatus }) => {
+type TodoComponentProps = TodoType & {
+  updateTodoStatus: (
+    id: TodoType["id"],
+    completd: TodoType["completed"]
+  ) => void;
+};
+
+export const TodoComponent = ({
+  id,
+  task,
+  completed,
+  updateTodoStatus,
+}: TodoComponentProps) => {
   const handleChange = () => {
     updateTodoStatus(id, completed);
   };
