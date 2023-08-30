@@ -5,17 +5,24 @@ type TodoComponentProps = TodoType & {
   updateTodoStatus: (id: TodoType["id"]) => void;
   deleteTodo: (id: TodoType["id"]) => void;
   updateTodoTask: (id: TodoType["id"], task: TodoType["task"]) => void;
+  updateTodoTimeToDeliver: (
+    id: TodoType["id"],
+    timeToDeliver: TodoType["timeToDeliver"]
+  ) => void;
 };
 
 export const TodoComponent = ({
   id,
   task,
+  timeToDeliver,
   completed,
   updateTodoStatus,
   deleteTodo,
   updateTodoTask,
+  updateTodoTimeToDeliver,
 }: TodoComponentProps) => {
   const [taskValue, setTaskValue] = useState(task);
+  const [timeToDeliverValue, setTimeToDeliverValue] = useState(timeToDeliver);
 
   const handleToggleTodo = () => {
     updateTodoStatus(id);
@@ -24,9 +31,13 @@ export const TodoComponent = ({
   const handleTaskChange = (e) => {
     setTaskValue(e.target.value);
   };
+  const handleTimeToDeliverChange = (e) => {
+    setTimeToDeliverValue(e.target.value);
+  };
 
   const handleTaskSubmitChange = () => {
     updateTodoTask(id, taskValue);
+    updateTodoTimeToDeliver(id, timeToDeliverValue);
   };
 
   const handleDelete = () => {
@@ -36,29 +47,52 @@ export const TodoComponent = ({
   return (
     <li
       style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr 1fr",
-        alignItems: "center",
-        width: "200px",
+        display: "flex",
+        gap: "24px",
+        backgroundColor: "rgba(0, 0, 255, 0.4)",
+        border: "1px solid rgba(0, 0, 255, 0.4)",
+        padding: "16px 32px",
       }}
     >
-      <input
-        type="checkbox"
-        checked={completed}
-        onChange={handleToggleTodo}
-        style={{ width: "24px", height: "24px" }}
-      />
-      <input
-        value={taskValue}
-        onChange={handleTaskChange}
-        onBlur={handleTaskSubmitChange}
-      />
       <button
-        style={{ background: "red", justifySelf: "flex-end" }}
+        style={{
+          background: "red",
+          width: "24px",
+          height: "24px",
+          alignSelf: "center",
+        }}
         onClick={() => handleDelete()}
       >
         x
       </button>
+      <label>
+        Task description
+        <br />
+        <input
+          value={taskValue}
+          onChange={handleTaskChange}
+          onBlur={handleTaskSubmitChange}
+        />
+      </label>
+      <label>
+        Estimated time to deliver
+        <br />
+        <input
+          type="number"
+          min="1"
+          value={timeToDeliverValue}
+          onChange={handleTimeToDeliverChange}
+          onBlur={handleTaskSubmitChange}
+          style={{ width: "50px" }}
+        />{" "}
+        hours
+      </label>
+      <input
+        type="checkbox"
+        checked={completed}
+        onChange={handleToggleTodo}
+        style={{ width: "24px" }}
+      />
     </li>
   );
 };

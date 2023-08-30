@@ -10,6 +10,7 @@ export type TodoType = {
   id: number;
   task: string;
   completed: boolean;
+  timeToDeliver: number;
 };
 
 const todoReducer = (state, action) => {
@@ -26,10 +27,18 @@ const todoReducer = (state, action) => {
       });
     }
 
-    case "EDIT_TODO": {
+    case "EDIT_TODO_TASK": {
       return state.map((todo) => {
         return todo.id === action.payload.id
           ? { ...todo, task: action.payload.task }
+          : todo;
+      });
+    }
+
+    case "EDIT_TODO_TIME_TO_DELIVER": {
+      return state.map((todo) => {
+        return todo.id === action.payload.id
+          ? { ...todo, timeToDeliver: action.payload.time }
           : todo;
       });
     }
@@ -72,8 +81,15 @@ export const TodoPage = () => {
 
   const updateTodoTask = (id, task) => {
     dispatch({
-      type: "EDIT_TODO",
+      type: "EDIT_TODO_TASK",
       payload: { id, task },
+    });
+  };
+
+  const updateTodoTimeToDeliver = (id, time) => {
+    dispatch({
+      type: "EDIT_TODO_TIME_TO_DELIVER",
+      payload: { id, time },
     });
   };
 
@@ -116,7 +132,11 @@ export const TodoPage = () => {
       <h1>Todo list</h1>
       <TodosStatus todos={todos} />
       <AddNewTodo addNewTodo={addNewTodo} />
-      <ul>
+      <ul
+        style={{
+          backgroundColor: "rgba(0, 0, 255, 0.4)",
+        }}
+      >
         {todos.map((todo) => (
           <TodoComponent
             key={todo.id}
@@ -124,6 +144,7 @@ export const TodoPage = () => {
             updateTodoStatus={updateTodoStatus}
             deleteTodo={deleteTodo}
             updateTodoTask={updateTodoTask}
+            updateTodoTimeToDeliver={updateTodoTimeToDeliver}
           />
         ))}
       </ul>
