@@ -6,9 +6,11 @@ type TodosStatusProps = {
 };
 
 export const TodosTotalTimeEstimated = ({ todos }: TodosStatusProps) => {
-  const totalTimeToDoTasks = todos.reduce(
-    (accumulator, currentTodo) => accumulator + currentTodo.timeToDeliver,
-    0
-  );
+  const totalTimeToDoTasks = todos
+    .filter((todo) => !todo.completed)
+    .reduce(
+      (accumulator, currentTodo) => accumulator + currentTodo.timeToDeliver,
+      0
+    );
   return <p>Total time to complete tasks: {totalTimeToDoTasks}</p>;
 };
