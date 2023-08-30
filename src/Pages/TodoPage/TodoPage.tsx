@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import { MainWrapper } from "../../Shared/Page.styled";
 import { TodosStatus } from "./DumbComponents/TodosStatus";
 import { TodoComponent } from "./TodoComponent";
+import { initialseStateOfTodos } from "./utils/initialseTodoApp";
 
 export type TodoType = {
   id: number;
@@ -9,59 +10,75 @@ export type TodoType = {
   completed: boolean;
 };
 
-const initialTodos = [
-  { id: 1, task: "begin creating app", completed: true },
-  { id: 2, task: "create rest of app", completed: false },
-];
+const todoReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_TODOS": {
+      return action.payload;
+    }
 
-const storedTodosFromLocalStorage = localStorage.getItem("storedTodos");
+    case "TOGGLE_TODO": {
+      console.log("toggle initiated in todoReducer");
 
-const initialseStateOfTodos = storedTodosFromLocalStorage
-  ? JSON.parse(storedTodosFromLocalStorage)
-  : initialTodos;
+      return state.map((todo) => {
+        return todo.id === action.payload
+          ? { ...todo, completed: !todo.completed }
+          : todo;
+      });
+    }
+
+    default: {
+      return state;
+    }
+  }
+};
 
 export const TodoPage = () => {
-  const [todos, setTodos] = useState<Array<TodoType>>(initialseStateOfTodos);
+  // const [todos, setTodos] = useState<Array<TodoType>>(initialseStateOfTodos);
+  const [todos, dispatch] = useReducer(todoReducer, initialseStateOfTodos);
 
-  const updateTodoStatus = (todoId, oldStatus) => {
-    const updatedTodo = todos.find((todo) => todo.id === todoId);
-    if (updatedTodo) {
-      updatedTodo.completed = !oldStatus;
+  const updateTodoStatus = (todoId) => {
+    dispatch({
+      type: "TOGGLE_TODO",
+      payload: todoId,
+    });
 
-      // this is a black box
-      // setTodos([
-      //   ...todos.map((todo) => {
-      //     if (todo.id === todoId) {
-      //       return {
-      //         ...todo,
-      //         complete: !oldStatus,
-      //       };
-      //     }
-      //     return todo;
-      //   }),
-      // ]);
+    // -- old solution using useState:
+    // this is a black box
+    // setTodos([
+    //   ...todos.map((todo) => {
+    //     if (todo.id === todoId) {
+    //       return {
+    //         ...todo,
+    //         complete: !oldStatus,
+    //       };
+    //     }
+    //     return todo;
+    //   }),
+    // ]);
 
-      // this is even more compact, but sursprisingly easier to read
-      setTodos([
-        ...todos.map((todo) =>
-          todo.id === todoId ? { ...todo, completed: !oldStatus } : todo
-        ),
-      ]);
-    }
+    // -- old but better solution using useState
+    // this is even more compact, but sursprisingly easier to read
+    // setTodos([
+    //   ...todos.map((todo) =>
+    //     todo.id === todoId ? { ...todo, completed: !oldStatus } : todo
+    //   ),
+    // ]);
   };
 
   // runs to sync the state of the react component with what was saved in localstorage
   useEffect(() => {
-    const storedTodos = JSON.parse(localStorage.getItem("storedTodos")!);
-    console.log("storedTodos", storedTodos);
-    if (!storedTodos) {
-      console.log("should never run");
-      localStorage.setItem("storedTodos", JSON.stringify(todos));
-    } else {
-      console.log("should always run");
-      setTodos(storedTodos);
+    const storedTodosJSON = localStorage.getItem("storedTodos");
+
+    if (storedTodosJSON) {
+      console.log(
+        "should run once on startup and whenever storedTodos is not null"
+      );
+      const storedTodos = JSON.parse(storedTodosJSON);
+      dispatch({
+        type: "SET_TODOS",
+        payload: storedTodos,
+      });
     }
-    console.log("use Effect called once on startup");
   }, []);
 
   // runs after the todo array has been altered

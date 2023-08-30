@@ -2,10 +2,7 @@ import React from "react";
 import { TodoType } from "./TodoPage";
 
 type TodoComponentProps = TodoType & {
-  updateTodoStatus: (
-    id: TodoType["id"],
-    completd: TodoType["completed"]
-  ) => void;
+  updateTodoStatus: (id: TodoType["id"]) => void;
 };
 
 export const TodoComponent = ({
@@ -15,7 +12,7 @@ export const TodoComponent = ({
   updateTodoStatus,
 }: TodoComponentProps) => {
   const handleChange = () => {
-    updateTodoStatus(id, completed);
+    updateTodoStatus(id);
   };
   return (
     <li>
