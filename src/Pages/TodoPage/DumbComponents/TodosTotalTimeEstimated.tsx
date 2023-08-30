@@ -13,5 +13,5 @@ export const TodosTotalTimeEstimated = ({ todos }: TodosStatusProps) => {
   const totalTimeToDoTasks = todos
     .filter(onlyUncompletedTodos)
     .reduce(toTotalTimeToComplete, 0);
-  return <p>Total time to complete tasks: {totalTimeToDoTasks}</p>;
+  return <p>Total time to complete tasks: {totalTimeToDoTasks} hours</p>;
 };
