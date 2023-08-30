@@ -38,6 +38,9 @@ function Navbar({ themeToggler }) {
         <ListItem>
           <CommonLink href="/hover-move2">Hover effects 2</CommonLink>
         </ListItem>
+        <ListItem>
+          <CommonLink href="/chart">Chart</CommonLink>
+        </ListItem>
       </NavbarList>
       <button onClick={() => themeToggler()}>Toggle Dark mode</button>
     </NavbarWrapper>
