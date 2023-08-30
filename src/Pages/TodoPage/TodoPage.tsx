@@ -26,6 +26,14 @@ const todoReducer = (state, action) => {
       });
     }
 
+    case "EDIT_TODO": {
+      return state.map((todo) => {
+        return todo.id === action.payload.id
+          ? { ...todo, task: action.payload.task }
+          : todo;
+      });
+    }
+
     case "ADD_TODO": {
       return [...state, action.payload];
     }
@@ -59,6 +67,13 @@ export const TodoPage = () => {
     dispatch({
       type: "DELETE_TODO",
       payload: todoId,
+    });
+  };
+
+  const updateTodoTask = (id, task) => {
+    dispatch({
+      type: "EDIT_TODO",
+      payload: { id, task },
     });
   };
 
@@ -108,6 +123,7 @@ export const TodoPage = () => {
             {...todo}
             updateTodoStatus={updateTodoStatus}
             deleteTodo={deleteTodo}
+            updateTodoTask={updateTodoTask}
           />
         ))}
       </ul>
