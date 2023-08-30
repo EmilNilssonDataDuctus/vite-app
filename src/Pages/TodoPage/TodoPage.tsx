@@ -65,22 +65,6 @@ export const TodoPage = () => {
     // ]);
   };
 
-  // runs to sync the state of the react component with what was saved in localstorage
-  useEffect(() => {
-    const storedTodosJSON = localStorage.getItem("storedTodos");
-
-    if (storedTodosJSON) {
-      console.log(
-        "should run once on startup and whenever storedTodos is not null"
-      );
-      const storedTodos = JSON.parse(storedTodosJSON);
-      dispatch({
-        type: "SET_TODOS",
-        payload: storedTodos,
-      });
-    }
-  }, []);
-
   // runs after the todo array has been altered
   useEffect(() => {
     localStorage.setItem("storedTodos", JSON.stringify(todos));
