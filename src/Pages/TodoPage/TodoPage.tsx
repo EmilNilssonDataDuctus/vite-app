@@ -9,11 +9,15 @@ export type TodoType = {
   completed: boolean;
 };
 
+const initialTodos = [
+  { id: 1, task: "begin creating app", completed: true },
+  { id: 2, task: "create rest of app", completed: false },
+];
+
 export const TodoPage = () => {
-  const [todos, setTodos] = useState<Array<TodoType>>([
-    { id: 1, task: "begin creating app", completed: true },
-    { id: 2, task: "create rest of app", completed: false },
-  ]);
+  const [todos, setTodos] = useState<Array<TodoType>>(
+    JSON.parse(localStorage.getItem("storedTodos")!) || [...initialTodos]
+  );
 
   const updateTodoStatus = (todoId, oldStatus) => {
     const updatedTodo = todos.find((todo) => todo.id === todoId);
@@ -36,15 +40,29 @@ export const TodoPage = () => {
       // this is even more compact, but sursprisingly easier to read
       setTodos([
         ...todos.map((todo) =>
-          todo.id === todoId ? { ...todo, complete: !oldStatus } : todo
+          todo.id === todoId ? { ...todo, completed: !oldStatus } : todo
         ),
       ]);
     }
   };
 
+  // runs to sync the state of the react component with what was saved in localstorage
   useEffect(() => {
-    console.log("use Effect called");
-    console.log("todos array updated");
+    const storedTodos = JSON.parse(localStorage.getItem("storedTodos")!);
+    console.log("storedTodos", storedTodos);
+    if (!storedTodos) {
+      console.log("should never run");
+      localStorage.setItem("storedTodos", JSON.stringify(todos));
+    } else {
+      console.log("should always run");
+      setTodos(storedTodos);
+    }
+    console.log("use Effect called once on startup");
+  }, []);
+
+  // runs after the todo array has been altered
+  useEffect(() => {
+    localStorage.setItem("storedTodos", JSON.stringify(todos));
   }, [todos]);
 
   return (
