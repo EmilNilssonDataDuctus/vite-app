@@ -1,5 +1,7 @@
 import React, { useEffect, useReducer } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
+import { AddNewTodo } from "./AddNewTodo";
 import { TodosStatus } from "./DumbComponents/TodosStatus";
 import { TodoComponent } from "./TodoComponent";
 import { initialseStateOfTodos } from "./utils/initialseTodoApp";
@@ -24,6 +26,10 @@ const todoReducer = (state, action) => {
       });
     }
 
+    case "ADD_TODO": {
+      return [...state, action.payload];
+    }
+
     default: {
       return state;
     }
@@ -33,6 +39,17 @@ const todoReducer = (state, action) => {
 export const TodoPage = () => {
   // const [todos, setTodos] = useState<Array<TodoType>>(initialseStateOfTodos);
   const [todos, dispatch] = useReducer(todoReducer, initialseStateOfTodos);
+
+  const addNewTodo = (task) => {
+    dispatch({
+      type: "ADD_TODO",
+      payload: {
+        completed: false,
+        id: uuidv4(),
+        task,
+      },
+    });
+  };
 
   const updateTodoStatus = (todoId) => {
     dispatch({
@@ -72,6 +89,7 @@ export const TodoPage = () => {
     <MainWrapper>
       <h1>Todo list</h1>
       <TodosStatus todos={todos} />
+      <AddNewTodo addNewTodo={addNewTodo} />
       <ul>
         {todos.map((todo) => (
           <TodoComponent
