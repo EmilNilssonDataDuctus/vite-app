@@ -1,5 +1,5 @@
 import React from "react";
-import { TodoType } from "./TodoPage";
+import { TodoType } from "../TodoPage";
 
 type TodosStatusProps = {
   todos: TodoType[];

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MainWrapper } from "../../Shared/Page.styled";
+import { TodosStatus } from "./DumbComponents/TodosStatus";
 import { TodoComponent } from "./TodoComponent";
-import { TodosStatus } from "./TodosStatus";
 
 export type TodoType = {
   id: number;
