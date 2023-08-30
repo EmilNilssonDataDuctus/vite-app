@@ -17,8 +17,6 @@ const todoReducer = (state, action) => {
     }
 
     case "TOGGLE_TODO": {
-      console.log("toggle initiated in todoReducer");
-
       return state.map((todo) => {
         return todo.id === action.payload
           ? { ...todo, completed: !todo.completed }
