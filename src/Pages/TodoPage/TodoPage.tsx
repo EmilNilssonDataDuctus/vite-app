@@ -14,16 +14,23 @@ export const TodoPage = () => {
       updatedTodo.completed = !oldStatus;
 
       // this is a black box
+      // setTodos([
+      //   ...todos.map((todo) => {
+      //     if (todo.id === todoId) {
+      //       return {
+      //         ...todo,
+      //         complete: !oldStatus,
+      //       };
+      //     }
+      //     return todo;
+      //   }),
+      // ]);
+
+      // this is even more compact, but sursprisingly easier to read
       setTodos([
-        ...todos.map((todo) => {
-          if (todo.id === todoId) {
-            return {
-              ...todo,
-              complete: !oldStatus,
-            };
-          }
-          return todo;
-        }),
+        ...todos.map((todo) =>
+          todo.id === todoId ? { ...todo, complete: !oldStatus } : todo
+        ),
       ]);
     }
   };
