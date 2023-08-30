@@ -41,6 +41,9 @@ function Navbar({ themeToggler }) {
         <ListItem>
           <CommonLink href="/chart">Chart</CommonLink>
         </ListItem>
+        <ListItem>
+          <CommonLink href="/todo-list">Todo list</CommonLink>
+        </ListItem>
       </NavbarList>
       <button onClick={() => themeToggler()}>Toggle Dark mode</button>
     </NavbarWrapper>

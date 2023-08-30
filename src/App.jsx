@@ -8,6 +8,7 @@ import { Home } from "./Pages/Home/Home";
 import { HoverEffectsPage } from "./Pages/HoverEffectsPage/HoverEffectsPage";
 import { HoverEffectsPage2 } from "./Pages/HoverEffectsPage2/HoverEffectsPage2";
 import { MyChart } from "./Pages/MyChart/MyChart";
+import { TodoPage } from "./Pages/TodoPage/TodoPage";
 import Navbar from "./Shared/Navbar/Navbar";
 import CardBig from "./components/CardBig/CardBig";
 import Cards from "./components/Cards/Cards";
@@ -46,6 +47,7 @@ function App() {
           <Route path="/hover-move" element={<HoverEffectsPage />} />
           <Route path="/hover-move2" element={<HoverEffectsPage2 />} />
           <Route path="/chart" element={<MyChart />} />
+          <Route path="/todo-list" element={<TodoPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
