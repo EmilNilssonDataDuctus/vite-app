@@ -3,6 +3,7 @@ import { CommonLink } from "../Links.styled.js";
 import {
   ListItem,
   NavBarContainer,
+  NavBarToggleBtn,
   NavbarList,
   NavbarWrapper,
 } from "./Navbar.styled.js";
@@ -16,12 +17,9 @@ function Navbar({ themeToggler }) {
 
   return (
     <NavbarWrapper $showNav={showNav}>
-      <button
-        onClick={handleToggleNavbar}
-        style={{ position: "relative", zIndex: "2" }}
-      >
+      <NavBarToggleBtn onClick={handleToggleNavbar} $showNav={showNav}>
         Toggle Navbar
-      </button>
+      </NavBarToggleBtn>
       <NavBarContainer $showNav={showNav}>
         <NavbarList>
           <ListItem>

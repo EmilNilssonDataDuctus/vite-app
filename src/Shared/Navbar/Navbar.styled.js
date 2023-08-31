@@ -30,6 +30,14 @@ export const NavBarContainer = styled.div`
     $showNav ? "translateY(0)" : "translateY(-100%)"};
 `;
 
+export const NavBarToggleBtn = styled.button`
+  position: relative;
+  z-index: 2;
+
+  display: block;
+  padding: ${({ $showNav }) => ($showNav ? "0" : "16px")};
+`;
+
 export const NavbarList = styled.ul`
   list-style: none;
 
