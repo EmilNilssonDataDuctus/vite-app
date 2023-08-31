@@ -13,9 +13,10 @@ export const NavbarWrapper = styled.nav`
 
   height: ${({ $showNav }) => ($showNav ? "auto" : "0")};
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     ul {
-      flex-wrap: ${({ $showNav }) => ($showNav ? "wrap" : "nowrap")};
+      flex-wrap: wrap;
     }
   }
 `;
