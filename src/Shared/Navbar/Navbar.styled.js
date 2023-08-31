@@ -9,13 +9,18 @@ export const NavbarWrapper = styled.nav`
   top: 0;
 
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 
   &:hover {
     ul {
       flex-wrap: wrap;
     }
   }
+`;
+
+export const NavBarContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const NavbarList = styled.ul`
