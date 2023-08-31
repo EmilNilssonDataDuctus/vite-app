@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { CommonLink } from "../Links.styled.js";
 import {
   ListItem,
@@ -7,10 +8,21 @@ import {
 } from "./Navbar.styled.js";
 
 function Navbar({ themeToggler }) {
+  const [showNav, setShowNav] = useState(true);
+  const handleToggleNavbar = () => {
+    console.log("navbar btn clicked");
+    setShowNav(!showNav);
+  };
+
   return (
-    <NavbarWrapper>
-      <button>Hide Navbar</button>
-      <NavBarContainer>
+    <NavbarWrapper $showNav={showNav}>
+      <button
+        onClick={handleToggleNavbar}
+        style={{ position: "relative", zIndex: "2" }}
+      >
+        Toggle Navbar
+      </button>
+      <NavBarContainer $showNav={showNav}>
         <NavbarList>
           <ListItem>
             <CommonLink href="/">Home</CommonLink>

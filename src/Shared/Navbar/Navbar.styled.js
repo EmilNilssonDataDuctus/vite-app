@@ -11,9 +11,11 @@ export const NavbarWrapper = styled.nav`
   display: flex;
   flex-direction: column;
 
+  height: ${({ $showNav }) => ($showNav ? "auto" : "0")};
+
   &:hover {
     ul {
-      flex-wrap: wrap;
+      flex-wrap: ${({ $showNav }) => ($showNav ? "wrap" : "nowrap")};
     }
   }
 `;
@@ -21,6 +23,11 @@ export const NavbarWrapper = styled.nav`
 export const NavBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
+
+  transition: transform 200ms;
+
+  transform: ${({ $showNav }) =>
+    $showNav ? "translateY(0)" : "translateY(-100%)"};
 `;
 
 export const NavbarList = styled.ul`
