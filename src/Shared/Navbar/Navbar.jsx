@@ -1,5 +1,9 @@
 import { useRef, useState } from "react";
-import { hideInactive, pageRoutes } from "../../meta/pageData.jsx";
+import {
+  hideDynamicRoutes,
+  hideInactivePages,
+  pageRoutes,
+} from "../../meta/pageData.jsx";
 import { CommonLink } from "../Links.styled.js";
 import {
   NavBarContainer,
@@ -37,11 +41,14 @@ export const Navbar = ({ themeToggler }) => {
       </NavBarToggleBtn>
       <NavBarContainer $showNav={showNav}>
         <NavbarList>
-          {pageRoutes.filter(hideInactive).map(({ path, description }) => (
-            <li key={path}>
-              <CommonLink href={path}>{description}</CommonLink>
-            </li>
-          ))}
+          {pageRoutes
+            .filter(hideInactivePages)
+            .filter(hideDynamicRoutes)
+            .map(({ path, description }) => (
+              <li key={path}>
+                <CommonLink href={path}>{description}</CommonLink>
+              </li>
+            ))}
         </NavbarList>
         <button onClick={() => themeToggler()}>Toggle Dark mode</button>
       </NavBarContainer>

@@ -36,7 +36,8 @@ export const pageRoutes = [
     description: "Memory Game",
   },
   {
-    path: "/card/:name",
+    path: "/card",
+    dynamicId: "name",
     element: <CardBig />,
     description: "Pokedex detail page",
   },
@@ -117,4 +118,5 @@ export const pageRoutes = [
   return { ...obj, active: true };
 });
 
-export const hideInactive = ({ active }) => active;
+export const hideInactivePages = ({ active }) => active;
+export const hideDynamicRoutes = ({ dynamicId }) => !dynamicId;

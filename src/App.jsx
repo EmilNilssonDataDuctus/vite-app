@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { Navbar } from "./Shared/Navbar/Navbar";
 import { darkTheme, lightTheme } from "./components/Themes";
 import { GlobalStyles } from "./components/globalStyles";
-import { hideInactive, pageRoutes } from "./meta/pageData";
+import { hideInactivePages, pageRoutes } from "./meta/pageData";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -21,9 +21,15 @@ function App() {
       <Navbar themeToggler={themeToggler} />
       <BrowserRouter>
         <Routes>
-          {pageRoutes.filter(hideInactive).map(({ path, element }) => (
-            <Route key={path} path={path} element={element} />
-          ))}
+          {pageRoutes
+            .filter(hideInactivePages)
+            .map(({ path, element, dynamicId }) => (
+              <Route
+                key={path}
+                path={dynamicId ? `${path}/:${dynamicId}` : path}
+                element={element}
+              />
+            ))}
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
