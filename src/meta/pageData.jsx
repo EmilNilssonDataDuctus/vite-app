@@ -17,6 +17,8 @@ import { SpeedCalculator } from "../Pages/SpeedCalculator/SpeedCalculator";
 import { TodoPage } from "../Pages/TodoPage/TodoPage";
 import { TracerPage } from "../Pages/TracerPage/TracerPage";
 
+const WIPPages = ["/canvas", "/game"];
+
 export const pageRoutes = [
   {
     path: "/",
@@ -108,4 +110,11 @@ export const pageRoutes = [
     element: <MyCanvas />,
     description: "HTML Canvas experiment",
   },
-];
+].map((obj) => {
+  // temporarily WIP pages
+  if (WIPPages.find((page) => page === obj.path))
+    return { ...obj, active: false };
+  return { ...obj, active: true };
+});
+
+export const hideInactive = ({ active }) => active;

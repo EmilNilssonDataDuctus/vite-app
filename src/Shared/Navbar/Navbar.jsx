@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { pageRoutes } from "../../meta/pageData.jsx";
+import { hideInactive, pageRoutes } from "../../meta/pageData.jsx";
 import { CommonLink } from "../Links.styled.js";
 import {
   NavBarContainer,
@@ -8,7 +8,7 @@ import {
   NavbarWrapper,
 } from "./Navbar.styled.js";
 
-function Navbar({ themeToggler }) {
+export const Navbar = ({ themeToggler }) => {
   const [showNav, setShowNav] = useState(true);
 
   const handleToggleNavbar = () => {
@@ -37,7 +37,7 @@ function Navbar({ themeToggler }) {
       </NavBarToggleBtn>
       <NavBarContainer $showNav={showNav}>
         <NavbarList>
-          {pageRoutes.map(({ path, description }) => (
+          {pageRoutes.filter(hideInactive).map(({ path, description }) => (
             <li>
               <CommonLink href={path}>{description}</CommonLink>
             </li>
@@ -47,6 +47,4 @@ function Navbar({ themeToggler }) {
       </NavBarContainer>
     </NavbarWrapper>
   );
-}
-
-export default Navbar;
+};
