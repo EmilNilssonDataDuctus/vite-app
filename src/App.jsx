@@ -42,7 +42,6 @@ function App() {
             <Route path="/card/:name" element={<CardBig />} />
             <Route path="/hover-cards" element={<HoverCardsPage />} />
             <Route path="/game" element={<GamePage />} />
-            <Route path="/card/:name" element={<CardBig />} />
             <Route path="/kc-summerleague" element={<KCSummerLeaguePage />} />
             <Route path="/generate" element={<GeneratePage />} />
             <Route path="/tracing" element={<TracerPage />} />
