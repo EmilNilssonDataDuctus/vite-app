@@ -38,7 +38,7 @@ export const Navbar = ({ themeToggler }) => {
       <NavBarContainer $showNav={showNav}>
         <NavbarList>
           {pageRoutes.filter(hideInactive).map(({ path, description }) => (
-            <li>
+            <li key={path}>
               <CommonLink href={path}>{description}</CommonLink>
             </li>
           ))}
