@@ -131,7 +131,7 @@ export const CodeAlongSpeakers = () => {
         <div>Loading...</div>
       ) : (
         <ul>
-          {speakerListFiltered.map((speaker: any) => {
+          {speakerListFiltered?.map((speaker: any) => {
             return (
               <SpeakerDetail
                 key={speaker.id}
