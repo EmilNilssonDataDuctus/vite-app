@@ -76,6 +76,9 @@ function Navbar({ themeToggler }) {
           <ListItem>
             <CommonLink href="/speed-calculator">Speed calculator</CommonLink>
           </ListItem>
+          <ListItem>
+            <CommonLink href="/canvas">Canvas</CommonLink>
+          </ListItem>
         </NavbarList>
         <button onClick={() => themeToggler()}>Toggle Dark mode</button>
       </NavBarContainer>
