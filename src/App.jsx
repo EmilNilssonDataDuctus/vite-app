@@ -10,6 +10,7 @@ import { GeneratePage } from "./Pages/GeneratePage/GeneratePage";
 import { Home } from "./Pages/Home/Home";
 import { HoverEffectsPage } from "./Pages/HoverEffectsPage/HoverEffectsPage";
 import { HoverEffectsPage2 } from "./Pages/HoverEffectsPage2/HoverEffectsPage2";
+import { SpeedCalculator } from "./Pages/SpeedCalculator/SpeedCalculator";
 import { MyChart } from "./Pages/MyChart/MyChart";
 import { TodoPage } from "./Pages/TodoPage/TodoPage";
 import Navbar from "./Shared/Navbar/Navbar";
@@ -55,6 +56,7 @@ function App() {
               path="/code-along/speakers"
               element={<CodeAlongSpeakers />}
             />
+          <Route path="/speed-calculator" element={<SpeedCalculator />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
