@@ -1,7 +1,10 @@
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { useState } from "react";
 import { ThemeProvider } from "styled-components";
+import { CodeAlong } from "./Pages/CodeAlong/CodeAlong";
+import { CodeAlongHome } from "./Pages/CodeAlong/Pages";
+import { CodeAlongSpeakers } from "./Pages/CodeAlong/Pages/Speakers";
 import { GamePage } from "./Pages/Game/Game";
 import { GeneratePage } from "./Pages/GeneratePage/GeneratePage";
 import { Home } from "./Pages/Home/Home";
@@ -28,29 +31,33 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <GlobalStyles />
-      <Navbar themeToggler={themeToggler} />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cards" element={<Cards />} />
-          <Route path="/memory-game" element={<MemoryGame />} />
-          <Route path="/card/:name" element={<CardBig />} />
-          <Route path="/hover-cards" element={<HoverCardsPage />} />
-          <Route path="/game" element={<GamePage />} />
-          <Route path="/memory-game" element={<MemoryGame />} />
-          <Route path="/card/:name" element={<CardBig />} />
-          <Route path="/kc-summerleague" element={<KCSummerLeaguePage />} />
-          <Route path="/generate" element={<GeneratePage />} />
-          <Route path="/tracing" element={<TracerPage />} />
-          <Route path="/hover-move" element={<HoverEffectsPage />} />
-          <Route path="/hover-move2" element={<HoverEffectsPage2 />} />
-          <Route path="/chart" element={<MyChart />} />
-          <Route path="/todo-list" element={<TodoPage />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <GlobalStyles />
+        <Navbar themeToggler={themeToggler} />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cards" element={<Cards />} />
+            <Route path="/memory-game" element={<MemoryGame />} />
+            <Route path="/card/:name" element={<CardBig />} />
+            <Route path="/hover-cards" element={<HoverCardsPage />} />
+            <Route path="/game" element={<GamePage />} />
+            <Route path="/kc-summerleague" element={<KCSummerLeaguePage />} />
+            <Route path="/generate" element={<GeneratePage />} />
+            <Route path="/tracing" element={<TracerPage />} />
+            <Route path="/chart" element={<MyChart />} />
+            <Route path="/todo-list" element={<TodoPage />} />
+            <Route path="/hover-move" element={<HoverEffectsPage />} />
+            <Route path="/hover-move2" element={<HoverEffectsPage2 />} />
+            <Route path="/code-along-old" element={<CodeAlong />} />
+            <Route path="/code-along" element={<CodeAlongHome />} />
+            <Route
+              path="/code-along/speakers"
+              element={<CodeAlongSpeakers />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
   );
 }
 
