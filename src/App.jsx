@@ -2,27 +2,10 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { ThemeProvider } from "styled-components";
-import { CodeAlong } from "./Pages/CodeAlong/CodeAlong";
-import { CodeAlongHome } from "./Pages/CodeAlong/Pages";
-import { CodeAlongSpeakers } from "./Pages/CodeAlong/Pages/Speakers";
-import { GamePage } from "./Pages/Game/Game";
-import { GeneratePage } from "./Pages/GeneratePage/GeneratePage";
-import { Home } from "./Pages/Home/Home";
-import { HoverEffectsPage } from "./Pages/HoverEffectsPage/HoverEffectsPage";
-import { HoverEffectsPage2 } from "./Pages/HoverEffectsPage2/HoverEffectsPage2";
-import { MyCanvas } from "./Pages/MyCanvas/MyCanvas";
-import { SpeedCalculator } from "./Pages/SpeedCalculator/SpeedCalculator";
-import { MyChart } from "./Pages/MyChart/MyChart";
-import { TodoPage } from "./Pages/TodoPage/TodoPage";
 import Navbar from "./Shared/Navbar/Navbar";
-import CardBig from "./components/CardBig/CardBig";
-import Cards from "./components/Cards/Cards";
-import { HoverCardsPage } from "./components/HoverCardsPage/HoverCardsPage";
-import { KCSummerLeaguePage } from "./components/KCSummerLeaguePage/KCSummerLeaguePage";
-import { MemoryGame } from "./components/MemoryGame/MemoryGame";
 import { darkTheme, lightTheme } from "./components/Themes";
-import { TracerPage } from "./components/TracerPage/TracerPage";
 import { GlobalStyles } from "./components/globalStyles";
+import { pageRoutes } from "./meta/pageData";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -37,7 +20,7 @@ function App() {
         <GlobalStyles />
         <Navbar themeToggler={themeToggler} />
         <BrowserRouter>
-          <Routes>
+{/*           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cards" element={<Cards />} />
             <Route path="/memory-game" element={<MemoryGame />} />
@@ -57,8 +40,11 @@ function App() {
               path="/code-along/speakers"
               element={<CodeAlongSpeakers />}
             />
-          <Route path="/speed-calculator" element={<SpeedCalculator />} />
-          <Route path="/canvas" element={<MyCanvas />} />
+            <Route path="/speed-calculator" element={<SpeedCalculator />} />
+            <Route path="/canvas" element={<MyCanvas />} />
+          </Routes> */}
+          <Routes>
+            {pageRoutes.map(({path, element}) => <Route key={path} path={path} element={element} />)}
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

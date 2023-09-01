@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchPokemonByID } from "../../Shared/FetchPokemon";
 import styles from "./CardBig.module.css";
-function CardBig() {
+
+export const CardBig = () => {
   const { name } = useParams();
   const [card, setCard] = useState();
   const [prev, setPrev] = useState();
@@ -85,6 +86,4 @@ function CardBig() {
       </div>
     </div>
   );
-}
-
-export default CardBig;
+};

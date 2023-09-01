@@ -45,12 +45,8 @@ export const NavbarList = styled.ul`
   list-style: none;
 
   display: flex;
-  gap: 32px;
+  gap: 16px 8px;
 
   margin: 0;
   padding: 32px 16px;
-`;
-
-export const ListItem = styled.li`
-  display: inline-block;
 `;

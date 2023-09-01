@@ -4,7 +4,7 @@ import { MainWrapper } from "../../Shared/Page.styled";
 import Card from "./Card/Card";
 import { CardsLibrary } from "./Cards.styled";
 
-function Cards() {
+export const Cards = () => {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -23,6 +23,4 @@ function Cards() {
       </CardsLibrary>
     </MainWrapper>
   );
-}
-
-export default Cards;
+};
