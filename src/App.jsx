@@ -7,8 +7,10 @@ import { darkTheme, lightTheme } from "./components/Themes";
 import { GlobalStyles } from "./components/globalStyles";
 import { hideInactivePages, pageRoutes } from "./meta/pageData";
 
+const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
 function App() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(darkModeMediaQuery);
 
   const themeToggler = () => {
     console.log(theme);
