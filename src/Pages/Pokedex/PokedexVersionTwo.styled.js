@@ -6,9 +6,3 @@ export const CardsListContainer = styled.div`
   gap: 40px;
   margin: 0 50px;
 `;
-
-export const CardsList = styled.div`
-  /* display: flex;
-  flex */
-  /* gap: 8px; */
-`;

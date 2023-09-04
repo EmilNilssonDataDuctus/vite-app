@@ -1,36 +1,18 @@
-import { useEffect, useState } from "react";
-import { fetchManyPokemon } from "../../Shared/FetchPokemon";
 import { MainWrapper } from "../../Shared/Page.styled";
-import { CardsList, CardsListContainer } from "./PokedexVersionTwo.styled";
+import { CardList } from "./CardList/CardList";
+import { CardsListContainer } from "./PokedexVersionTwo.styled";
+
+const LIMIT = 100;
+const OFFSET = 100;
 
 export const PokedexVersionTwo = () => {
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    fetchManyPokemon().then((cards) => {
-      setCards(cards.results);
-    });
-  }, []);
-
   return (
     <MainWrapper>
       <h1>New pokedex</h1>
       <CardsListContainer>
-        <CardsList>
-          {cards.map((card, i) => (
-            <li key={i}>{card.name}</li>
-          ))}
-        </CardsList>
-        <CardsList>
-          {cards.map((card, i) => (
-            <li key={i}>{card.toString()}</li>
-          ))}
-        </CardsList>
-        <CardsList>
-          {cards.map((card, i) => (
-            <li key={i}>{card.toString()}</li>
-          ))}
-        </CardsList>
+        <CardList limit={LIMIT} offset={0} />
+        <CardList limit={LIMIT} offset={OFFSET} />
+        <CardList limit={LIMIT} offset={OFFSET * 2} />
       </CardsListContainer>
     </MainWrapper>
   );
