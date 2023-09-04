@@ -5,6 +5,7 @@ import { CodeAlongHome } from "../Pages/CodeAlong/Pages/index";
 import { CodeAlongSpeakers } from "../Pages/CodeAlong/Pages/Speakers";
 import { GamePage } from "../Pages/Game/Game";
 import { GeneratePage } from "../Pages/GeneratePage/GeneratePage";
+import { HackerAnimation } from "../Pages/HackerAnimation/HackerAnimation";
 import { Home } from "../Pages/Home/Home";
 import { HoverCardsPage } from "../Pages/HoverCardsPage/HoverCardsPage";
 import { HoverEffectsPage } from "../Pages/HoverEffectsPage/HoverEffectsPage";
@@ -24,6 +25,11 @@ export const pageRoutes = [
     path: "/",
     element: <Home />,
     description: "Home",
+  },
+  {
+    path: "/hackerAnimation",
+    element: <HackerAnimation />,
+    description: "Hacker animation",
   },
   {
     path: "/cards",

@@ -8,7 +8,7 @@ const MAX_POKEMON_ID = 150;
 const NO_CARDS_EASY = 3;
 const NO_CARDS_HARD = 20;
 
-function getRandomIntInclusive(min, max) {
+export function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
@@ -41,7 +41,7 @@ export const MemoryGame = () => {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  
+
   useEffect(() => {
     setGameOver(false);
     setSavedClicks([]);
