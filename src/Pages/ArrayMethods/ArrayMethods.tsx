@@ -107,62 +107,33 @@ export const ArrayMethods = () => {
   };
 
   useEffect(() => {
-    console.log("beads: ", beads);
-
-    // const firstThreeBeadsAreTheSame = (beads) => {
-    //   if (beads[0].color === beads[2].color) {
-    //     console.log("beads need to be removed: ");
-    //     return true;
-    //   }
-    //   console.log("beads have been removed: ");
-
-    //   return false;
-    // };
-
-    const firstThreeBeadsAreTheSame = (beads) => {
-      if (
-        beads[0].color === beads[1].color &&
-        beads[2].color === beads[1].color
-      ) {
-        console.log("beads need to be removed: ");
-        return true;
-      }
-      console.log("beads are not the same: ");
-
-      return false;
-    };
+    const firstThreeBeadsAreTheSame = (beads) =>
+      beads[0].color === beads[1].color && beads[2].color === beads[1].color;
 
     if (firstThreeBeadsAreTheSame(beads)) {
       // remove all these beads
       removeFromLeft();
       removeFromLeft();
       removeFromLeft();
-      setScore(() => score + 1)
+      setScore(() => score + 1);
     }
-    const lastThreeBeadsAreTheSame = (beads) => {
-      if (
-        beads[beads.length - 1].color === beads[beads.length - 2].color &&
-        beads[beads.length - 3].color === beads[beads.length - 2].color
-      ) {
-        console.log("beads need to be removed: ");
-        return true;
-      }
-      console.log("beads are not the same: ");
 
-      return false;
-    };
+    const lastThreeBeadsAreTheSame = (beads) =>
+      beads[beads.length - 1].color === beads[beads.length - 2].color &&
+      beads[beads.length - 3].color === beads[beads.length - 2].color;
+
     if (lastThreeBeadsAreTheSame(beads)) {
       // remove all these beads
       removeFromRight();
       removeFromRight();
       removeFromRight();
-      setScore(() => score + 1)
+      setScore(() => score + 1);
     }
   }, [nextBeadColor, beads]);
 
   const handleKeyDown = (e) => {
-    console.log(e.keycode);
-    console.log(e.key);
+    if (e.key === "ArrowLeft") addToLeft();
+    if (e.key === "ArrowRight") addToRight();
   };
 
   return (
@@ -181,6 +152,7 @@ export const ArrayMethods = () => {
           <p>Current score: {score}</p>
           <p>Next bead: {nextBeadColor}</p>
         </div>
+        <button style={{ height: "200px" }}></button>
         <ControlCenter>
           <button onClick={() => addToLeft()}>Add Left</button>
           <button onClick={() => addToRight()}>Add Right</button>
