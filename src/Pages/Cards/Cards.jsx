@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchManyPokemon } from "../../Shared/FetchPokemon";
 import { MainWrapper } from "../../Shared/Page.styled";
-import Card from "./Card/Card";
+import Card from "../../components/Card/Card";
 import { CardsLibrary } from "./Cards.styled";
 
 export const Cards = () => {
