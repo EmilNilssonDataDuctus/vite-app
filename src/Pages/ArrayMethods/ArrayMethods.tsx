@@ -41,9 +41,6 @@ const myReducer = (state, action) => {
   console.log("state: ", state);
 
   switch (action.type) {
-    case "SET_TODOS": {
-      return action.payload;
-    }
 
     case "ADD_TO_LEFT": {
       return [action.payload, ...state];
