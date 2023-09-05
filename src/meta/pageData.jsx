@@ -3,6 +3,7 @@ import { Cards } from "../Pages/Cards/Cards";
 import { CodeAlong } from "../Pages/CodeAlong/CodeAlong";
 import { CodeAlongHome } from "../Pages/CodeAlong/Pages/index";
 import { CodeAlongSpeakers } from "../Pages/CodeAlong/Pages/Speakers";
+import { ColorTheory } from "../Pages/ColorTheory/ColorTheory";
 import { GamePage } from "../Pages/Game/Game";
 import { GeneratePage } from "../Pages/GeneratePage/GeneratePage";
 import { HackerAnimation } from "../Pages/HackerAnimation/HackerAnimation";
@@ -30,6 +31,16 @@ export const pageRoutes = [
     path: "/hackerAnimation",
     element: <HackerAnimation />,
     description: "Hacker animation",
+  },
+  {
+    path: "/mix-blend-mode-demo",
+    element: <ColorTheory />,
+    description: "Color theory",
+  },
+  {
+    path: "/PokedexVersionTwo",
+    element: <PokedexVersionTwo />,
+    description: "PokedexVersionTwo",
   },
   {
     path: "/cards",
