@@ -156,8 +156,6 @@ export const ArrayMethods = () => {
         <ControlCenter>
           <button onClick={() => addToLeft()}>Add Left</button>
           <button onClick={() => addToRight()}>Add Right</button>
-          {/* <button onClick={() => removeFromLeft()}>RemoveLeft</button> */}
-          {/* <button onClick={() => removeFromRight()}>Remove Right</button> */}
         </ControlCenter>
       </GameArea>
     </MainWrapper>
