@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { CommonLink } from "../../../Shared/Links.styled";
+import { CommonLink } from "../../Shared/Links.styled";
 
 export const CardContainer = styled.div`
   display: block;
@@ -7,7 +7,9 @@ export const CardContainer = styled.div`
   border-radius: 20px 60px 40px 5px;
   padding: 16px 20px;
   box-shadow: 0 0 15px 4px white;
-  transition: box-shadow 100ms ease-in-out, border-radius 200ms ease-in-out;
+  transition:
+    box-shadow 100ms ease-in-out,
+    border-radius 200ms ease-in-out;
 
   &:hover {
     box-shadow: 0 0 5px 4px white;

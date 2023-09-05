@@ -14,6 +14,7 @@ import { KCSummerLeaguePage } from "../Pages/KCSummerLeaguePage/KCSummerLeaguePa
 import { MemoryGame } from "../Pages/MemoryGame/MemoryGame";
 import { MyCanvas } from "../Pages/MyCanvas/MyCanvas";
 import { MyChart } from "../Pages/MyChart/MyChart";
+import { PokedexVersionTwo } from "../Pages/Pokedex/PokedexVersionTwo";
 import { SpeedCalculator } from "../Pages/SpeedCalculator/SpeedCalculator";
 import { TodoPage } from "../Pages/TodoPage/TodoPage";
 import { TracerPage } from "../Pages/TracerPage/TracerPage";
@@ -30,6 +31,11 @@ export const pageRoutes = [
     path: "/hackerAnimation",
     element: <HackerAnimation />,
     description: "Hacker animation",
+  },
+  {
+    path: "/PokedexVersionTwo",
+    element: <PokedexVersionTwo />,
+    description: "PokedexVersionTwo",
   },
   {
     path: "/cards",

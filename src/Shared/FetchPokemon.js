@@ -4,8 +4,8 @@ export const fetchData = async (string) => {
   return json;
 };
 
-export const fetchManyPokemon = () =>
-  fetchData("https://pokeapi.co/api/v2/pokemon/");
+export const fetchManyPokemon = (query = "") =>
+  fetchData("https://pokeapi.co/api/v2/pokemon/" + query);
 
 export const fetchPokemonByID = (id) =>
   fetchData("https://pokeapi.co/api/v2/pokemon/" + id);

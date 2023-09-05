@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
-import { fetchPokemonByID } from "../../../Shared/FetchPokemon";
+import { fetchPokemonByID } from "../../Shared/FetchPokemon";
 import { CardContainer, CardCopy, CardLink } from "./Card.styled.js";
 
 const initialState = {
