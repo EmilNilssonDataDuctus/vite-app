@@ -1,3 +1,4 @@
+import { ArrayMethods } from "../Pages/ArrayMethods/ArrayMethods";
 import { CardBig } from "../Pages/CardBig/CardBig";
 import { Cards } from "../Pages/Cards/Cards";
 import { CodeAlong } from "../Pages/CodeAlong/CodeAlong";
@@ -27,6 +28,11 @@ export const pageRoutes = [
     path: "/",
     element: <Home />,
     description: "Home",
+  },
+  {
+    path: "/array-methods",
+    element: <ArrayMethods />,
+    description: "Array methods",
   },
   {
     path: "/hackerAnimation",
