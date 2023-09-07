@@ -1,28 +1,25 @@
-import { ArrayMethods } from "./ArrayMethods/ArrayMethods";
-import { CardBig } from "./CardBig/CardBig";
-import { Cards } from "./Cards/Cards";
-import { CodeAlong } from "./CodeAlong/CodeAlong";
-import { CodeAlongHome } from "./CodeAlong/Pages/index";
-import { CodeAlongSpeakers } from "./CodeAlong/Pages/Speakers";
-import { ColorTheory } from "./ColorTheory/ColorTheory";
-import { DataStructures } from "./DataStructures/DataStructures";
-import { ECommerceShirtPage } from "./ECommerceShirtPage/ECommerceShirtPage";
-import { FlexBoxTest } from "./FlexBoxTest/FlexBoxTest";
-import { GamePage } from "./Game/Game";
-import { GeneratePage } from "./GeneratePage/GeneratePage";
-import { HackerAnimation } from "./HackerAnimation/HackerAnimation";
-import { Home } from "./Home/Home";
-import { HoverCardsPage } from "./HoverCardsPage/HoverCardsPage";
-import { HoverEffectsPage } from "./HoverEffectsPage/HoverEffectsPage";
-import { HoverEffectsPage2 } from "./HoverEffectsPage2/HoverEffectsPage2";
-import { KCSummerLeaguePage } from "./KCSummerLeaguePage/KCSummerLeaguePage";
-import { MemoryGame } from "./MemoryGame/MemoryGame";
-import { MyCanvas } from "./MyCanvas/MyCanvas";
-import { MyChart } from "./MyChart/MyChart";
-import { PokedexVersionTwo } from "./Pokedex/PokedexVersionTwo";
-import { SpeedCalculator } from "./SpeedCalculator/SpeedCalculator";
-import { TodoPage } from "./TodoPage/TodoPage";
-import { TracerPage } from "./TracerPage/TracerPage";
+import { ArrayMethods } from "../Pages/ArrayMethods/ArrayMethods";
+import { CardBig } from "../Pages/CardBig/CardBig";
+import { Cards } from "../Pages/Cards/Cards";
+import { CodeAlong } from "../Pages/CodeAlong/CodeAlong";
+import { CodeAlongHome } from "../Pages/CodeAlong/Pages/index";
+import { CodeAlongSpeakers } from "../Pages/CodeAlong/Pages/Speakers";
+import { ColorTheory } from "../Pages/ColorTheory/ColorTheory";
+import { GamePage } from "../Pages/Game/Game";
+import { GeneratePage } from "../Pages/GeneratePage/GeneratePage";
+import { HackerAnimation } from "../Pages/HackerAnimation/HackerAnimation";
+import { Home } from "../Pages/Home/Home";
+import { HoverCardsPage } from "../Pages/HoverCardsPage/HoverCardsPage";
+import { HoverEffectsPage } from "../Pages/HoverEffectsPage/HoverEffectsPage";
+import { HoverEffectsPage2 } from "../Pages/HoverEffectsPage2/HoverEffectsPage2";
+import { KCSummerLeaguePage } from "../Pages/KCSummerLeaguePage/KCSummerLeaguePage";
+import { MemoryGame } from "../Pages/MemoryGame/MemoryGame";
+import { MyCanvas } from "../Pages/MyCanvas/MyCanvas";
+import { MyChart } from "../Pages/MyChart/MyChart";
+import { PokedexVersionTwo } from "../Pages/Pokedex/PokedexVersionTwo";
+import { SpeedCalculator } from "../Pages/SpeedCalculator/SpeedCalculator";
+import { TodoPage } from "../Pages/TodoPage/TodoPage";
+import { TracerPage } from "../Pages/TracerPage/TracerPage";
 
 const WIPPages = ["/canvas", "/game"];
 
@@ -33,24 +30,9 @@ export const pageRoutes = [
     description: "Home",
   },
   {
-    path: "/flexbox-test",
-    element: <FlexBoxTest />,
-    description: "FlexBoxTest",
-  },
-  {
     path: "/array-methods",
     element: <ArrayMethods />,
     description: "Array methods",
-  },
-  {
-    path: "/ecommerce-shirt",
-    element: <ECommerceShirtPage />,
-    description: "ECommerceShirtPage",
-  },
-  {
-    path: "/data-structures",
-    element: <DataStructures />,
-    description: "Data Structures",
   },
   {
     path: "/hackerAnimation",
