@@ -1,0 +1,73 @@
+/* What the documentation says to write */
+/* .item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+} */
+
+/* How I had to rewrite it to get it to work */
+/* .item.enter {
+  opacity: 0;
+}
+.item.enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.item.exit {
+  opacity: 1;
+}
+.item.exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+} */
+
+/* What I really wanted */
+.item.enter {
+  transform: translateY(-100px);
+}
+.item.enter-active {
+  transform: translateY(0px);
+  transition: transform 500ms ease-in;
+}
+.item.exit {
+  transform: translateY(0px);
+}
+.item.exit-active {
+  transform: translateY(100px);
+  transition: transform 500ms ease-in;
+}
+
+.item {
+  background-color: blue;
+  margin: 10px;
+  padding: 0 16px;
+  display: inline-block;
+}
+
+.item-container {
+  background-color: beige;
+}
+
+.item-container::before {
+  content: "End of queue";
+  background-color: red;
+  color: white;
+  width: 10px;
+  height: 10px;
+}
+.item-container::after {
+  content: "Start of queue";
+  background-color: green;
+  color: white;
+  width: 10px;
+  height: 10px;
+}
