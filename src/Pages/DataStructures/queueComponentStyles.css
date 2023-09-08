@@ -1,0 +1,70 @@
+/* What the documentation says to write */
+/* .item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+} */
+
+/* How I had to rewrite it to get it to work */
+/* .item.enter {
+  opacity: 0;
+}
+.item.enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.item.exit {
+  opacity: 1;
+}
+.item.exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+} */
+
+/* What I really wanted */
+.item.TTD.enter {
+  transform: translateY(-100px);
+}
+.item.TTD.enter-active {
+  transform: translateY(0px);
+  transition: transform 500ms ease-in;
+}
+.item.TTD.exit {
+  transform: translateY(0px);
+}
+.item.TTD.exit-active {
+  transform: translateY(100px);
+  transition: transform 500ms ease-in;
+}
+
+/* What I really wanted */
+.item.LTR.enter {
+  transform: translateX(-100px);
+}
+.item.LTR.enter-active {
+  transform: translateX(0px);
+  transition: transform 500ms ease-in;
+}
+.item.LTR.exit {
+  transform: translateX(0px);
+}
+.item.LTR.exit-active {
+  transform: translateX(100px);
+  transition: transform 500ms ease-in;
+}
+
+.item {
+  background-color: blue;
+  margin: 10px;
+  padding: 0 16px;
+  display: inline-block;
+}
