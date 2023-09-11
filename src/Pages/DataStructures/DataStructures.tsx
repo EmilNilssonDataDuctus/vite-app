@@ -1,7 +1,7 @@
 import React from "react";
 import { MainWrapper } from "../../Shared/Page.styled";
 import { DataSection } from "./DataStructures.styled";
-import { QueueComponent } from "./QueueComponent";
+import { QueueComponent } from "./QueueComponent/QueueComponent";
 import "./styles.css";
 
 export const DataStructures = () => {

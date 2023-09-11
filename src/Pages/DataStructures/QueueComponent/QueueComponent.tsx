@@ -1,8 +1,8 @@
 import React, { createRef, useReducer } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { v4 as uuidv4 } from "uuid";
-import { DataSection } from "./DataStructures.styled";
-import "./queueComponentStyles.css";
+import { DataSection } from "../DataStructures.styled";
+import "./QueueComponentStyles.css";
 
 const initialState = {
   queue: [],
