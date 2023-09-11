@@ -1,0 +1,18 @@
+.item-container {
+  background-color: beige;
+}
+
+.item-container::before {
+  content: "End of queue";
+  background-color: red;
+  color: white;
+  width: 10px;
+  height: 10px;
+}
+.item-container::after {
+  content: "Start of queue";
+  background-color: green;
+  color: white;
+  width: 10px;
+  height: 10px;
+}

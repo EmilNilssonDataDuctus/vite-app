@@ -5,6 +5,7 @@ import { CodeAlong } from "../Pages/CodeAlong/CodeAlong";
 import { CodeAlongHome } from "../Pages/CodeAlong/Pages/index";
 import { CodeAlongSpeakers } from "../Pages/CodeAlong/Pages/Speakers";
 import { ColorTheory } from "../Pages/ColorTheory/ColorTheory";
+import { DataStructures } from "../Pages/DataStructures/DataStructures";
 import { GamePage } from "../Pages/Game/Game";
 import { GeneratePage } from "../Pages/GeneratePage/GeneratePage";
 import { HackerAnimation } from "../Pages/HackerAnimation/HackerAnimation";
@@ -33,6 +34,11 @@ export const pageRoutes = [
     path: "/array-methods",
     element: <ArrayMethods />,
     description: "Array methods",
+  },
+  {
+    path: "/data-structures",
+    element: <DataStructures />,
+    description: "Data Structures",
   },
   {
     path: "/hackerAnimation",
