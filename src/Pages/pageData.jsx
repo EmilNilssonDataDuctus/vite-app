@@ -7,6 +7,7 @@ import { CodeAlongSpeakers } from "./CodeAlong/Pages/Speakers";
 import { ColorTheory } from "./ColorTheory/ColorTheory";
 import { DataStructures } from "./DataStructures/DataStructures";
 import { ECommerceShirtPage } from "./ECommerceShirtPage/ECommerceShirtPage";
+import { FlexBoxTest } from "./FlexBoxTest/FlexBoxTest";
 import { GamePage } from "./Game/Game";
 import { GeneratePage } from "./GeneratePage/GeneratePage";
 import { HackerAnimation } from "./HackerAnimation/HackerAnimation";
@@ -30,6 +31,11 @@ export const pageRoutes = [
     path: "/",
     element: <Home />,
     description: "Home",
+  },
+  {
+    path: "/flexbox-test",
+    element: <FlexBoxTest />,
+    description: "FlexBoxTest",
   },
   {
     path: "/array-methods",
