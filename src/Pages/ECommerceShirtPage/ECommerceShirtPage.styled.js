@@ -21,7 +21,7 @@ export const CustomButton = styled.button`
   background-color: ${({ $isActive }) => ($isActive ? "black" : "white")};
   color: ${({ $isActive }) => ($isActive ? "white" : "black")};
 
-  &:hover {
+  &:hover, &:focus-visible {
     mix-blend-mode: multiply;
     cursor: pointer;
   }
