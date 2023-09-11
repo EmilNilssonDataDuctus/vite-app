@@ -37,7 +37,7 @@ export const pageRoutes = [
     description: "Array methods",
   },
   {
-    path: "/ECommerceShirtPage",
+    path: "/ecommerce-shirt",
     element: <ECommerceShirtPage />,
     description: "ECommerceShirtPage",
   },
