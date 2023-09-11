@@ -1,20 +1,16 @@
 import React from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { MainWrapper } from "../../Shared/Page.styled";
-import { CustomButton, SectionContainer } from "./ECommerceShirtPage.styled";
+import { CustomButton, OptionList, OptionListItem, SectionContainer } from "./ECommerceShirtPage.styled";
+
+const colors = ["black", "white", "green", "red", "blue"];
+const sizes = ["xs", "medium", "xl"];
 
 export const ECommerceShirtPage = () => {
-  let location = useLocation();
-  console.log("location ", location);
   const [searchParams, setSearchParams] = useSearchParams();
-  const color = searchParams.get("color") || "black";
-  const size = searchParams.get("size") || "xl";
-  console.log("setSearchParams: ", setSearchParams);
 
-  // useEffect(() => {
-  //   console.log("color or size has changed");
-  //   setSearchParams(`?color=${color}&size=${size}`);
-  // }, [color, size]);
+  const color = searchParams.get("color") || colors[0];
+  const size = searchParams.get("size") || sizes[0];
 
   const isActiveColor = (colorOfButton) => color === colorOfButton;
   const isActiveSize = (sizeOfButton) => size === sizeOfButton;
@@ -36,45 +32,33 @@ export const ECommerceShirtPage = () => {
         <span>$20.00 USD</span>
         <div>
           <h3>Color</h3>
-          <ul>
-            <li>
-              <CustomButton
-                onClick={() => updateSearchParams("color", "black")}
-                $isActive={isActiveColor("black")}
-              >
-                Black
-              </CustomButton>
-            </li>
-            <li>
-              <CustomButton
-                onClick={() => updateSearchParams("color", "white")}
-                $isActive={isActiveColor("white")}
-              >
-                White
-              </CustomButton>
-            </li>
-          </ul>
+          <OptionList style={{ display: "flex" }}>
+            {colors.map((color) => (
+              <OptionListItem key={color} style={{ display: "flex" }}>
+                <CustomButton
+                  onClick={() => updateSearchParams("color", color)}
+                  $isActive={isActiveColor(color)}
+                >
+                  {color}
+                </CustomButton>
+              </OptionListItem>
+            ))}
+          </OptionList>
         </div>
         <div>
           <h3>Sizes</h3>
-          <ul>
-            <li>
-              <CustomButton
-                onClick={() => updateSearchParams("size", "xs")}
-                $isActive={isActiveSize("xs")}
-              >
-                XS
-              </CustomButton>
-            </li>
-            <li>
-              <CustomButton
-                onClick={() => updateSearchParams("size", "xl")}
-                $isActive={isActiveSize("xl")}
-              >
-                XL
-              </CustomButton>
-            </li>
-          </ul>
+          <OptionList>
+            {sizes.map((size) => (
+              <OptionListItem key={size}>
+                <CustomButton
+                  onClick={() => updateSearchParams("size", size)}
+                  $isActive={isActiveSize(size)}
+                >
+                  {size.toUpperCase()}
+                </CustomButton>
+              </OptionListItem>
+            ))}
+          </OptionList>
         </div>
       </SectionContainer>
     </MainWrapper>

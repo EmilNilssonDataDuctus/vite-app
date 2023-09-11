@@ -5,9 +5,18 @@ export const SectionContainer = styled.section`
   padding: 64px;
 `;
 
+export const OptionList = styled.ul`
+  display: flex;
+`;
+export const OptionListItem = styled.li`
+  display: flex;
+`;
+
 export const CustomButton = styled.button`
   padding: 4px 16px;
   border-radius: 999px;
+
+  text-transform: capitalize;
 
   background-color: ${({ $isActive }) => ($isActive ? "black" : "white")};
   color: ${({ $isActive }) => ($isActive ? "white" : "black")};
