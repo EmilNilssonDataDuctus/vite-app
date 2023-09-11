@@ -10,14 +10,12 @@ export const CardList = ({ limit, offset }) => {
 
   const [userMouseIsHovering, setUserMouseIsHovering] = useState(false);
   const [previewId, setPreviewId] = useState(null);
-  const [previewData, setPreviewData] = useState();
+  const [previewData, setPreviewData] = useState(undefined);
   const [topOffset, setTopOffset] = useState(0);
   const [leftOffset, setLeftOffset] = useState(0);
 
   useEffect(() => {
     fetchManyPokemon(`?limit=${limit}&offset=${offset}`).then((cards) => {
-      console.log(cards.results);
-
       setCards(
         cards.results.map((card) => {
           return { ...card, id: card.url.split("/")[6] };
@@ -39,12 +37,14 @@ export const CardList = ({ limit, offset }) => {
   };
 
   useEffect(() => {
-    setPreviewData(null);
-    fetchPokemonByID(previewId).then((results) => {
-      setTimeout(() => {
-        setPreviewData(results);
-      }, 1000);
-    });
+    setPreviewData(undefined);
+    if (previewId) {
+      fetchPokemonByID(previewId).then((results) => {
+        setTimeout(() => {
+          setPreviewData(results);
+        }, 1000);
+      });
+    }
   }, [previewId]);
 
   const handleMouseLeave = (e) => {
