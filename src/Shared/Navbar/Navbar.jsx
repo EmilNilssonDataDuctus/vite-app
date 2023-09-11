@@ -19,7 +19,8 @@ export const Navbar = ({ themeToggler }) => {
     setShowNav(!showNav);
   };
 
-  const btnRef = useRef(null);
+  const btnToggleNavbarRef = useRef(null);
+  const btnToggleDarkModeRef = useRef(null);
   const handleMouseLeave = () => {
     // Fixes the following bug:
     //   Click "Toggle navbar" to hide
@@ -27,13 +28,16 @@ export const Navbar = ({ themeToggler }) => {
     //   Now the button "Toggle navbar" still has the "active" attribute(?)
     //     This triggered the css pseudo-selector :focus-within
     //     Which was added to trigger the flex-wrap: wrap rule for keyboard navigation as well as mouse-hovering
-    btnRef.current.blur();
+    btnToggleNavbarRef.current.blur();
+
+    // Same bugfix for Toggle Dark mode btn
+    btnToggleDarkModeRef.current.blur();
   };
 
   return (
     <NavbarWrapper $showNav={showNav} onMouseLeave={handleMouseLeave}>
       <NavBarToggleBtn
-        ref={btnRef}
+        ref={btnToggleNavbarRef}
         onClick={handleToggleNavbar}
         $showNav={showNav}
       >
@@ -50,7 +54,7 @@ export const Navbar = ({ themeToggler }) => {
               </li>
             ))}
         </NavbarList>
-        <button onClick={() => themeToggler()}>Toggle Dark mode</button>
+        <button ref={btnToggleDarkModeRef} onClick={() => themeToggler()}>Toggle Dark mode</button>
       </NavBarContainer>
     </NavbarWrapper>
   );
