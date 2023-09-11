@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { ThemeProvider } from "styled-components";
+import { hideInactivePages, pageRoutes } from "./Pages/pageData";
 import { Navbar } from "./Shared/Navbar/Navbar";
 import { darkTheme, lightTheme } from "./components/Themes";
 import { GlobalStyles } from "./components/globalStyles";
-import { hideInactivePages, pageRoutes } from "./meta/pageData";
 import { initialseStateDarkMode } from "./utils/initialiseDarkMode";
 
 function App() {

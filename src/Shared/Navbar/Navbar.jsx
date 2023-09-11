@@ -3,7 +3,7 @@ import {
   hideDynamicRoutes,
   hideInactivePages,
   pageRoutes,
-} from "../../meta/pageData.jsx";
+} from "../../Pages/pageData.jsx";
 import { CommonLink } from "../Links.styled.js";
 import {
   NavBarContainer,
