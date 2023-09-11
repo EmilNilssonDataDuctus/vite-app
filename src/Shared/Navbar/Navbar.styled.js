@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const NavbarWrapper = styled.nav`
-  background-color: rgb(59, 59, 59);
+  background-color: rgba(59, 59, 59, 0.5);
   box-shadow: 0 0 10px black;
   width: 100%;
   position: fixed;
@@ -45,7 +45,7 @@ export const NavbarList = styled.ul`
   list-style: none;
 
   display: flex;
-  gap: 16px 8px;
+  gap: 32px 8px;
 
   margin: 0;
   padding: 32px 16px;
