@@ -1,7 +1,12 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { MainWrapper } from "../../Shared/Page.styled";
-import { CustomButton, OptionList, OptionListItem, SectionContainer } from "./ECommerceShirtPage.styled";
+import {
+  CustomButton,
+  OptionList,
+  OptionListItem,
+  SectionContainer,
+} from "./ECommerceShirtPage.styled";
 
 const colors = ["black", "white", "green", "red", "blue"];
 const sizes = ["xs", "medium", "xl"];
@@ -9,8 +14,10 @@ const sizes = ["xs", "medium", "xl"];
 export const ECommerceShirtPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const color = searchParams.get("color") || colors[0];
-  const size = searchParams.get("size") || sizes[0];
+  const color =
+    colors.find((color) => color === searchParams.get("color")) || colors[0];
+  const size =
+    sizes.find((size) => size === searchParams.get("size")) || sizes[0];
 
   const isActiveColor = (colorOfButton) => color === colorOfButton;
   const isActiveSize = (sizeOfButton) => size === sizeOfButton;
