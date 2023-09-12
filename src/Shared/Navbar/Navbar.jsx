@@ -54,7 +54,9 @@ export const Navbar = ({ themeToggler }) => {
               </li>
             ))}
         </NavbarList>
-        <button ref={btnToggleDarkModeRef} onClick={() => themeToggler()}>Toggle Dark mode</button>
+        <button ref={btnToggleDarkModeRef} onClick={() => themeToggler()}>
+          Toggle Dark mode
+        </button>
       </NavBarContainer>
     </NavbarWrapper>
   );
