@@ -20,6 +20,9 @@ import { PokedexVersionTwo } from "../Pages/Pokedex/PokedexVersionTwo";
 import { SpeedCalculator } from "../Pages/SpeedCalculator/SpeedCalculator";
 import { TodoPage } from "../Pages/TodoPage/TodoPage";
 import { TracerPage } from "../Pages/TracerPage/TracerPage";
+import { DataStructures } from "./DataStructures/DataStructures";
+import { ECommerceShirtPage } from "./ECommerceShirtPage/ECommerceShirtPage";
+import { FlexBoxTest } from "./FlexBoxTest/FlexBoxTest";
 
 const WIPPages = ["/canvas", "/game"];
 
@@ -30,9 +33,24 @@ export const pageRoutes = [
     description: "Home",
   },
   {
+    path: "/flexbox-test",
+    element: <FlexBoxTest />,
+    description: "FlexBoxTest",
+  },
+  {
     path: "/array-methods",
     element: <ArrayMethods />,
     description: "Array methods",
+  },
+  {
+    path: "/ecommerce-shirt",
+    element: <ECommerceShirtPage />,
+    description: "ECommerceShirtPage",
+  },
+  {
+    path: "/data-structures",
+    element: <DataStructures />,
+    description: "Data Structures",
   },
   {
     path: "/hackerAnimation",
