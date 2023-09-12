@@ -17,6 +17,7 @@ export const CustomButton = styled.a`
   border-radius: 999px;
 
   text-transform: capitalize;
+  text-decoration: none;
 
   background-color: ${({ $isActive }) => ($isActive ? "black" : "white")};
   color: ${({ $isActive }) => ($isActive ? "white" : "black")};
