@@ -12,7 +12,7 @@ export const OptionListItem = styled.li`
   display: flex;
 `;
 
-export const CustomButton = styled.button`
+export const CustomButton = styled.a`
   padding: 4px 16px;
   border-radius: 999px;
 

@@ -45,6 +45,15 @@ export const ECommerceShirtPage = () => {
               <OptionListItem key={color} style={{ display: "flex" }}>
                 <CustomButton
                   onClick={() => updateSearchParams("color", color)}
+                  // Tutorial video reccomended using the following href when using the Next.js framework with next/link components
+                  // I found that using the useSearchParams hook from react-router-dom worked better
+                  // Since clicking changed the URLs searchParams using <a> tag instead of <button> was fitting
+                  // But then href attribute is needed for <a> tag t.b.a.t. be reachable by tab-navigation
+                  // href={`?${new URLSearchParams({
+                  //   color,
+                  //   size
+                  // })}`}
+                  href="javascript:void(0)"
                   $isActive={isActiveColor(color)}
                 >
                   {color}
@@ -60,6 +69,12 @@ export const ECommerceShirtPage = () => {
               <OptionListItem key={size}>
                 <CustomButton
                   onClick={() => updateSearchParams("size", size)}
+                  // Same setup for size buttons
+                  // href={`?${new URLSearchParams({
+                  //   color,
+                  //   size
+                  // })}`}
+                  href="javascript:void(0)"
                   $isActive={isActiveSize(size)}
                 >
                   {size.toUpperCase()}
