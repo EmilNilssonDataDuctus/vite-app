@@ -5,6 +5,9 @@ import { CodeAlong } from "./CodeAlong/CodeAlong";
 import { CodeAlongSpeakers } from "./CodeAlong/Pages/Speakers";
 import { CodeAlongHome } from "./CodeAlong/Pages/index";
 import { ColorTheory } from "./ColorTheory/ColorTheory";
+import { DataStructures } from "./DataStructures/DataStructures";
+import { ECommerceShirtPage } from "./ECommerceShirtPage/ECommerceShirtPage";
+import { FlexBoxTest } from "./FlexBoxTest/FlexBoxTest";
 import { GamePage } from "./Game/Game";
 import { GeneratePage } from "./GeneratePage/GeneratePage";
 import { HackerAnimation } from "./HackerAnimation/HackerAnimation";
@@ -20,9 +23,6 @@ import { PokedexVersionTwo } from "./Pokedex/PokedexVersionTwo";
 import { SpeedCalculator } from "./SpeedCalculator/SpeedCalculator";
 import { TodoPage } from "./TodoPage/TodoPage";
 import { TracerPage } from "./TracerPage/TracerPage";
-import { DataStructures } from "/DataStructures";
-import { ECommerceShirtPage } from "/ECommerceShirtPage";
-import { FlexBoxTest } from "/FlexBoxTest";
 
 const WIPPages = ["/canvas", "/game"];
 
