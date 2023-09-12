@@ -11,13 +11,14 @@ import {
 const colors = ["black", "white", "green", "red", "blue"];
 const sizes = ["xs", "medium", "xl"];
 
+// Returns either string or undefined
+const findIn = (value, array) => array.find((entry) => entry === value);
+
 export const ECommerceShirtPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const color =
-    colors.find((color) => color === searchParams.get("color")) || colors[0];
-  const size =
-    sizes.find((size) => size === searchParams.get("size")) || sizes[0];
+  const color = findIn(searchParams.get("color"), colors) || colors[0];
+  const size = findIn(searchParams.get("size"), sizes) || sizes[0];
 
   const isActiveColor = (colorOfButton) => color === colorOfButton;
   const isActiveSize = (sizeOfButton) => size === sizeOfButton;
