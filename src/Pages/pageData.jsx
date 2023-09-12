@@ -5,6 +5,7 @@ import { CodeAlong } from "./CodeAlong/CodeAlong";
 import { CodeAlongSpeakers } from "./CodeAlong/Pages/Speakers";
 import { CodeAlongHome } from "./CodeAlong/Pages/index";
 import { ColorTheory } from "./ColorTheory/ColorTheory";
+import { ColorTheory2 } from "./ColorTheory2/ColorTheory2";
 import { DataStructures } from "./DataStructures/DataStructures";
 import { ECommerceShirtPage } from "./ECommerceShirtPage/ECommerceShirtPage";
 import { FlexBoxTest } from "./FlexBoxTest/FlexBoxTest";
@@ -61,6 +62,11 @@ export const pageRoutes = [
     path: "/mix-blend-mode-demo",
     element: <ColorTheory />,
     description: "Color theory",
+  },
+  {
+    path: "/color-theory-difference",
+    element: <ColorTheory2 />,
+    description: "Color theory mix-blend-mode difference",
   },
   {
     path: "/PokedexVersionTwo",
