@@ -20,6 +20,7 @@ import { KCSummerLeaguePage } from "./KCSummerLeaguePage/KCSummerLeaguePage";
 import { MemoryGame } from "./MemoryGame/MemoryGame";
 import { MyCanvas } from "./MyCanvas/MyCanvas";
 import { MyChart } from "./MyChart/MyChart";
+import { MyChartCombined } from "./MyChartCombined/MyChartCombined";
 import { PokedexVersionTwo } from "./Pokedex/PokedexVersionTwo";
 import { SpeedCalculator } from "./SpeedCalculator/SpeedCalculator";
 import { TodoPage } from "./TodoPage/TodoPage";
@@ -37,6 +38,11 @@ export const pageRoutes = [
     path: "/flexbox-test",
     element: <FlexBoxTest />,
     description: "FlexBoxTest",
+  },
+  {
+    path: "/combined-chart",
+    element: <MyChartCombined />,
+    description: "Combined chart",
   },
   {
     path: "/array-methods",
