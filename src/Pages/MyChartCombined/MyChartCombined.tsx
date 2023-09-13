@@ -14,21 +14,23 @@ import { Line } from "react-chartjs-2";
 let datesData, bodyweightData, fatPercentageData;
 
 const attemptToFetchData = async () => {
-  try {
-    const dataModule = await import("./data");
-    console.log("dataModule");
-    console.log(dataModule);
+  if (process.env.NODE_ENV === "development") {
+    try {
+      const dataModule = await import("./data");
+      console.log("dataModule");
+      console.log(dataModule);
 
-    datesData = dataModule.datesData;
-    bodyweightData = dataModule.bodyweightData;
-    fatPercentageData = dataModule.fatPercentageData;
-  } catch (error) {
-    console.log("error");
-    console.log(error);
+      datesData = dataModule.datesData;
+      bodyweightData = dataModule.bodyweightData;
+      fatPercentageData = dataModule.fatPercentageData;
+    } catch (error) {
+      console.log("error");
+      console.log(error);
 
-    datesData = [];
-    bodyweightData = [];
-    fatPercentageData = [];
+      datesData = [];
+      bodyweightData = [];
+      fatPercentageData = [];
+    }
   }
 };
 attemptToFetchData();
