@@ -10,7 +10,25 @@ import {
 } from "chart.js";
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { bodyweightData, datesData, fatPercentageData } from "./data";
+
+let datesData, bodyweightData, fatPercentageData;
+
+try {
+  const dataModule = await import("./data");
+  console.log("dataModule");
+  console.log(dataModule);
+
+  datesData = dataModule.datesData;
+  bodyweightData = dataModule.bodyweightData;
+  fatPercentageData = dataModule.fatPercentageData;
+} catch (error) {
+  console.log("error");
+  console.log(error);
+
+  datesData = [];
+  bodyweightData = [];
+  fatPercentageData = [];
+}
 
 ChartJS.register(
   CategoryScale,
