@@ -7,6 +7,8 @@ export const KCSummerLeaguePageSimplified = () => {
   const [climbersData, setClimbersData] = useState<Array<any>>([]);
   const [inputValue, setInputValue] = useState("");
 
+  const [shouldSortByCompletions, setShouldSortByCompletions] = useState(false);
+
   let iterator = climbersData.length;
 
   const handleSubmit = (e) => {
@@ -28,11 +30,7 @@ export const KCSummerLeaguePageSimplified = () => {
     setClimbersData([...climbersData].filter((climber) => climber !== target));
   };
 
-  const handleTextInputChange = (e) => {
-    setInputValue(e.target.value);
-    console.log(e.target.value);
-    console.log(typeof e.target.value);
-  };
+  const handleTextInputChange = (e) => setInputValue(e.target.value);
 
   const renderNumbers = () => {
     let arr: any = [];
@@ -80,6 +78,28 @@ export const KCSummerLeaguePageSimplified = () => {
     setClimbersData(updatedArrayofClimbers);
   };
 
+  const reduceBoulders = (accumulator, currentBoulder) => {
+    if (currentBoulder.completed) accumulator++;
+    return accumulator;
+  };
+
+  const sortClimbersData = (array) => {
+    array.sort((climberA, climberB) =>
+      climberA.orderAdded > climberB.orderAdded ? 1 : -1
+    );
+
+    if (shouldSortByCompletions) {
+      return array.sort((climberA, climberB) => {
+        return climberA.completedBoulders.reduce(reduceBoulders, 0) >
+          climberB.completedBoulders.reduce(reduceBoulders, 0)
+          ? -1
+          : 1;
+      });
+    } else {
+      return array;
+    }
+  };
+
   return (
     <MainWrapper>
       <h1>KCSummerLeagueTracker</h1>
@@ -98,50 +118,62 @@ export const KCSummerLeaguePageSimplified = () => {
         </section>
         <section>
           <h3>Current standings</h3>
-          {/* <ol>{renderNumbers()}</ol> */}
+          <form>
+            <label>
+              Sort the climbers
+              <input
+                type="checkbox"
+                checked={shouldSortByCompletions}
+                onChange={() =>
+                  setShouldSortByCompletions(!shouldSortByCompletions)
+                }
+              />
+            </label>
+          </form>
           <ul>
-            {climbersData
-              ?.sort((climberA, climberB) =>
-                climberA.orderAdded > climberB.orderAdded ? 1 : -1
+            {sortClimbersData(climbersData).map(
+              ({ climberId, climberName, completedBoulders, orderAdded }) => (
+                <li key={climberId}>
+                  climber: {climberName} , id: {climberId}, orderAdded:
+                  {orderAdded}
+                  <button onClick={() => handleDelete(climberId)}>
+                    Delete
+                  </button>
+                  <ul style={{ display: "flex" }}>
+                    {completedBoulders
+                      .sort((boulderA, boulderB) =>
+                        boulderA.boulderId > boulderB.boulderId ? 1 : -1
+                      )
+                      .map(({ boulderId, completed, wall, color }) => (
+                        <li
+                          style={{ backgroundColor: color, width: "90px" }}
+                          key={boulderId}
+                        >
+                          <label>
+                            <p>
+                              {wall}:{completed.toString()}
+                            </p>
+                            <div>
+                              <input
+                                style={{
+                                  accentColor: color,
+                                  width: "40px",
+                                  height: "40px",
+                                }}
+                                type="checkbox"
+                                checked={completed}
+                                onChange={() =>
+                                  handleBoulderToggle(climberId, boulderId)
+                                }
+                              />
+                            </div>
+                          </label>
+                        </li>
+                      ))}
+                  </ul>
+                </li>
               )
-              .map(
-                ({ climberId, climberName, completedBoulders, orderAdded }) => (
-                  <li key={climberId}>
-                    climber: {climberName} , id: {climberId}, orderAdded:{" "}
-                    {orderAdded}
-                    <button onClick={() => handleDelete(climberId)}>
-                      Delete
-                    </button>
-                    <ul style={{ display: "flex" }}>
-                      {completedBoulders
-                        .sort((boulderA, boulderB) =>
-                          boulderA.boulderId > boulderB.boulderId ? 1 : -1
-                        )
-                        .map(({ boulderId, completed, wall, color }) => (
-                          <li
-                            style={{ backgroundColor: color }}
-                            key={boulderId}
-                          >
-                            <label>
-                              <p>
-                                {wall}:{completed.toString()}
-                              </p>
-                              <div>
-                                <input
-                                  type="checkbox"
-                                  checked={completed}
-                                  onChange={() =>
-                                    handleBoulderToggle(climberId, boulderId)
-                                  }
-                                />
-                              </div>
-                            </label>
-                          </li>
-                        ))}
-                    </ul>
-                  </li>
-                )
-              )}
+            )}
           </ul>
         </section>
       </div>
