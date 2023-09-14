@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
 import { boulders } from "../KCSummerLeaguePage/data/boulders";
@@ -35,13 +35,10 @@ export const KCSummerLeaguePageSimplified = () => {
 
   const handleTextInputChange = (e) => setInputValue(e.target.value);
 
-  const renderNumbers = () => {
-    let arr: any = [];
-    for (let i = 0; i < 16; i++) {
-      arr.push(<li></li>);
-    }
-    return arr;
-  };
+  // runs after the climbers array has been altered
+  useEffect(() => {
+    localStorage.setItem("storedClimbers", JSON.stringify(climbersData));
+  }, [climbersData]);
 
   const handleBoulderToggle = (climberId, boulderId) => {
     const copyOfClimbersArr = [...climbersData];
