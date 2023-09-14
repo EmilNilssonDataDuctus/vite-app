@@ -32,8 +32,10 @@ export const KCSummerLeaguePageSimplified = () => {
     setInputValue("");
   };
 
-  const handleDelete = (target) => {
-    setClimbersData([...climbersData].filter((climber) => climber !== target));
+  const handleDelete = (climberId) => {
+    setClimbersData(
+      [...climbersData].filter((climber) => climber.climberId !== climberId)
+    );
   };
 
   const handleTextInputChange = (e) => setInputValue(e.target.value);
