@@ -166,8 +166,9 @@ export const KCSummerLeaguePageSimplified = () => {
                   .sort((boulderA, boulderB) =>
                     boulderA.boulderId > boulderB.boulderId ? 1 : -1
                   )
-                  .map(({ wall, color }) => (
+                  .map(({ wall, color }, index) => (
                     <li
+                      key={index}
                       style={{
                         backgroundColor: color,
                         width: "90px",
