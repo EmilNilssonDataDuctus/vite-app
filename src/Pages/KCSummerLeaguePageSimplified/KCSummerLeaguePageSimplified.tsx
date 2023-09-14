@@ -102,7 +102,7 @@ export const KCSummerLeaguePageSimplified = () => {
           <ul>
             {climbersData
               ?.sort((climberA, climberB) =>
-                climberA.orderAdded < climberB.orderAdded ? -1 : 1
+                climberA.orderAdded > climberB.orderAdded ? 1 : -1
               )
               .map(
                 ({ climberId, climberName, completedBoulders, orderAdded }) => (
@@ -115,7 +115,7 @@ export const KCSummerLeaguePageSimplified = () => {
                     <ul style={{ display: "flex" }}>
                       {completedBoulders
                         .sort((boulderA, boulderB) =>
-                          boulderA.boulderId < boulderB.boulderId ? 1 : -1
+                          boulderA.boulderId > boulderB.boulderId ? 1 : -1
                         )
                         .map(({ boulderId, completed, wall, color }) => (
                           <li
