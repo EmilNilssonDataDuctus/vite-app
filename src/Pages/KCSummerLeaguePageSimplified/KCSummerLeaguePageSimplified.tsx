@@ -10,6 +10,7 @@ export const KCSummerLeaguePageSimplified = () => {
   let iterator = climbersData.length;
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     const newClimber = {
       climberName: inputValue,
       climberId: uuidv4(),
@@ -19,7 +20,6 @@ export const KCSummerLeaguePageSimplified = () => {
       })),
       orderAdded: ++iterator,
     };
-    e.preventDefault();
     setClimbersData([...climbersData, newClimber]);
     setInputValue("");
   };
