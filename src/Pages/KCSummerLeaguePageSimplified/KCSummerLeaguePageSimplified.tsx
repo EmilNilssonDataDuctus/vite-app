@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
 import { boulders } from "../KCSummerLeaguePage/data/boulders";
+import { initialseStateOfClimbers } from "./utils/initialseClimberData";
 
 export const KCSummerLeaguePageSimplified = () => {
-  const [climbersData, setClimbersData] = useState<Array<any>>([]);
+  const [climbersData, setClimbersData] = useState<Array<any>>(
+    initialseStateOfClimbers
+  );
   const [inputValue, setInputValue] = useState("");
 
   const [shouldSortByCompletions, setShouldSortByCompletions] = useState(false);
@@ -84,12 +87,12 @@ export const KCSummerLeaguePageSimplified = () => {
   };
 
   const sortClimbersData = (array) => {
-    array.sort((climberA, climberB) =>
+    array?.sort((climberA, climberB) =>
       climberA.orderAdded > climberB.orderAdded ? 1 : -1
     );
 
     if (shouldSortByCompletions) {
-      return array.sort((climberA, climberB) => {
+      return array?.sort((climberA, climberB) => {
         return climberA.completedBoulders.reduce(reduceBoulders, 0) >
           climberB.completedBoulders.reduce(reduceBoulders, 0)
           ? -1
@@ -141,7 +144,7 @@ export const KCSummerLeaguePageSimplified = () => {
                   </button>
                   <ul style={{ display: "flex" }}>
                     {completedBoulders
-                      .sort((boulderA, boulderB) =>
+                      ?.sort((boulderA, boulderB) =>
                         boulderA.boulderId > boulderB.boulderId ? 1 : -1
                       )
                       .map(({ boulderId, completed, wall, color }) => (
