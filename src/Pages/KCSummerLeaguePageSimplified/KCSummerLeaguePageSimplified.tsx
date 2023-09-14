@@ -15,6 +15,7 @@ export const KCSummerLeaguePageSimplified = () => {
   const [shouldSortAlphabetically, setShouldSortAlphabetically] =
     useState(false);
 
+  // @TODO: fix this
   let iterator = climbersData.length;
 
   const handleSubmit = (e) => {
@@ -26,6 +27,7 @@ export const KCSummerLeaguePageSimplified = () => {
         ...boulder,
         completed: false,
       })),
+      // @TODO: fix this
       orderAdded: ++iterator,
     };
     setClimbersData([...climbersData, newClimber]);
