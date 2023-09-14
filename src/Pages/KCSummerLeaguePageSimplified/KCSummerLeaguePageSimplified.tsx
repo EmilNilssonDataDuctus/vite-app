@@ -11,6 +11,8 @@ export const KCSummerLeaguePageSimplified = () => {
   const [inputValue, setInputValue] = useState("");
 
   const [shouldSortByCompletions, setShouldSortByCompletions] = useState(false);
+  const [shouldSortAlphabetically, setShouldSortAlphabetically] =
+    useState(false);
 
   let iterator = climbersData.length;
 
@@ -84,20 +86,33 @@ export const KCSummerLeaguePageSimplified = () => {
   };
 
   const sortClimbersData = (array) => {
-    array?.sort((climberA, climberB) =>
-      climberA.orderAdded > climberB.orderAdded ? 1 : -1
-    );
+    const shouldSortByOrderAdded = true;
 
-    if (shouldSortByCompletions) {
-      return array?.sort((climberA, climberB) => {
-        return climberA.completedBoulders.reduce(reduceBoulders, 0) >
-          climberB.completedBoulders.reduce(reduceBoulders, 0)
-          ? -1
-          : 1;
-      });
-    } else {
-      return array;
-    }
+    const arrAfterFirstSort = shouldSortByOrderAdded
+      ? [...array].sort((climberA, climberB) =>
+          climberA.orderAdded > climberB.orderAdded ? 1 : -1
+        )
+      : [...array];
+
+    const arrAfterSecondSort = shouldSortAlphabetically
+      ? [...arrAfterFirstSort].sort((climberA, climberB) => {
+          return climberA.climberName.toLowerCase() <
+            climberB.climberName.toLowerCase()
+            ? -1
+            : 1;
+        })
+      : arrAfterFirstSort;
+
+    const arrAfterThirdSort = shouldSortByCompletions
+      ? [...arrAfterSecondSort].sort((climberA, climberB) => {
+          return climberA.completedBoulders.reduce(reduceBoulders, 0) >
+            climberB.completedBoulders.reduce(reduceBoulders, 0)
+            ? -1
+            : 1;
+        })
+      : arrAfterSecondSort;
+
+    return arrAfterThirdSort;
   };
 
   return (
@@ -120,12 +135,23 @@ export const KCSummerLeaguePageSimplified = () => {
           <h3>Current standings</h3>
           <form>
             <label>
-              Sort the climbers
+              Sort the climbers by boulders completed
               <input
                 type="checkbox"
                 checked={shouldSortByCompletions}
                 onChange={() =>
                   setShouldSortByCompletions(!shouldSortByCompletions)
+                }
+              />
+            </label>
+            <br />
+            <label>
+              Sort the climbers by name
+              <input
+                type="checkbox"
+                checked={shouldSortAlphabetically}
+                onChange={() =>
+                  setShouldSortAlphabetically(!shouldSortAlphabetically)
                 }
               />
             </label>
