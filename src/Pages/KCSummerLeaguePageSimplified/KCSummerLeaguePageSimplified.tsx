@@ -162,21 +162,25 @@ export const KCSummerLeaguePageSimplified = () => {
           <ul>
             <li>
               <ul style={{ display: "flex", alignItems: "center" }}>
-                {boulders.map(({ wall, color }) => (
-                  <li
-                    style={{
-                      backgroundColor: color,
-                      width: "90px",
-                      padding: "4px",
-                      display: "inline-block",
-                    }}
-                  >
-                    <span className="mix-me">
-                      Wall: <br />
-                      {wall}
-                    </span>
-                  </li>
-                ))}
+                {boulders
+                  .sort((boulderA, boulderB) =>
+                    boulderA.boulderId > boulderB.boulderId ? 1 : -1
+                  )
+                  .map(({ wall, color }) => (
+                    <li
+                      style={{
+                        backgroundColor: color,
+                        width: "90px",
+                        padding: "4px",
+                        display: "inline-block",
+                      }}
+                    >
+                      <span className="mix-me">
+                        Wall: <br />
+                        {wall}
+                      </span>
+                    </li>
+                  ))}
               </ul>
             </li>
             {sortClimbersData(climbersData).map(
