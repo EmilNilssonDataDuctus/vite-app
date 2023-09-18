@@ -12,6 +12,7 @@ import { ECommerceShirtPage } from "./ECommerceShirtPage/ECommerceShirtPage";
 import { FlexBoxTest } from "./FlexBoxTest/FlexBoxTest";
 import { GamePage } from "./Game/Game";
 import { GeneratePage } from "./GeneratePage/GeneratePage";
+import { GoatCar } from "./GoatCar/GoatCar";
 import { HackerAnimation } from "./HackerAnimation/HackerAnimation";
 import { Home } from "./Home/Home";
 import { HoverCardsPage } from "./HoverCardsPage/HoverCardsPage";
@@ -33,6 +34,11 @@ export const pageRoutes = [
     path: "/",
     element: <Home />,
     description: "Home",
+  },
+  {
+    path: "/goat-car",
+    element: <GoatCar />,
+    description: "Goats and Cars",
   },
   {
     path: "/flexbox-test",
