@@ -168,7 +168,7 @@ export const KCSummerLeaguePageSimplified = () => {
               />
             </label>
           </form>
-          <table style={{border: "1px solid grey"}}>
+          <table style={{ border: "1px solid grey" }}>
             <thead>
               <tr>
                 <th>Climber</th>

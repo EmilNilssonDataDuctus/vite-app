@@ -116,6 +116,8 @@ export const boulders: Boulder[] = [
     week: 8,
     boulderId: 16,
   },
-].sort((boulderA, boulderB) =>
+];
+
+boulders.sort((boulderA, boulderB) =>
   boulderA.boulderId > boulderB.boulderId ? 1 : -1
 );
