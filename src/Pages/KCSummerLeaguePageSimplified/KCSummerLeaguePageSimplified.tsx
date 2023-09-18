@@ -3,10 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
 import { boulders } from "../KCSummerLeaguePage/data/boulders";
 import "./myCss.css";
-import { initialseStateOfClimbers } from "./utils/initialseClimberData";
+import {
+  BoulderOnClimber,
+  Climber,
+  initialseStateOfClimbers,
+} from "./utils/initialseClimberData";
 
 export const KCSummerLeaguePageSimplified = () => {
-  const [climbersData, setClimbersData] = useState<Array<any>>(
+  const [climbersData, setClimbersData] = useState<Array<Climber>>(
     initialseStateOfClimbers
   );
   const [inputValue, setInputValue] = useState("");
@@ -20,7 +24,7 @@ export const KCSummerLeaguePageSimplified = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newClimber = {
+    const newClimber: Climber = {
       climberName: inputValue,
       climberId: uuidv4(),
       completedBoulders: boulders.map((boulder) => ({
@@ -164,69 +168,42 @@ export const KCSummerLeaguePageSimplified = () => {
               />
             </label>
           </form>
-          <ul>
-            <li>
-              <ul style={{ display: "flex", alignItems: "center" }}>
-                {boulders
-                  .sort((boulderA, boulderB) =>
-                    boulderA.boulderId > boulderB.boulderId ? 1 : -1
-                  )
-                  .map(({ wall, color }, index) => (
-                    <li
-                      key={index}
-                      style={{
-                        backgroundColor: color,
-                        width: "90px",
-                        padding: "4px",
-                        display: "inline-block",
-                      }}
-                    >
-                      <span className="mix-me">
-                        Wall: <br />
-                        {wall}
-                      </span>
-                    </li>
-                  ))}
-              </ul>
-            </li>
-            {sortClimbersData(climbersData).map(
-              ({ climberId, climberName, completedBoulders, orderAdded }) => (
-                <li
-                  key={climberId}
-                  style={{
-                    backgroundColor: "rgba(255, 0, 0, 0.3)",
-                    maxWidth: "fit-content",
-                  }}
-                >
-                  <div
+          <table style={{border: "1px solid grey"}}>
+            <thead>
+              <tr>
+                <th>Climber</th>
+                <th style={{ textAlign: "right" }}>Wall</th>
+                {boulders.map(({ boulderId, wall, color }) => (
+                  <th
+                    key={boulderId}
                     style={{
-                      display: "flex",
-                      backgroundColor: "rgba(0, 0, 120, 0.3)",
+                      backgroundColor: color,
                     }}
                   >
-                    <span>
-                      climber: {climberName} , id: {climberId}, orderAdded:
-                      {orderAdded}
-                    </span>
-                    <button onClick={() => handleDelete(climberId)}>
-                      Delete
-                    </button>
-                  </div>
-                  <ul style={{ display: "flex", alignItems: "center" }}>
-                    {completedBoulders
-                      ?.sort((boulderA, boulderB) =>
-                        boulderA.boulderId > boulderB.boulderId ? 1 : -1
-                      )
-                      .map(({ boulderId, completed, color }) => (
-                        <li
+                    <span style={{ mixBlendMode: "difference" }}>{wall}</span>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {sortClimbersData(climbersData).map(
+                ({ climberId, climberName, completedBoulders }: Climber) => (
+                  <tr key={climberId} style={{ mixBlendMode: "difference" }}>
+                    <td>{climberName}</td>
+                    <td>
+                      <span style={{ marginLeft: "auto", padding: "16px" }}>
+                        Total Boulders completed:{" "}
+                        {completedBoulders.reduce(reduceBoulders, 0)}
+                      </span>
+                    </td>
+                    {completedBoulders.map(
+                      ({ boulderId, color, completed }: BoulderOnClimber) => (
+                        <td
+                          key={boulderId}
                           style={{
                             backgroundColor: color,
-                            opacity: `${completed ? "1" : "0.4"}`,
-                            width: "90px",
-                            padding: "4px",
-                            display: "inline-block",
+                            opacity: completed ? "0.9" : "0.4",
                           }}
-                          key={boulderId}
                         >
                           <label>
                             <div
@@ -250,17 +227,19 @@ export const KCSummerLeaguePageSimplified = () => {
                               />
                             </div>
                           </label>
-                        </li>
-                      ))}
-                    <span style={{ marginLeft: "auto", padding: "16px" }}>
-                      Total Boulders completed:{" "}
-                      {completedBoulders.reduce(reduceBoulders, 0)}
-                    </span>
-                  </ul>
-                </li>
-              )
-            )}
-          </ul>
+                        </td>
+                      )
+                    )}
+                    <td>
+                      <button onClick={() => handleDelete(climberId)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </table>
         </section>
       </div>
     </MainWrapper>

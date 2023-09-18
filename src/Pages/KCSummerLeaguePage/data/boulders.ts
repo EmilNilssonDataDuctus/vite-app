@@ -1,11 +1,31 @@
-export const boulders = [
+type ColorOfBoulder = "black" | "blue" | "orange" | "red" | "purple" | "yellow";
+type WallOfBoulder =
+  | "A1"
+  | "A3"
+  | "B2"
+  | "C3"
+  | "D2"
+  | "D3"
+  | "D4"
+  | "E1"
+  | "E3"
+  | "G1"
+  | "G2"
+  | "H3";
+
+export type Boulder = {
+  readonly color: ColorOfBoulder;
+  readonly wall: WallOfBoulder;
+  readonly week: number;
+  readonly boulderId: number;
+};
+export const boulders: Boulder[] = [
   {
     color: "orange",
     wall: "C3",
     week: 1,
     boulderId: 2,
   },
-
   {
     color: "orange",
     wall: "H3",
@@ -96,4 +116,6 @@ export const boulders = [
     week: 8,
     boulderId: 16,
   },
-];
+].sort((boulderA, boulderB) =>
+  boulderA.boulderId > boulderB.boulderId ? 1 : -1
+);
