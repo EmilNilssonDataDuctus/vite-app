@@ -1,3 +1,4 @@
+import { KCSummerLeaguePageSimplified } from "../Pages/KCSummerLeaguePageSimplified/KCSummerLeaguePageSimplified";
 import { ArrayMethods } from "./ArrayMethods/ArrayMethods";
 import { CardBig } from "./CardBig/CardBig";
 import { Cards } from "./Cards/Cards";
@@ -47,6 +48,11 @@ export const pageRoutes = [
     path: "/ecommerce-shirt",
     element: <ECommerceShirtPage />,
     description: "ECommerceShirtPage",
+  },
+  {
+    path: "/kc-summer-leauge-simplified",
+    element: <KCSummerLeaguePageSimplified />,
+    description: "KCSummerLeaguePageSimplified",
   },
   {
     path: "/data-structures",
