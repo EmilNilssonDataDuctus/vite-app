@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
 import { boulders } from "../KCSummerLeaguePage/data/boulders";
-import "./myCss.css";
 import {
   BoulderOnClimber,
   Climber,
@@ -24,6 +23,7 @@ export const KCSummerLeaguePageSimplified = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (inputValue === "") return
     const newClimber: Climber = {
       climberName: inputValue,
       climberId: uuidv4(),
