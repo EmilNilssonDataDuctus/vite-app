@@ -48,41 +48,44 @@ export const KCSummerLeaguePageSimplified = () => {
   }, [climbersData]);
 
   const handleBoulderToggle = (climberId, boulderId) => {
-    const copyOfClimbersArr = [...climbersData];
-    const selectedClimber = copyOfClimbersArr.find(
+    // Clone the climbersData array to avoid mutations
+    const updatedClimbersData = [...climbersData];
+
+    // Find the climber by climberId
+    const selectedClimber = updatedClimbersData.find(
       (climber) => climber.climberId === climberId
     );
-    const copyOfClimbersBoulderArr = [...selectedClimber.completedBoulders];
-    const selectedBoulder = copyOfClimbersBoulderArr.find(
-      (boulder) => boulder.boulderId === boulderId
-    );
 
-    const changedBoulderStatus = {
-      ...selectedBoulder,
-      completed: !selectedBoulder.completed,
-    };
+    if (selectedClimber) {
+      // Clone the completedBoulders array of the selected climber
+      const updatedBoulders = [...selectedClimber.completedBoulders];
 
-    const newBoulderArr = [
-      ...copyOfClimbersBoulderArr.filter(
-        (boudler) => boudler.boulderId !== selectedBoulder.boulderId
-      ),
-    ];
-    newBoulderArr.push(changedBoulderStatus);
-    const updatedClimberObject = {
-      ...selectedClimber,
-      completedBoulders: newBoulderArr,
-    };
+      // Find the selected boulder within the completedBoulders array
+      const selectedBoulderIndex = updatedBoulders.findIndex(
+        (boulder) => boulder.boulderId === boulderId
+      );
 
-    const updatedArrayofClimbers = [
-      ...[...climbersData].filter((climber) => climber.climberId !== climberId),
-      updatedClimberObject,
-    ];
+      if (selectedBoulderIndex !== -1) {
+        // Toggle the completed status of the selected boulder
+        updatedBoulders[selectedBoulderIndex].completed =
+          !updatedBoulders[selectedBoulderIndex].completed;
 
-    // climbersData
-    //   .find((climber) => climber.climberId === climberId)
-    //   .completedBoulders.find((boulder) => boulder.boulderId === boulderId);
+        // Update the completedBoulders array of the selected climber
+        selectedClimber.completedBoulders = updatedBoulders;
 
-    setClimbersData(updatedArrayofClimbers);
+        // Update the climbersData array with the modified climber object
+        const climberIndex = updatedClimbersData.findIndex(
+          (climber) => climber.climberId === climberId
+        );
+
+        if (climberIndex !== -1) {
+          updatedClimbersData[climberIndex] = selectedClimber;
+
+          // Set the updated climbersData state
+          setClimbersData(updatedClimbersData);
+        }
+      }
+    }
   };
 
   const reduceBoulders = (accumulator, currentBoulder) => {
