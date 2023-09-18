@@ -20,6 +20,7 @@ import { HoverEffectsPage } from "./HoverEffectsPage/HoverEffectsPage";
 import { HoverEffectsPage2 } from "./HoverEffectsPage2/HoverEffectsPage2";
 import { KCSummerLeaguePage } from "./KCSummerLeaguePage/KCSummerLeaguePage";
 import { MemoryGame } from "./MemoryGame/MemoryGame";
+import { MoneyCalculator } from "./MoneyCalculator/MoneyCalculator";
 import { MyCanvas } from "./MyCanvas/MyCanvas";
 import { MyChart } from "./MyChart/MyChart";
 import { PokedexVersionTwo } from "./Pokedex/PokedexVersionTwo";
@@ -39,6 +40,11 @@ export const pageRoutes = [
     path: "/goat-car",
     element: <GoatCar />,
     description: "Goats and Cars",
+  },
+  {
+    path: "/money-calculator",
+    element: <MoneyCalculator />,
+    description: "Calculator for money",
   },
   {
     path: "/flexbox-test",
