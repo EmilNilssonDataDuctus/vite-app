@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
 import { boulders } from "../KCSummerLeaguePage/data/boulders";
 import {
-  BoulderOnClimber,
   Climber,
+  PrettyBoulderOnClimber,
   initialseStateOfClimbers,
 } from "./utils/initialseClimberData";
 
@@ -23,7 +23,7 @@ export const KCSummerLeaguePageSimplified = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue === "") return
+    if (inputValue === "") return;
     const newClimber: Climber = {
       climberName: inputValue,
       climberId: uuidv4(),
@@ -197,7 +197,11 @@ export const KCSummerLeaguePageSimplified = () => {
                       </span>
                     </td>
                     {completedBoulders.map(
-                      ({ boulderId, color, completed }: BoulderOnClimber) => (
+                      ({
+                        boulderId,
+                        color,
+                        completed,
+                      }: PrettyBoulderOnClimber) => (
                         <td
                           key={boulderId}
                           style={{

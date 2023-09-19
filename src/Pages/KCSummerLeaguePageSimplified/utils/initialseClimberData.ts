@@ -1,10 +1,13 @@
 // Example climbers
 
+import { Prettify } from "../../../utils/typescriptPrettify";
 import { Boulder, boulders } from "../../KCSummerLeaguePage/data/boulders";
 
-export type BoulderOnClimber = Boulder & {
+type BoulderOnClimber = Boulder & {
   completed: boolean;
 };
+
+export type PrettyBoulderOnClimber = Prettify<BoulderOnClimber>;
 
 export type Climber = {
   climberName: string;
