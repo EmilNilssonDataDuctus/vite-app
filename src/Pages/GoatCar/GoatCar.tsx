@@ -8,6 +8,24 @@ type DoorInGame = {
   picked: boolean;
 };
 
+const createSetOfGoatsAndDoors = (noOfDoors) => {
+  const doorsArray: string[] = [];
+  const doorIndex = getRandomIntInclusive(0, noOfDoors - 1);
+
+  for (let i = 0; i < noOfDoors; i++) {
+    if (i === doorIndex) {
+      doorsArray.push("Car");
+    } else {
+      doorsArray.push("Goat");
+    }
+  }
+
+  const indexOfDoorWithCarPrize = doorsArray.findIndex(
+    (door) => door === "Car"
+  );
+  return [doorsArray, indexOfDoorWithCarPrize];
+};
+
 const initialiseGoatsAndCar = () => {
   const returnArr: DoorInGame["content"][] = ["Goat", "Goat", "Goat"];
   const slotWithCar = getRandomIntInclusive(0, 2);
@@ -20,8 +38,8 @@ const initialiseGoatsAndCar = () => {
     open: false,
     picked: false,
   }));
-  console.log("newArr");
-  console.log(newArr);
+  // console.log("newArr");
+  // console.log(newArr);
 
   return newArr;
 };
@@ -50,20 +68,10 @@ export const GoatCar = () => {
   const [firstSetOfDoors, setFirstSetOfDoors] = useState<Array<DoorInGame>>(
     initialiseGoatsAndCar()
   );
-  console.log(firstSetOfDoors);
+  // console.log(firstSetOfDoors);
 
   const [secondSetOfDoors, setSecondSetOfDoors] = useState([]);
-  const [firstChoice, setFirstChoice] = useState(null);
   const [secondChoice, setSecondChoice] = useState(null);
-  const handleClick = (e) => {
-    const doorPicked = e.target.dataset.index;
-    console.log(doorPicked);
-    setFirstChoice(e.target.dataset.index);
-
-    setFirstSetOfDoors()
-
-    firstSetOfDoors[doorPicked];
-  };
 
   const handleClickSimulation = () => {
     let carInDoor1 = 0;
@@ -118,80 +126,121 @@ export const GoatCar = () => {
     setSimulationResults2([...result, noOfSimulations]);
   };
 
-  const shouldBeDisabledInSecondRound = (index) => {
-    // check door array
-    const pickedDoor = firstSetOfDoors.find(door => )
-    if ()
-  }
+  const [doors, setDoors] = useState<any>(null);
+  const [doorWCar, setDoorWCar] = useState<any>(null);
+
+  const handleClickStartGame = (e) => {
+    // Reset prev game
+    setFirstChoice(null);
+
+    const [doorsInGame, doorWithCar] = createSetOfGoatsAndDoors(e);
+    setDoors(doorsInGame);
+    setDoorWCar(doorWithCar);
+  };
+
+  const [playingWithHint, setPlayingWithHint] = useState<any>(false);
+  const [firstChoice, setFirstChoice] = useState<any>(null);
+
+  const handleSelectDoor = (e) => {
+    const doorPicked = e.target.dataset.index;
+    setFirstChoice(doorPicked);
+  };
+
+  const shouldBeDisabled = (currentIndex) => {
+    const pickedDoor = parseInt(firstChoice, 10);
+    const indexOfDoorWithCar = doors.findIndex((door) => door === "Car");
+    const pickedCorrectDoorOnFirstTry = pickedDoor === indexOfDoorWithCar;
+
+    let forbiddenIndex = NaN;
+    if (pickedCorrectDoorOnFirstTry) {
+      do {
+        getRandomIntInclusive();
+      } while (forbiddenIndex !== indexOfDoorWithCar);
+      // console.log("You picked the car the first time");
+    } else {
+      // console.log("You didnt pick the car on your first try");
+    }
+
+    // DONT Disable the door if it contains the car
+    const thisIndexContainsTheCar =
+      currentIndex === doors.findIndex((door) => door === "Car");
+
+    // if this is not the door the player clicked
+    const thisIndexWasClickedByPlayer =
+      currentIndex === parseInt(firstChoice, 10);
+
+    // disable all buttons that were not clicked by the player and does not contain the car
+    const disableTheButton =
+      !thisIndexContainsTheCar && !thisIndexWasClickedByPlayer;
+
+    return disableTheButton;
+  };
 
   return (
     <MainWrapper>
       {/* <h1>GoatCar</h1> */}
+      <p>
+        <label>
+          Play with hints enabled
+          <input
+            type="checkbox"
+            checked={playingWithHint}
+            onChange={() => setPlayingWithHint(!playingWithHint)}
+          />
+        </label>
+      </p>
       <section>
-        <h2>Pick 1 of 3 doors</h2>
-        Doors:{" "}
-        {firstSetOfDoors.map((door) => (
-          <span>{door.content}, </span>
-        ))}
+        <h2>Pick difficulty mode</h2>
         <div>
-          <button
-            disabled={firstChoice !== null}
-            data-index={1}
-            onClick={(e) => handleClick(e)}
-          >
-            Door 1
-          </button>
-          <button
-            disabled={firstChoice !== null}
-            data-index={2}
-            onClick={(e) => handleClick(e)}
-          >
-            Door 2
-          </button>
-          <button
-            disabled={firstChoice !== null}
-            data-index={3}
-            onClick={(e) => handleClick(e)}
-          >
-            Door 3
+          <button onClick={() => handleClickStartGame(3)}>
+            Start game with 3 doors
           </button>
         </div>
+        <div>
+          <button onClick={() => handleClickStartGame(10)}>
+            Start game with 10 doors
+          </button>
+        </div>
+        <div>
+          <button onClick={() => handleClickStartGame(100)}>
+            Start game with 100 doors
+          </button>
+        </div>
+        {doors && doors.length > 0 && (
+          <section>
+            <h2>Pick door you think has the prize</h2>
+            {playingWithHint && (
+              <p>Hint: the door with a car is door number {doorWCar + 1}</p>
+            )}
+            {doors.map((_, index) => (
+              <button
+                key={index}
+                data-index={index}
+                onClick={(e) => handleSelectDoor(e)}
+              >
+                Door {index + 1}
+              </button>
+            ))}
+          </section>
+        )}
+        {firstChoice && (
+          <section>
+            <p>First choice: door {parseInt(firstChoice, 10) + 1}</p>
+            <p>Disabled doors were revealed to contain goats</p>
+            {doors.map((_, index) => (
+              <button
+                key={index}
+                data-index={index}
+                disabled={shouldBeDisabled(index)}
+                onClick={(e) => handleSelectDoor(e)}
+              >
+                Door {index + 1}
+              </button>
+            ))}
+          </section>
+        )}
       </section>
-      {firstChoice && (
-        <section>
-          <h2>Reveal</h2>
-          <p>You have selected door: {firstChoice}</p>
-          <p>Open doors</p>
-          Doors:{" "}
-          {firstSetOfDoors.map((door) => (
-            <span>{door.content}</span>
-          ))}
-          <div>
-            <button
-              disabled={false}
-              data-index={1}
-              onClick={(e) => handleClick(e)}
-            >
-              Door 1
-            </button>
-            <button
-              disabled={false}
-              data-index={2}
-              onClick={(e) => handleClick(e)}
-            >
-              Door 2
-            </button>
-            <button
-              disabled={false}
-              data-index={3}
-              onClick={(e) => handleClick(e)}
-            >
-              Door 3
-            </button>
-          </div>
-        </section>
-      )}
-      {/* <section>
+      <section>
         <details>
           <summary>Simulation 1</summary>
           <h2>3 doors 100 times</h2>
@@ -230,7 +279,7 @@ export const GoatCar = () => {
             </>
           )}
         </details>
-      </section> */}
+      </section>
     </MainWrapper>
   );
 };
