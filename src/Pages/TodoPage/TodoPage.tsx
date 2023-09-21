@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer } from "react";
+import { toast } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
 import { AddNewTodo } from "./AddNewTodo";
@@ -63,6 +64,7 @@ export const TodoPage = () => {
   const [todos, dispatch] = useReducer(todoReducer, initialseStateOfTodos);
 
   const addNewTodo = (task) => {
+    toast("New todo added");
     dispatch({
       type: "ADD_TODO",
       payload: {
@@ -74,6 +76,7 @@ export const TodoPage = () => {
   };
 
   const deleteTodo = (todoId) => {
+    toast("Todo deleted");
     dispatch({
       type: "DELETE_TODO",
       payload: todoId,
@@ -81,6 +84,7 @@ export const TodoPage = () => {
   };
 
   const updateTodoTask = (id, task) => {
+    toast("Todo updated: description");
     dispatch({
       type: "EDIT_TODO_TASK",
       payload: { id, task },
@@ -88,6 +92,7 @@ export const TodoPage = () => {
   };
 
   const updateTodoTimeToDeliver = (id, time) => {
+    toast("Todo updated: time");
     dispatch({
       type: "EDIT_TODO_TIME_TO_DELIVER",
       payload: { id, time },
@@ -95,6 +100,7 @@ export const TodoPage = () => {
   };
 
   const updateTodoStatus = (todoId) => {
+    toast("Todo updated: status");
     dispatch({
       type: "TOGGLE_TODO",
       payload: todoId,

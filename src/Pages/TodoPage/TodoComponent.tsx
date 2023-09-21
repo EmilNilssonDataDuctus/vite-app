@@ -35,8 +35,11 @@ export const TodoComponent = ({
     setTimeToDeliverValue(parseInt(e.target.value, 10));
   };
 
-  const handleTaskSubmitChange = () => {
+  const handleTaskDescription = () => {
     updateTodoTask(id, taskValue);
+  };
+  
+  const handleUpdateTodoTimeToDeliver = () => {
     updateTodoTimeToDeliver(id, timeToDeliverValue);
   };
 
@@ -72,7 +75,7 @@ export const TodoComponent = ({
         <input
           value={taskValue}
           onChange={handleTaskChange}
-          onBlur={handleTaskSubmitChange}
+          onBlur={handleTaskDescription}
         />
       </label>
       <label>
@@ -83,7 +86,7 @@ export const TodoComponent = ({
           min="1"
           value={timeToDeliverValue}
           onChange={handleTimeToDeliverChange}
-          onBlur={handleTaskSubmitChange}
+          onBlur={handleUpdateTodoTimeToDeliver}
           style={{ width: "50px" }}
         />{" "}
         hours
