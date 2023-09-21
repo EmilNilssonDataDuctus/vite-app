@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "styled-components";
 import { hideInactivePages, pageRoutes } from "./Pages/pageData";
+import "./Shared/MakeStore/MakeStore";
 import { Navbar } from "./Shared/Navbar/Navbar";
 import { darkTheme, lightTheme } from "./components/Themes";
 import { GlobalStyles } from "./components/globalStyles";
