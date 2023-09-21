@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "styled-components";
 import { hideInactivePages, pageRoutes } from "./Pages/pageData";
 import { Navbar } from "./Shared/Navbar/Navbar";
@@ -37,6 +38,7 @@ function App() {
             ))}
         </Routes>
       </BrowserRouter>
+      <Toaster position="bottom-left" />
     </ThemeProvider>
   );
 }
