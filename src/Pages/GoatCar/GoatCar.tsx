@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MainWrapper } from "../../Shared/Page.styled";
 import { getRandomIntInclusive } from "../MemoryGame/MemoryGame";
+import { TabList, TabListButton, TabListItem } from "./GoatCar.styled";
 
 type DoorInGame = {
   content: "Goat" | "Car";
@@ -74,6 +75,7 @@ export const GoatCar = () => {
   const [secondChoice, setSecondChoice] = useState(null);
 
   const handleClickSimulation = () => {
+    console.log("Start sim 1");
     let carInDoor1 = 0;
     let carInDoor2 = 0;
     let carInDoor3 = 0;
@@ -91,6 +93,8 @@ export const GoatCar = () => {
   };
 
   const handleClickSimulation2 = () => {
+    console.log("Start sim 2");
+
     let carInDoor1 = 0;
     let carInDoor2 = 0;
     let carInDoor3 = 0;
@@ -147,6 +151,7 @@ export const GoatCar = () => {
   };
 
   const shouldBeDisabled = (currentIndex) => {
+    return true; // Fix bugs below
     const pickedDoor = parseInt(firstChoice, 10);
     const indexOfDoorWithCar = doors.findIndex((door) => door === "Car");
     const pickedCorrectDoorOnFirstTry = pickedDoor === indexOfDoorWithCar;
@@ -175,89 +180,144 @@ export const GoatCar = () => {
 
     return disableTheButton;
   };
+  const [activeTab, setActiveTab] = useState<any>(0);
+  const changeTab = (e) => {
+    const newTab = e.target.dataset.index;
+    console.log("newTab");
+    console.log(newTab);
+    console.log("activeTab");
+    console.log(activeTab);
 
+    setActiveTab(() => parseInt(newTab, 10));
+  };
   return (
     <MainWrapper>
-      {/* <h1>GoatCar</h1> */}
-      <p>
-        <label>
-          Play with hints enabled
-          <input
-            type="checkbox"
-            checked={playingWithHint}
-            onChange={() => setPlayingWithHint(!playingWithHint)}
-          />
-        </label>
-      </p>
-      <section>
-        <h2>Pick difficulty mode</h2>
-        <div>
-          <button onClick={() => handleClickStartGame(3)}>
-            Start game with 3 doors
-          </button>
-        </div>
-        <div>
-          <button onClick={() => handleClickStartGame(10)}>
-            Start game with 10 doors
-          </button>
-        </div>
-        <div>
-          <button onClick={() => handleClickStartGame(100)}>
-            Start game with 100 doors
-          </button>
-        </div>
-        {doors && doors.length > 0 && (
-          <section>
-            <h2>Pick door you think has the prize</h2>
-            {playingWithHint && (
-              <p>Hint: the door with a car is door number {doorWCar + 1}</p>
-            )}
-            {doors.map((_, index) => (
-              <button
-                key={index}
-                data-index={index}
-                onClick={(e) => handleSelectDoor(e)}
+      <h1>GoatCar</h1>
+      <div style={{ backgroundColor: "rgba(0,0,40,0.9)" }}>
+        <nav>
+          <TabList>
+            <TabListItem $active={activeTab === 0}>
+              <TabListButton
+                data-index={0}
+                $active={activeTab === 0}
+                $index={0}
+                onClick={(e) => changeTab(e)}
               >
-                Door {index + 1}
-              </button>
-            ))}
-          </section>
-        )}
-        {firstChoice && (
-          <section>
-            <p>First choice: door {parseInt(firstChoice, 10) + 1}</p>
-            <p>Disabled doors were revealed to contain goats</p>
-            {doors.map((_, index) => (
-              <button
-                key={index}
-                data-index={index}
-                disabled={shouldBeDisabled(index)}
-                onClick={(e) => handleSelectDoor(e)}
+                Interactive
+              </TabListButton>
+            </TabListItem>
+            <TabListItem $active={activeTab === 1}>
+              <TabListButton
+                data-index={1}
+                $active={activeTab === 1}
+                $index={1}
+                onClick={(e) => changeTab(e)}
               >
-                Door {index + 1}
-              </button>
-            ))}
-          </section>
-        )}
-      </section>
-      <section>
-        <details>
-          <summary>Simulation 1</summary>
-          <h2>3 doors 100 times</h2>
-          <button onClick={handleClickSimulation}>Switch</button>
+                Simulation 1
+              </TabListButton>
+            </TabListItem>
+            <TabListItem $active={activeTab === 2}>
+              <TabListButton
+                data-index={2}
+                $active={activeTab === 2}
+                $index={2}
+                onClick={(e) => changeTab(e)}
+              >
+                Simulation 2
+              </TabListButton>
+            </TabListItem>
+          </TabList>
+        </nav>
+      </div>
+
+      {activeTab === 0 ? (
+        <section>
+          <h2>Pick difficulty mode</h2>
+          <div>
+            <button onClick={() => handleClickStartGame(3)}>
+              Start game with 3 doors
+            </button>
+          </div>
+          <div>
+            <button onClick={() => handleClickStartGame(10)}>
+              Start game with 10 doors
+            </button>
+          </div>
+          <div>
+            <button onClick={() => handleClickStartGame(100)}>
+              Start game with 100 doors
+            </button>
+          </div>
+          <p>
+            <label>
+              Play with hints enabled
+              <input
+                type="checkbox"
+                checked={playingWithHint}
+                onChange={() => setPlayingWithHint(!playingWithHint)}
+              />
+            </label>
+          </p>
+          {doors && doors.length > 0 && (
+            <section>
+              <h2>Pick door you think has the prize</h2>
+              {playingWithHint && (
+                <p>Hint: the door with a car is door number {doorWCar + 1}</p>
+              )}
+              {doors.map((_, index) => (
+                <button
+                  key={index}
+                  data-index={index}
+                  onClick={(e) => handleSelectDoor(e)}
+                >
+                  Door {index + 1}
+                </button>
+              ))}
+            </section>
+          )}
+          {firstChoice && (
+            <section>
+              <p>First choice: door {parseInt(firstChoice, 10) + 1}</p>
+              <p>Disabled doors were revealed to contain goats</p>
+              {doors.map((_, index) => (
+                <button
+                  key={index}
+                  data-index={index}
+                  disabled={shouldBeDisabled(index)}
+                  onClick={(e) => handleSelectDoor(e)}
+                >
+                  Door {index + 1}
+                </button>
+              ))}
+            </section>
+          )}
+        </section>
+      ) : activeTab === 1 ? (
+        <section>
+          <h2>Simulation 1</h2>
+          <p>3 doors 100 times</p>
+          <button onClick={handleClickSimulation}>Re-run simulation</button>
           {simulationResults.length > 0 && (
             <>
-              <p>Number of times door 1 has car: {simulationResults[0]}</p>
-              <p>Number of times door 2 has car: {simulationResults[1]}</p>
-              <p>Number of times door 3 has car: {simulationResults[2]}</p>
+              <p>
+                Odds Door 1 contains car: {simulationResults[0]}%{" "}
+                <sup>{simulationResults[0]}</sup>/<sub>100</sub>
+              </p>
+              <p>
+                Odds Door 2 contains car: {simulationResults[1]}%{" "}
+                <sup>{simulationResults[1]}</sup>/<sub>100</sub>
+              </p>
+              <p>
+                Odds Door 3 contains car: {simulationResults[2]}%{" "}
+                <sup>{simulationResults[2]}</sup>/<sub>100</sub>
+              </p>
             </>
           )}
-        </details>
-      </section>
-      <section>
-        <details open>
-          <summary>Simulation 2</summary>
-          <h2>
+        </section>
+      ) : (
+        <section>
+          <h2>Simulation 2</h2>
+          <p>
             3 doors 100 times, how many times until one door has the car over{" "}
             <input
               style={{ width: "40px" }}
@@ -268,18 +328,34 @@ export const GoatCar = () => {
               }
             />
             times
-          </h2>
-          <button onClick={handleClickSimulation2}>Switch</button>
+          </p>
+          <button onClick={handleClickSimulation2}>Re-run simulation</button>
           {simulationResults2.length > 0 && (
             <>
-              <p>Number of times door 1 has car: {simulationResults2[0]}</p>
-              <p>Number of times door 2 has car: {simulationResults2[1]}</p>
-              <p>Number of times door 3 has car: {simulationResults2[2]}</p>
               <p>After this many simulations: {simulationResults2[3]}</p>
+              <p>After randomly choosing 1 of 3 doors to place the car behind</p>
+              <details>
+                <summary>The final simulation (where the given wanted threshhold was reached)</summary>
+              <p>
+                Odds Door 1 contains car: {simulationResults2[0]}%{" "}
+                <sup>{simulationResults2[0]}</sup>/
+                <sub>100</sub>
+              </p>
+              <p>
+                Odds Door 2 contains car: {simulationResults2[1]}%{" "}
+                <sup>{simulationResults2[1]}</sup>/
+                <sub>100</sub>
+              </p>
+              <p>
+                Odds Door 3 contains car: {simulationResults2[2]}%{" "}
+                <sup>{simulationResults2[2]}</sup>/
+                <sub>100</sub>
+              </p>
+              </details>
             </>
           )}
-        </details>
-      </section>
+        </section>
+      )}
     </MainWrapper>
   );
 };
