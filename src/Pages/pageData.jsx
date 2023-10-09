@@ -17,6 +17,7 @@ import { Home } from "./Home/Home";
 import { HoverCardsPage } from "./HoverCardsPage/HoverCardsPage";
 import { HoverEffectsPage } from "./HoverEffectsPage/HoverEffectsPage";
 import { HoverEffectsPage2 } from "./HoverEffectsPage2/HoverEffectsPage2";
+import { InputElementTest } from "./InputElementTest/InputElementTest";
 import { KCSummerLeaguePage } from "./KCSummerLeaguePage/KCSummerLeaguePage";
 import { MemoryGame } from "./MemoryGame/MemoryGame";
 import { MyCanvas } from "./MyCanvas/MyCanvas";
@@ -33,6 +34,11 @@ export const pageRoutes = [
     path: "/",
     element: <Home />,
     description: "Home",
+  },
+  {
+    path: "/input-tests",
+    element: <InputElementTest />,
+    description: "InputElementTest",
   },
   {
     path: "/flexbox-test",
