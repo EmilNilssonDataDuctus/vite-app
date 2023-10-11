@@ -1,5 +1,6 @@
 import { KCSummerLeaguePageSimplified } from "../Pages/KCSummerLeaguePageSimplified/KCSummerLeaguePageSimplified";
 import { ArrayMethods } from "./ArrayMethods/ArrayMethods";
+import { CanvasTestOktober } from "./CanvasTestOktober/CanvasTestOktober";
 import { CardBig } from "./CardBig/CardBig";
 import { Cards } from "./Cards/Cards";
 import { CodeAlong } from "./CodeAlong/CodeAlong";
@@ -39,6 +40,11 @@ export const pageRoutes = [
     path: "/input-tests",
     element: <InputElementTest />,
     description: "InputElementTest",
+  },
+  {
+    path: "/canvas-test-oktober",
+    element: <CanvasTestOktober />,
+    description: "canvas-test-oktober",
   },
   {
     path: "/flexbox-test",
