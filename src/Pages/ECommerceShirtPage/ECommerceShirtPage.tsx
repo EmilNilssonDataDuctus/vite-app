@@ -46,6 +46,7 @@ export const ECommerceShirtPage = () => {
                 <CustomButton
                   onClick={() => updateSearchParams("color", color)}
                   // Tutorial video reccomended using the following href when using the Next.js framework with next/link components
+                  //   https://www.youtube.com/watch?v=ukpgxEemXsk
                   // I found that using the useSearchParams hook from react-router-dom worked better
                   // Since clicking changed the URLs searchParams using <a> tag instead of <button> was fitting
                   // But then href attribute is needed for <a> tag t.b.a.t. be reachable by tab-navigation
