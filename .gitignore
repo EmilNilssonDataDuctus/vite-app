@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+## personal files
+src/Pages/MyChartCombined/data.js

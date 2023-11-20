@@ -1,21 +1,26 @@
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "styled-components";
-import CardBig from "./components/CardBig/CardBig";
-import Cards from "./components/Cards/Cards";
-import { Home } from "./components/Home/Home";
-import Navbar from "./components/Navbar/Navbar";
+import { hideInactivePages, pageRoutes } from "./Pages/pageData";
+import "./Shared/MakeStore/MakeStore";
+import { Navbar } from "./Shared/Navbar/Navbar";
 import { darkTheme, lightTheme } from "./components/Themes";
 import { GlobalStyles } from "./components/globalStyles";
+import { initialseStateDarkMode } from "./utils/initialiseDarkMode";
 
 function App() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(initialseStateDarkMode);
 
   const themeToggler = () => {
     console.log(theme);
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
+
+  useEffect(() => {
+    localStorage.setItem("storedDarkMode", theme);
+  }, [theme]);
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -23,11 +28,18 @@ function App() {
       <Navbar themeToggler={themeToggler} />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cards" element={<Cards />} />
-          <Route path="/card/:name" element={<CardBig />} />
+          {pageRoutes
+            .filter(hideInactivePages)
+            .map(({ path, element, dynamicId }) => (
+              <Route
+                key={path}
+                path={dynamicId ? `${path}/:${dynamicId}` : path}
+                element={element}
+              />
+            ))}
         </Routes>
       </BrowserRouter>
+      <Toaster position="bottom-left" />
     </ThemeProvider>
   );
 }

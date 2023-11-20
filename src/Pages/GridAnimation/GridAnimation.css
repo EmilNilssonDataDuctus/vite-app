@@ -1,0 +1,77 @@
+.grid {
+  margin: 0 auto;
+  display: grid;
+  background-color: bisque;
+  gap: 10px;
+  width: 300px;
+  grid-template-columns: repeat(5, 100px);
+  grid-template-rows: repeat(5, 100px);
+}
+
+.grid > div {
+  background-color: rgba(0, 0, 255, 0.2);
+}
+
+.grid > div:first-child {
+  grid-column: span 1;
+
+  transition: grid-column 500ms;
+}
+
+.grid > div:first-child:hover {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+section.kevin {
+  height: 100vh;
+}
+
+.k-grid-container {
+  display: grid;
+  width: 600px;
+  height: 400px;
+  margin: 0 auto;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.k-grid-box {
+  background-color: grey;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: subgrid;
+  /* grid-template-rows: 66px 1fr; */
+  align-items: center;
+}
+
+.k-grid-box header {
+  gap: 16px;
+  grid-column: span 2;
+}
+
+.k-grid-box header img {
+  justify-self: center;
+  border-radius: 999px;
+  background-color: bisque;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+.k-grid-box-1 section,
+.k-grid-box-2 section {
+  grid-column: span 2;
+}
+.k-grid-box-3 {
+  grid-column: span 2;
+}
+.k-grid-box-3 section {
+  grid-column-start: 2;
+}
+.k-grid-box h3 {
+  text-transform: uppercase;
+}
