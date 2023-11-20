@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import {
   hideDynamicRoutes,
   hideInactivePages,
-  pageRoutes,
+  pageRoutes
 } from "../../Pages/pageData.jsx";
 import { CommonLink } from "../Links.styled.js";
 import {
@@ -45,12 +45,28 @@ export const Navbar = ({ themeToggler }) => {
       </NavBarToggleBtn>
       <NavBarContainer $showNav={showNav}>
         <NavbarList>
+          {/* Uncomment below to push featured projects to the start of the list */}
+          {/* Featured projects:
           {pageRoutes
             .filter(hideInactivePages)
             .filter(hideDynamicRoutes)
-            .map(({ path, description }) => (
+            .filter(hideNonFeaturedPages)
+            .map(({ path, description, featured }) => (
               <li key={path}>
-                <CommonLink href={path}>{description}</CommonLink>
+                <CommonLink href={path} $featured={featured}>
+                  {description}
+                </CommonLink>
+              </li>
+            ))} */}
+          {pageRoutes
+            .filter(hideInactivePages)
+            .filter(hideDynamicRoutes)
+            // .filter(hideFeaturedPages)
+            .map(({ path, description, featured }) => (
+              <li key={path}>
+                <CommonLink href={path} $featured={featured}>
+                  {description}
+                </CommonLink>
               </li>
             ))}
         </NavbarList>

@@ -4,9 +4,10 @@ const transitionDuration = "400ms";
 const transitionDelay = "150ms";
 
 export const CommonLink = styled.a`
-  text-decoration: none;
   color: black;
-  background-color: aqua;
+  background-color: ${(props) => props.$featured ? "gold" : "aqua"};
+  
+  text-decoration: none;
   font-weight: 900;
   border-radius: 20px;
   padding: 8px 16px;

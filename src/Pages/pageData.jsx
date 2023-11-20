@@ -46,6 +46,13 @@ const WIPPages = [
 
 const obsoletePages = ["/kc-summerleague"];
 
+const featuredPages = [
+  "/kc-summer-league-simplified",
+  "/ecommerce-shirt",
+  "/hackerAnimation",
+  "/todo-list",
+];
+
 export const pageRoutes = [
   {
     path: "/",
@@ -206,11 +213,15 @@ export const pageRoutes = [
 ].map((obj) => {
   // temporarily WIP pages
   if (WIPPages.find((page) => page === obj.path))
-    return { ...obj, active: false };
+    return { ...obj, active: false, featured: false };
   if (obsoletePages.find((page) => page === obj.path))
-    return { ...obj, active: false };
-  return { ...obj, active: true };
+    return { ...obj, active: false, featured: false };
+  if (featuredPages.find((page) => page === obj.path))
+    return { ...obj, active: true, featured: true };
+  return { ...obj, active: true, featured: false };
 });
 
 export const hideInactivePages = ({ active }) => active;
 export const hideDynamicRoutes = ({ dynamicId }) => !dynamicId;
+export const hideNonFeaturedPages = ({ featured }) => featured;
+export const hideFeaturedPages = ({ featured }) => !featured;
