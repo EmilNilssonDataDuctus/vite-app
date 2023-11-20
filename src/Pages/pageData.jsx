@@ -212,13 +212,13 @@ export const pageRoutes = [
   },
 ].map((obj) => {
   // temporarily WIP pages
-  if (WIPPages.find((page) => page === obj.path))
-    return { ...obj, active: false, featured: false };
-  if (obsoletePages.find((page) => page === obj.path))
-    return { ...obj, active: false, featured: false };
-  if (featuredPages.find((page) => page === obj.path))
-    return { ...obj, active: true, featured: true };
-  return { ...obj, active: true, featured: false };
+  return {
+    ...obj,
+    active:
+      !obsoletePages.find((page) => page === obj.page) &&
+      !WIPPages.find((page) => page === obj.path),
+    featured: !!featuredPages.find((page) => page === obj.path),
+  };
 });
 
 export const hideInactivePages = ({ active }) => active;
