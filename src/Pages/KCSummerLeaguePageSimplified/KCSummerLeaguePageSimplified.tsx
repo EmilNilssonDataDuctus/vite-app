@@ -17,6 +17,7 @@ export const KCSummerLeaguePageSimplified = () => {
   const [shouldSortByCompletions, setShouldSortByCompletions] = useState(false);
   const [shouldSortAlphabetically, setShouldSortAlphabetically] =
     useState(false);
+  const [hideDeletedClimbers, hideShowDeletedClimbers] = useState(true);
 
   // @TODO: fix this
   let iterator = climbersData.length;
@@ -38,10 +39,58 @@ export const KCSummerLeaguePageSimplified = () => {
     setInputValue("");
   };
 
-  const handleDelete = (climberId) => {
+  const handleDeletePermanent = (climberId) => {
     setClimbersData(
       [...climbersData].filter((climber) => climber.climberId !== climberId)
     );
+  };
+
+  const handleDeleteWithOptionToRestore = (climberId) => {
+    // Clone the climbersData array to avoid mutations
+    const updatedClimbersData = [...climbersData];
+
+    // Find the climber by climberId
+    const selectedClimber = updatedClimbersData.find(
+      (climber) => climber.climberId === climberId
+    );
+
+    if (selectedClimber) {
+      const copyOfSelectedClimber = { ...selectedClimber, deleted: true };
+
+      const climberIndex = updatedClimbersData.findIndex(
+        (climber) => climber.climberId === climberId
+      );
+      if (climberIndex !== -1) {
+        updatedClimbersData[climberIndex] = copyOfSelectedClimber;
+
+        // Set the updated climbersData state
+        setClimbersData(updatedClimbersData);
+      }
+    }
+  };
+
+  const handleRestoreDeletedClimber = (climberId) => {
+    // Clone the climbersData array to avoid mutations
+    const updatedClimbersData = [...climbersData];
+
+    // Find the climber by climberId
+    const selectedClimber = updatedClimbersData.find(
+      (climber) => climber.climberId === climberId
+    );
+
+    if (selectedClimber) {
+      const copyOfSelectedClimber = { ...selectedClimber, deleted: false };
+
+      const climberIndex = updatedClimbersData.findIndex(
+        (climber) => climber.climberId === climberId
+      );
+      if (climberIndex !== -1) {
+        updatedClimbersData[climberIndex] = copyOfSelectedClimber;
+
+        // Set the updated climbersData state
+        setClimbersData(updatedClimbersData);
+      }
+    }
   };
 
   const handleTextInputChange = (e) => setInputValue(e.target.value);
@@ -124,7 +173,11 @@ export const KCSummerLeaguePageSimplified = () => {
         })
       : arrAfterSecondSort;
 
-    return arrAfterThirdSort;
+    const arrAfterFiltering = hideDeletedClimbers
+      ? [...arrAfterThirdSort].filter((climber) => !climber.deleted)
+      : arrAfterThirdSort;
+
+    return arrAfterFiltering;
   };
 
   return (
@@ -167,6 +220,15 @@ export const KCSummerLeaguePageSimplified = () => {
                 }
               />
             </label>
+            <br />
+            <label>
+              Hide deleted climbers
+              <input
+                type="checkbox"
+                checked={hideDeletedClimbers}
+                onChange={() => hideShowDeletedClimbers(!hideDeletedClimbers)}
+              />
+            </label>
           </form>
           <table style={{ border: "1px solid grey" }}>
             <thead>
@@ -187,7 +249,12 @@ export const KCSummerLeaguePageSimplified = () => {
             </thead>
             <tbody>
               {sortClimbersData(climbersData).map(
-                ({ climberId, climberName, completedBoulders }: Climber) => (
+                ({
+                  climberId,
+                  climberName,
+                  completedBoulders,
+                  deleted,
+                }: Climber) => (
                   <tr key={climberId} style={{ mixBlendMode: "difference" }}>
                     <td>{climberName}</td>
                     <td>
@@ -234,11 +301,34 @@ export const KCSummerLeaguePageSimplified = () => {
                         </td>
                       )
                     )}
-                    <td>
-                      <button onClick={() => handleDelete(climberId)}>
-                        Delete
-                      </button>
-                    </td>
+                    <>
+                      {deleted ? (
+                        <td>
+                          <button
+                            onClick={() =>
+                              handleRestoreDeletedClimber(climberId)
+                            }
+                          >
+                            Restore
+                          </button>
+                          <button
+                            onClick={() => handleDeletePermanent(climberId)}
+                          >
+                            Delete permanently
+                          </button>
+                        </td>
+                      ) : (
+                        <td>
+                          <button
+                            onClick={() =>
+                              handleDeleteWithOptionToRestore(climberId)
+                            }
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      )}
+                    </>
                   </tr>
                 )
               )}

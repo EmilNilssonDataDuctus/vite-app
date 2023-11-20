@@ -14,12 +14,13 @@ export type Climber = {
   climberId: string;
   completedBoulders: BoulderOnClimber[];
   orderAdded: number;
+  deleted: boolean;
 };
 
 // Only ever used whenever a new client is using this application
 const initialClimbers: Climber[] = [
-  { climberId: "1", climberName: "Emil Nilsson", orderAdded: 1 },
-  { climberId: "2", climberName: "Xilefski", orderAdded: 2 },
+  { climberId: "1", climberName: "Emil Nilsson", orderAdded: 1, deleted: false },
+  { climberId: "2", climberName: "Xilefski", orderAdded: 2, deleted: false },
 ].map((climber) => ({
   ...climber,
   completedBoulders: boulders.map((boulder) => ({
