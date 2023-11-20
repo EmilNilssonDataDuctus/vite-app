@@ -13,6 +13,7 @@ import { ECommerceShirtPage } from "./ECommerceShirtPage/ECommerceShirtPage";
 import { FlexBoxTest } from "./FlexBoxTest/FlexBoxTest";
 import { GamePage } from "./Game/Game";
 import { GeneratePage } from "./GeneratePage/GeneratePage";
+import { GridAnimation } from "./GridAnimation/GridAnimation";
 import { HackerAnimation } from "./HackerAnimation/HackerAnimation";
 import { Home } from "./Home/Home";
 import { HoverCardsPage } from "./HoverCardsPage/HoverCardsPage";
@@ -23,18 +24,43 @@ import { KCSummerLeaguePage } from "./KCSummerLeaguePage/KCSummerLeaguePage";
 import { MemoryGame } from "./MemoryGame/MemoryGame";
 import { MyCanvas } from "./MyCanvas/MyCanvas";
 import { MyChart } from "./MyChart/MyChart";
+import { PersonnummerCalc } from "./PersonnummerCalc/PersonnummerCalc";
 import { PokedexVersionTwo } from "./Pokedex/PokedexVersionTwo";
 import { SpeedCalculator } from "./SpeedCalculator/SpeedCalculator";
 import { TodoPage } from "./TodoPage/TodoPage";
 import { TracerPage } from "./TracerPage/TracerPage";
 
-const WIPPages = ["/canvas", "/game"];
+const WIPPages = [
+  "/canvas",
+  "/game",
+  "/canvas-test-oktober",
+  "/flexbox-test",
+  "/mix-blend-mode-demo",
+  "/cards",
+  "/memory-game",
+  "/hover-cards",
+  "/code-along-old",
+  "/code-along",
+  "/code-along/speakers",
+];
+
+const obsoletePages = ["/kc-summerleague"];
 
 export const pageRoutes = [
   {
     path: "/",
     element: <Home />,
     description: "Home",
+  },
+  {
+    path: "/personnummer-calc",
+    element: <PersonnummerCalc />,
+    description: "Personnummer Calculator",
+  },
+  {
+    path: "/grid-experiment-animation",
+    element: <GridAnimation />,
+    description: "Grid Animations",
   },
   {
     path: "/input-tests",
@@ -62,7 +88,7 @@ export const pageRoutes = [
     description: "ECommerceShirtPage",
   },
   {
-    path: "/kc-summer-leauge-simplified",
+    path: "/kc-summer-league-simplified",
     element: <KCSummerLeaguePageSimplified />,
     description: "KCSummerLeaguePageSimplified",
   },
@@ -180,6 +206,8 @@ export const pageRoutes = [
 ].map((obj) => {
   // temporarily WIP pages
   if (WIPPages.find((page) => page === obj.path))
+    return { ...obj, active: false };
+  if (obsoletePages.find((page) => page === obj.path))
     return { ...obj, active: false };
   return { ...obj, active: true };
 });

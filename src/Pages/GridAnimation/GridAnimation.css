@@ -41,16 +41,12 @@ section.kevin {
   background-color: grey;
   padding: 16px;
   display: grid;
-  grid-template-columns: 66px 1fr;
-  grid-template-rows: 66px 1fr;
+  grid-template-columns: subgrid;
+  /* grid-template-rows: 66px 1fr; */
   align-items: center;
 }
 
 .k-grid-box header {
-  display: grid;
-  grid-template-columns: auto auto;
-  justify-content: flex-start;
-  align-items: center;
   gap: 16px;
   grid-column: span 2;
 }
