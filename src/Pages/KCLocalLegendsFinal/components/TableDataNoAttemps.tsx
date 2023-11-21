@@ -24,7 +24,7 @@ export const TableDataNoAttemps = ({
             accentColor: colorA,
             width: "40px",
           }}
-          min="0"
+          min="1"
           type="number"
           value={attemptsValue}
           onChange={(e) => setAttemptsValue(() => parseInt(e.target.value, 10))}

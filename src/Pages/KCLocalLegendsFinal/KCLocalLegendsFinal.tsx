@@ -244,6 +244,15 @@ export const KCLocalLegendsFinal = () => {
     if (currentBoulder.completed) accumulator++;
     return accumulator;
   };
+  const reduceBouldersToPoints = (accumulator, currentBoulder) => {
+    if (!currentBoulder.points || !currentBoulder.attempts) return accumulator;
+
+    const penaltyPoints = (currentBoulder.attempts - 1) * 0.1;
+    const formattedPoints = parseFloat(currentBoulder.points);
+    const totalPointsForBoulder = formattedPoints - penaltyPoints;
+
+    return accumulator + totalPointsForBoulder;
+  };
 
   const sortClimbersData = (array) => {
     const shouldSortByOrderAdded = true;
@@ -383,6 +392,13 @@ export const KCLocalLegendsFinal = () => {
                         <span style={{ marginLeft: "auto", padding: "16px" }}>
                           Total Boulders completed:{" "}
                           {completedBoulders.reduce(reduceBoulders, 0)}
+                        </span>
+                        <br />
+                        <span style={{ marginLeft: "auto", padding: "16px" }}>
+                          Total score:{" "}
+                          {completedBoulders
+                            .reduce(reduceBouldersToPoints, 0.0)
+                            .toFixed(1)}
                         </span>
                       </td>
                       {completedBoulders
