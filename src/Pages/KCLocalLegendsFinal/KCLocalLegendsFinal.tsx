@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
 import "./KCLocalLegendsFinal.css";
-import TableHeader from "./components/tableHeader";
+import { TableDataCheckbox } from "./components/TableDataCheckbox";
+import TableHeader from "./components/TableHeader";
 import { boulders } from "./data/boulders";
 import {
   Climber,
@@ -301,47 +302,15 @@ export const KCLocalLegendsFinal = () => {
                             boulderId,
                             color,
                             completed,
-                          }: PrettyBoulderOnClimber) => {
-                            const colorA = color.includes("/")
-                              ? "white"
-                              : color;
-
-                            return (
-                              <td
-                                key={boulderId}
-                                style={{
-                                  backgroundColor: colorA,
-                                  opacity: completed ? "0.9" : "0.4",
-                                }}
-                              >
-                                <label>
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      flexDirection: "column",
-                                      alignItems: "center",
-                                    }}
-                                  >
-                                    <input
-                                      style={{
-                                        accentColor: colorA,
-                                        width: "40px",
-                                        height: "40px",
-                                      }}
-                                      type="checkbox"
-                                      checked={completed}
-                                      onChange={() =>
-                                        handleBoulderToggle(
-                                          climberId,
-                                          boulderId
-                                        )
-                                      }
-                                    />
-                                  </div>
-                                </label>
-                              </td>
-                            );
-                          }
+                          }: PrettyBoulderOnClimber) => (
+                            <TableDataCheckbox
+                              color={color}
+                              boulderId={boulderId}
+                              completed={completed}
+                              handleBoulderToggle={handleBoulderToggle}
+                              climberId={climberId}
+                            />
+                          )
                         )}
                       <>
                         {deleted ? (
@@ -417,47 +386,15 @@ export const KCLocalLegendsFinal = () => {
                             boulderId,
                             color,
                             completed,
-                          }: PrettyBoulderOnClimber) => {
-                            const colorA = color.includes("/")
-                              ? "white"
-                              : color;
-
-                            return (
-                              <td
-                                key={boulderId}
-                                style={{
-                                  backgroundColor: colorA,
-                                  opacity: completed ? "0.9" : "0.4",
-                                }}
-                              >
-                                <label>
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      flexDirection: "column",
-                                      alignItems: "center",
-                                    }}
-                                  >
-                                    <input
-                                      style={{
-                                        accentColor: colorA,
-                                        width: "40px",
-                                        height: "40px",
-                                      }}
-                                      type="checkbox"
-                                      checked={completed}
-                                      onChange={() =>
-                                        handleBoulderToggle(
-                                          climberId,
-                                          boulderId
-                                        )
-                                      }
-                                    />
-                                  </div>
-                                </label>
-                              </td>
-                            );
-                          }
+                          }: PrettyBoulderOnClimber) => (
+                            <TableDataCheckbox
+                              color={color}
+                              boulderId={boulderId}
+                              completed={completed}
+                              handleBoulderToggle={handleBoulderToggle}
+                              climberId={climberId}
+                            />
+                          )
                         )}
                       <>
                         {deleted ? (
