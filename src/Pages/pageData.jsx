@@ -20,6 +20,7 @@ import { HoverCardsPage } from "./HoverCardsPage/HoverCardsPage";
 import { HoverEffectsPage } from "./HoverEffectsPage/HoverEffectsPage";
 import { HoverEffectsPage2 } from "./HoverEffectsPage2/HoverEffectsPage2";
 import { InputElementTest } from "./InputElementTest/InputElementTest";
+import { KCLocalLegendsFinal } from "./KCLocalLegendsFinal/KCLocalLegendsFinal";
 import { KCSummerLeaguePage } from "./KCSummerLeaguePage/KCSummerLeaguePage";
 import { MemoryGame } from "./MemoryGame/MemoryGame";
 import { MyCanvas } from "./MyCanvas/MyCanvas";
@@ -98,6 +99,11 @@ export const pageRoutes = [
     path: "/kc-summer-league-simplified",
     element: <KCSummerLeaguePageSimplified />,
     description: "KCSummerLeaguePageSimplified",
+  },
+  {
+    path: "/kc-local-legends-final",
+    element: <KCLocalLegendsFinal />,
+    description: "KCLocalLegendsFinal",
   },
   {
     path: "/data-structures",
