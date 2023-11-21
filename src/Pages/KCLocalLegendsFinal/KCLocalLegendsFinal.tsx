@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
 import "./KCLocalLegendsFinal.css";
 import { TableDataCheckbox } from "./components/TableDataCheckbox";
+import { TableDataRangeInput } from "./components/TableDataRangeInput";
 import TableHeader from "./components/TableHeader";
 import { boulders } from "./data/boulders";
 import {
@@ -36,6 +37,8 @@ export const KCLocalLegendsFinal = () => {
       completedBoulders: boulders.map((boulder) => ({
         ...boulder,
         completed: false,
+        points: 0,
+        attempts: 0,
       })),
       deleted: false,
       // @TODO: fix this
@@ -150,6 +153,89 @@ export const KCLocalLegendsFinal = () => {
       }
     }
   };
+
+  // WIP
+  const handleBoulderPointsChange = (climberId, boulderId, points) => {
+    // Clone the climbersData array to avoid mutations
+    const updatedClimbersData = [...climbersData];
+
+    // Find the climber by climberId
+    const selectedClimber = updatedClimbersData.find(
+      (climber) => climber.climberId === climberId
+    );
+
+    if (selectedClimber) {
+      // Clone the completedBoulders array of the selected climber
+      const updatedBoulders = [...selectedClimber.completedBoulders];
+
+      // Find the selected boulder within the completedBoulders array
+      const selectedBoulderIndex = updatedBoulders.findIndex(
+        (boulder) => boulder.boulderId === boulderId
+      );
+
+      if (selectedBoulderIndex !== -1) {
+        // Toggle the completed status of the selected boulder
+        updatedBoulders[selectedBoulderIndex].points = points;
+
+        // Update the completedBoulders array of the selected climber
+        selectedClimber.completedBoulders = updatedBoulders;
+
+        // Update the climbersData array with the modified climber object
+        const climberIndex = updatedClimbersData.findIndex(
+          (climber) => climber.climberId === climberId
+        );
+
+        if (climberIndex !== -1) {
+          updatedClimbersData[climberIndex] = selectedClimber;
+
+          // Set the updated climbersData state
+          setClimbersData(updatedClimbersData);
+        }
+      }
+    }
+  };
+  // WIP
+  // WIP
+  const handleNoAttemptsChange = (climberId, boulderId, attempts) => {
+    // Clone the climbersData array to avoid mutations
+    const updatedClimbersData = [...climbersData];
+
+    // Find the climber by climberId
+    const selectedClimber = updatedClimbersData.find(
+      (climber) => climber.climberId === climberId
+    );
+
+    if (selectedClimber) {
+      // Clone the completedBoulders array of the selected climber
+      const updatedBoulders = [...selectedClimber.completedBoulders];
+
+      // Find the selected boulder within the completedBoulders array
+      const selectedBoulderIndex = updatedBoulders.findIndex(
+        (boulder) => boulder.boulderId === boulderId
+      );
+
+      if (selectedBoulderIndex !== -1) {
+        // Toggle the completed status of the selected boulder
+        updatedBoulders[selectedBoulderIndex].attempts = attempts;
+
+        // Update the completedBoulders array of the selected climber
+        selectedClimber.completedBoulders = updatedBoulders;
+
+        // Update the climbersData array with the modified climber object
+        const climberIndex = updatedClimbersData.findIndex(
+          (climber) => climber.climberId === climberId
+        );
+
+        if (climberIndex !== -1) {
+          updatedClimbersData[climberIndex] = selectedClimber;
+
+          // Set the updated climbersData state
+          setClimbersData(updatedClimbersData);
+        }
+      }
+    }
+  };
+  // WIP
 
   const reduceBoulders = (accumulator, currentBoulder) => {
     if (currentBoulder.completed) accumulator++;
@@ -270,6 +356,7 @@ export const KCLocalLegendsFinal = () => {
                   .filter((boulder) => boulder.boulderId.includes("W"))
                   .map(({ boulderId, wall, color }) => (
                     <TableHeader
+                      key={boulderId}
                       boulderId={boulderId}
                       wall={wall}
                       color={color}
@@ -302,12 +389,20 @@ export const KCLocalLegendsFinal = () => {
                             boulderId,
                             color,
                             completed,
+                            points,
+                            attempts,
                           }: PrettyBoulderOnClimber) => (
-                            <TableDataCheckbox
+                            <TableDataRangeInput
+                              key={boulderId}
                               color={color}
                               boulderId={boulderId}
                               completed={completed}
-                              handleBoulderToggle={handleBoulderToggle}
+                              points={points}
+                              attempts={attempts}
+                              handleBoulderPointsChange={
+                                handleBoulderPointsChange
+                              }
+                              handleNoAttemptsChange={handleNoAttemptsChange}
                               climberId={climberId}
                             />
                           )
@@ -354,6 +449,7 @@ export const KCLocalLegendsFinal = () => {
                   .filter((boulder) => boulder.boulderId.includes("M"))
                   .map(({ boulderId, wall, color }) => (
                     <TableHeader
+                      key={boulderId}
                       boulderId={boulderId}
                       wall={wall}
                       color={color}
@@ -388,6 +484,7 @@ export const KCLocalLegendsFinal = () => {
                             completed,
                           }: PrettyBoulderOnClimber) => (
                             <TableDataCheckbox
+                              key={boulderId}
                               color={color}
                               boulderId={boulderId}
                               completed={completed}

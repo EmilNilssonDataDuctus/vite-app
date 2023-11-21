@@ -3,11 +3,12 @@
 import { Prettify } from "../../../utils/typescriptPrettify";
 import { Boulder, boulders } from "../data/boulders";
 
-type BoulderPoints = 10.0 | 20.0 | 30.0 | 40.0 | 65.0;
+type BoulderPoints = 0 | 10 | 20 | 30 | 40 | 65;
 
 type BoulderOnClimber = Boulder & {
   completed: boolean;
   points: BoulderPoints;
+  attempts: number;
 };
 
 export type PrettyBoulderOnClimber = Prettify<BoulderOnClimber>;
@@ -36,6 +37,8 @@ const initialClimbers: Climber[] = [
   completedBoulders: boulders.map((boulder) => ({
     ...boulder,
     completed: false,
+    points: 0,
+    attempts: 0,
   })),
 }));
 
