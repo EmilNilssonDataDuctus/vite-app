@@ -28,7 +28,7 @@ export const TableDataNoAttemps = ({
           type="number"
           value={attemptsValue}
           onChange={(e) => setAttemptsValue(() => parseInt(e.target.value, 10))}
-          onBlur={() =>
+          onMouseUp={() =>
             handleNoAttemptsChange(climberId, boulderId, attemptsValue)
           }
         />

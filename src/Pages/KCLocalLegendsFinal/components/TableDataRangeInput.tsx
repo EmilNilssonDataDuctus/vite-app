@@ -26,6 +26,7 @@ export const TableDataRangeInput = ({
       style={{
         opacity: "0.9",
         fontWeight: 900,
+        backgroundColor: completed ? "rgba(0, 255, 0, 0.3)" : "black",
       }}
     >
       <label>
@@ -50,7 +51,7 @@ export const TableDataRangeInput = ({
             list="markers"
             value={pointsGained}
             onChange={(e) => handleRangeChange(e)}
-            onBlur={() =>
+            onMouseUp={() =>
               handleBoulderPointsChange(climberId, boulderId, pointsGained)
             }
           />

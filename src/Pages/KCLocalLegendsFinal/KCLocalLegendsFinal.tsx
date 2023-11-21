@@ -154,7 +154,6 @@ export const KCLocalLegendsFinal = () => {
     }
   };
 
-  // WIP
   const handleBoulderPointsChange = (climberId, boulderId, points) => {
     // Clone the climbersData array to avoid mutations
     const updatedClimbersData = [...climbersData];
@@ -177,6 +176,12 @@ export const KCLocalLegendsFinal = () => {
         // Toggle the completed status of the selected boulder
         updatedBoulders[selectedBoulderIndex].points = points;
 
+        if (points == 65) {
+          updatedBoulders[selectedBoulderIndex].completed = true;
+        } else {
+          updatedBoulders[selectedBoulderIndex].completed = false;
+        }
+
         // Update the completedBoulders array of the selected climber
         selectedClimber.completedBoulders = updatedBoulders;
 
@@ -194,8 +199,7 @@ export const KCLocalLegendsFinal = () => {
       }
     }
   };
-  // WIP
-  // WIP
+
   const handleNoAttemptsChange = (climberId, boulderId, attempts) => {
     // Clone the climbersData array to avoid mutations
     const updatedClimbersData = [...climbersData];
@@ -235,7 +239,6 @@ export const KCLocalLegendsFinal = () => {
       }
     }
   };
-  // WIP
 
   const reduceBoulders = (accumulator, currentBoulder) => {
     if (currentBoulder.completed) accumulator++;
