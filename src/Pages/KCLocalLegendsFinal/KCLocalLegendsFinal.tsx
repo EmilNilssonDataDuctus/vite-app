@@ -31,9 +31,9 @@ export const KCLocalLegendsFinal = () => {
 
   const [shouldSortByCompletions, setShouldSortByCompletions] = useState(false);
   const [shouldSortByPoints, setShouldSortByPoints] = useState(true);
-  const [shouldSortAlphabetically, setShouldSortAlphabetically] =
-    useState(false);
+  const [sortAlphabetically, setSortAlphabetically] = useState(false);
   const [hideDeletedClimbers, setHideDeletedClimbers] = useState(true);
+  const [useSimpleScoring, setUseSimpleScoring] = useState(false);
 
   // @TODO: fix this
   let iterator = climbersData.length;
@@ -257,13 +257,15 @@ export const KCLocalLegendsFinal = () => {
     handleRestoreDeletedClimber,
     handleDeletePermanent,
     handleDeleteWithOptionToRestore,
+    handleBoulderToggle,
   };
 
   const modifiers = {
     shouldSortByCompletions,
     shouldSortByPoints,
-    shouldSortAlphabetically,
+    sortAlphabetically,
     hideDeletedClimbers,
+    useSimpleScoring,
   };
 
   return (
@@ -328,13 +330,20 @@ export const KCLocalLegendsFinal = () => {
             </label>
             <br />
             <label>
+              Use simple scoring
+              <input
+                type="checkbox"
+                checked={useSimpleScoring}
+                onChange={() => setUseSimpleScoring(!useSimpleScoring)}
+              />
+            </label>
+            <br />
+            <label>
               Sort the climbers by name
               <input
                 type="checkbox"
-                checked={shouldSortAlphabetically}
-                onChange={() =>
-                  setShouldSortAlphabetically(!shouldSortAlphabetically)
-                }
+                checked={sortAlphabetically}
+                onChange={() => setSortAlphabetically(!sortAlphabetically)}
               />
             </label>
             <br />

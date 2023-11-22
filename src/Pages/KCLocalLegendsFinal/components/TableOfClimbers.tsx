@@ -1,6 +1,7 @@
 import React from "react";
 import { boulders } from "../data/boulders";
 import { Climber, PrettyBoulderOnClimber } from "../utils/initialseClimberData";
+import { TableDataCheckbox } from "./TableDataCheckbox";
 import { TableDataRangeInput } from "./TableDataRangeInput";
 import { TableHeaderBoulderInfo } from "./TableHeaderBoulderInfo";
 
@@ -17,13 +18,15 @@ export const TableOfClimbers = ({
     handleRestoreDeletedClimber,
     handleDeletePermanent,
     handleDeleteWithOptionToRestore,
+    handleBoulderToggle
   } = callbacks;
 
   const {
     shouldSortByCompletions,
     shouldSortByPoints,
-    shouldSortAlphabetically,
+    sortAlphabetically,
     hideDeletedClimbers,
+    useSimpleScoring,
   } = modifiers;
 
   const reduceBoulders = (accumulator, currentBoulder) => {
@@ -49,7 +52,7 @@ export const TableOfClimbers = ({
         )
       : array;
 
-    const arrAfterSecondSort = shouldSortAlphabetically
+    const arrAfterSecondSort = sortAlphabetically
       ? arrAfterFirstSort.toSorted((climberA, climberB) => {
           return climberA.climberName.toLowerCase() <
             climberB.climberName.toLowerCase()
@@ -136,17 +139,31 @@ export const TableOfClimbers = ({
                       points,
                       attempts,
                     }: PrettyBoulderOnClimber) => (
-                      <TableDataRangeInput
-                        key={boulderId}
-                        color={color}
-                        boulderId={boulderId}
-                        completed={completed}
-                        points={points}
-                        attempts={attempts}
-                        handleBoulderPointsChange={handleBoulderPointsChange}
-                        handleNoAttemptsChange={handleNoAttemptsChange}
-                        climberId={climberId}
-                      />
+                      <>
+                        {useSimpleScoring ? (
+                          <TableDataCheckbox
+                          color={color}
+                          boulderId={boulderId}
+                          completed={completed}
+                          handleBoulderToggle={handleBoulderToggle}
+                          climberId={climberId}
+                          />
+                        ) : (
+                          <TableDataRangeInput
+                            key={boulderId}
+                            color={color}
+                            boulderId={boulderId}
+                            completed={completed}
+                            points={points}
+                            attempts={attempts}
+                            handleBoulderPointsChange={
+                              handleBoulderPointsChange
+                            }
+                            handleNoAttemptsChange={handleNoAttemptsChange}
+                            climberId={climberId}
+                          />
+                        )}
+                      </>
                     )
                   )}
                 <>
