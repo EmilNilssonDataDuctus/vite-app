@@ -15,7 +15,7 @@ export const TableDataRangeInput = ({
   const [pointsGained, setPointsGained] = useState<string>(points);
 
   const handleRangeChange = (e) => {
-    let newValue = e.target.value;
+    let newValue = Math.ceil(parseInt(e.target.value, 10) / 10) * 10;
     if (newValue > 40) newValue = 65;
     setPointsGained((prev) => newValue.toString());
   };

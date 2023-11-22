@@ -15,26 +15,24 @@ export const TableDataNoAttemps = ({
   }, [attemptsValue]);
 
   return (
-    <label>
-      <div
+    <label
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <input
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          accentColor: colorA,
+          width: "40px",
         }}
-      >
-        <input
-          style={{
-            accentColor: colorA,
-            width: "40px",
-          }}
-          min="1"
-          type="number"
-          value={attemptsValue}
-          onChange={(e) => setAttemptsValue(() => parseInt(e.target.value, 10))}
-        />
-        attempts
-      </div>
+        min="1"
+        type="number"
+        value={attemptsValue}
+        onChange={(e) => setAttemptsValue(() => parseInt(e.target.value, 10))}
+      />
+      attempts
     </label>
   );
 };

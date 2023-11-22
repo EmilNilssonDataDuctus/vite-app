@@ -2,15 +2,25 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
 import "./KCLocalLegendsFinal.css";
-import { TableDataCheckbox } from "./components/TableDataCheckbox";
-import { TableDataRangeInput } from "./components/TableDataRangeInput";
-import { TableHeaderBoulderInfo } from "./components/TableHeaderBoulderInfo";
+import { TableOfClimbers } from "./components/TableOfClimbers";
 import { boulders } from "./data/boulders";
 import {
   Climber,
-  PrettyBoulderOnClimber,
   initialseStateOfClimbers,
 } from "./utils/initialseClimberData";
+
+const categories = {
+  male: {
+    title: "Male Climbers",
+    identifier: "M",
+    gender: "male",
+  },
+  female: {
+    title: "Female Climbers",
+    identifier: "W",
+    gender: "female",
+  },
+};
 
 export const KCLocalLegendsFinal = () => {
   const [climbersData, setClimbersData] = useState<Array<Climber>>(
@@ -20,7 +30,7 @@ export const KCLocalLegendsFinal = () => {
   const [inputValueGender, setInputValueGender] = useState("male");
 
   const [shouldSortByCompletions, setShouldSortByCompletions] = useState(false);
-  const [shouldSortByPoints, setShouldSortByPoints] = useState(false);
+  const [shouldSortByPoints, setShouldSortByPoints] = useState(true);
   const [shouldSortAlphabetically, setShouldSortAlphabetically] =
     useState(false);
   const [hideDeletedClimbers, setHideDeletedClimbers] = useState(true);
@@ -241,68 +251,26 @@ export const KCLocalLegendsFinal = () => {
     }
   };
 
-  const reduceBoulders = (accumulator, currentBoulder) => {
-    if (currentBoulder.completed) accumulator++;
-    return accumulator;
-  };
-  const reduceBouldersToPoints = (accumulator, currentBoulder) => {
-    if (!currentBoulder.points || !currentBoulder.attempts) return accumulator;
-
-    const penaltyPoints = (currentBoulder.attempts - 1) * 0.1;
-    const formattedPoints = parseFloat(currentBoulder.points);
-    const totalPointsForBoulder = formattedPoints - penaltyPoints;
-
-    return accumulator + totalPointsForBoulder;
+  const callbacks = {
+    handleBoulderPointsChange,
+    handleNoAttemptsChange,
+    handleRestoreDeletedClimber,
+    handleDeletePermanent,
+    handleDeleteWithOptionToRestore,
   };
 
-  const sortClimbersData = (array) => {
-    const shouldSortByOrderAdded = true;
-
-    const arrAfterFirstSort = shouldSortByOrderAdded
-      ? array.toSorted((climberA, climberB) =>
-          climberA.orderAdded > climberB.orderAdded ? 1 : -1
-        )
-      : array;
-
-    const arrAfterSecondSort = shouldSortAlphabetically
-      ? arrAfterFirstSort.toSorted((climberA, climberB) => {
-          return climberA.climberName.toLowerCase() <
-            climberB.climberName.toLowerCase()
-            ? -1
-            : 1;
-        })
-      : arrAfterFirstSort;
-
-    const arrAfterThirdSort = shouldSortByCompletions
-      ? arrAfterSecondSort.toSorted((climberA, climberB) => {
-          return climberA.completedBoulders.reduce(reduceBoulders, 0) >
-            climberB.completedBoulders.reduce(reduceBoulders, 0)
-            ? -1
-            : 1;
-        })
-      : arrAfterSecondSort;
-
-    const arrAfterFourthSort = shouldSortByPoints
-      ? arrAfterThirdSort.toSorted((climberA, climberB) => {
-          return climberA.completedBoulders.reduce(reduceBouldersToPoints, 0) >
-            climberB.completedBoulders.reduce(reduceBouldersToPoints, 0)
-            ? -1
-            : 1;
-        })
-      : arrAfterThirdSort;
-
-    const arrAfterFiltering = hideDeletedClimbers
-      ? [...arrAfterFourthSort].filter((climber) => !climber.deleted)
-      : arrAfterThirdSort;
-
-    return arrAfterFiltering;
+  const modifiers = {
+    shouldSortByCompletions,
+    shouldSortByPoints,
+    shouldSortAlphabetically,
+    hideDeletedClimbers,
   };
 
   return (
     <MainWrapper>
-      {/* <h1>KCSummerLeagueTracker</h1> */}
+      <h1>KC Local Legends Standings</h1>
       <div>
-        {/* <h2>Table of climbers</h2> */}
+        <h2>Table of climbers</h2>
         <section>
           <h3>Add a new climber</h3>
           <form onSubmit={handleSubmit}>
@@ -336,7 +304,8 @@ export const KCLocalLegendsFinal = () => {
           </form>
         </section>
         <section>
-          <h3>Current standings</h3>
+          <br />
+          <h3>Filter and sort</h3>
           <form>
             <label>
               Sort the climbers by boulders completed
@@ -378,192 +347,20 @@ export const KCLocalLegendsFinal = () => {
               />
             </label>
           </form>
-          <table>
-            <thead>
-              <tr>
-                <th>Female Climber</th>
-                <th style={{ textAlign: "right" }}>Wall</th>
-                {boulders
-                  .filter((boulder) => boulder.boulderId.includes("W"))
-                  .map(({ boulderId, wall, color }) => (
-                    <TableHeaderBoulderInfo
-                      key={boulderId}
-                      boulderId={boulderId}
-                      wall={wall}
-                      color={color}
-                    />
-                  ))}
-              </tr>
-            </thead>
-            <tbody>
-              {sortClimbersData(climbersData)
-                .filter((climber) => climber.climberGender !== "male")
-                .map(
-                  ({
-                    climberId,
-                    climberName,
-                    completedBoulders,
-                    deleted,
-                  }: Climber) => (
-                    <tr key={climberId} style={{ mixBlendMode: "difference" }}>
-                      <td>{climberName}</td>
-                      <td>
-                        <span style={{ marginLeft: "auto", padding: "16px" }}>
-                          Total Boulders completed:{" "}
-                          {completedBoulders.reduce(reduceBoulders, 0)}
-                        </span>
-                        <br />
-                        <span style={{ marginLeft: "auto", padding: "16px" }}>
-                          Total score:{" "}
-                          {completedBoulders
-                            .reduce(reduceBouldersToPoints, 0.0)
-                            .toFixed(1)}
-                        </span>
-                      </td>
-                      {completedBoulders
-                        .filter((boulder) => boulder.boulderId.includes("W"))
-                        .map(
-                          ({
-                            boulderId,
-                            color,
-                            completed,
-                            points,
-                            attempts,
-                          }: PrettyBoulderOnClimber) => (
-                            <TableDataRangeInput
-                              key={boulderId}
-                              color={color}
-                              boulderId={boulderId}
-                              completed={completed}
-                              points={points}
-                              attempts={attempts}
-                              handleBoulderPointsChange={
-                                handleBoulderPointsChange
-                              }
-                              handleNoAttemptsChange={handleNoAttemptsChange}
-                              climberId={climberId}
-                            />
-                          )
-                        )}
-                      <>
-                        {deleted ? (
-                          <td>
-                            <button
-                              onClick={() =>
-                                handleRestoreDeletedClimber(climberId)
-                              }
-                            >
-                              Restore
-                            </button>
-                            <button
-                              onClick={() => handleDeletePermanent(climberId)}
-                            >
-                              Delete permanently
-                            </button>
-                          </td>
-                        ) : (
-                          <td>
-                            <button
-                              onClick={() =>
-                                handleDeleteWithOptionToRestore(climberId)
-                              }
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        )}
-                      </>
-                    </tr>
-                  )
-                )}
-            </tbody>
-          </table>
-          <table>
-            <thead>
-              <tr>
-                <th>Male Climber</th>
-                <th style={{ textAlign: "right" }}>Wall</th>
-                {boulders
-                  .filter((boulder) => boulder.boulderId.includes("M"))
-                  .map(({ boulderId, wall, color }) => (
-                    <TableHeaderBoulderInfo
-                      key={boulderId}
-                      boulderId={boulderId}
-                      wall={wall}
-                      color={color}
-                    />
-                  ))}
-              </tr>
-            </thead>
-            <tbody>
-              {sortClimbersData(climbersData)
-                .filter((climber) => climber.climberGender !== "female")
-                .map(
-                  ({
-                    climberId,
-                    climberName,
-                    completedBoulders,
-                    deleted,
-                  }: Climber) => (
-                    <tr key={climberId} style={{ mixBlendMode: "difference" }}>
-                      <td>{climberName}</td>
-                      <td>
-                        <span style={{ marginLeft: "auto", padding: "16px" }}>
-                          Total Boulders completed:{" "}
-                          {completedBoulders.reduce(reduceBoulders, 0)}
-                        </span>
-                      </td>
-                      {completedBoulders
-                        .filter((boulder) => boulder.boulderId.includes("M"))
-                        .map(
-                          ({
-                            boulderId,
-                            color,
-                            completed,
-                          }: PrettyBoulderOnClimber) => (
-                            <TableDataCheckbox
-                              key={boulderId}
-                              color={color}
-                              boulderId={boulderId}
-                              completed={completed}
-                              handleBoulderToggle={handleBoulderToggle}
-                              climberId={climberId}
-                            />
-                          )
-                        )}
-                      <>
-                        {deleted ? (
-                          <td>
-                            <button
-                              onClick={() =>
-                                handleRestoreDeletedClimber(climberId)
-                              }
-                            >
-                              Restore
-                            </button>
-                            <button
-                              onClick={() => handleDeletePermanent(climberId)}
-                            >
-                              Delete permanently
-                            </button>
-                          </td>
-                        ) : (
-                          <td>
-                            <button
-                              onClick={() =>
-                                handleDeleteWithOptionToRestore(climberId)
-                              }
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        )}
-                      </>
-                    </tr>
-                  )
-                )}
-            </tbody>
-          </table>
+          <br />
+          <h3>Current standings</h3>
+          <TableOfClimbers
+            climbersData={climbersData}
+            category={categories.female}
+            modifiers={modifiers}
+            callbacks={callbacks}
+          />
+          <TableOfClimbers
+            climbersData={climbersData}
+            category={categories.male}
+            modifiers={modifiers}
+            callbacks={callbacks}
+          />
         </section>
       </div>
     </MainWrapper>

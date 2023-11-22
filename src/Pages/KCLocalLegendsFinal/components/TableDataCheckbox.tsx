@@ -17,25 +17,23 @@ export const TableDataCheckbox = ({
         opacity: completed ? "0.9" : "0.4",
       }}
     >
-      <label>
-        <div
+      <label
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <input
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            accentColor: colorA,
+            width: "40px",
+            height: "40px",
           }}
-        >
-          <input
-            style={{
-              accentColor: colorA,
-              width: "40px",
-              height: "40px",
-            }}
-            type="checkbox"
-            checked={completed}
-            onChange={() => handleBoulderToggle(climberId, boulderId)}
-          />
-        </div>
+          type="checkbox"
+          checked={completed}
+          onChange={() => handleBoulderToggle(climberId, boulderId)}
+        />
       </label>
     </td>
   );
