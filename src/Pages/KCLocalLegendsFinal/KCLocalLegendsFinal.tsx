@@ -20,9 +20,10 @@ export const KCLocalLegendsFinal = () => {
   const [inputValueGender, setInputValueGender] = useState("male");
 
   const [shouldSortByCompletions, setShouldSortByCompletions] = useState(false);
+  const [shouldSortByPoints, setShouldSortByPoints] = useState(false);
   const [shouldSortAlphabetically, setShouldSortAlphabetically] =
     useState(false);
-  const [hideDeletedClimbers, hideShowDeletedClimbers] = useState(true);
+  const [hideDeletedClimbers, setHideDeletedClimbers] = useState(true);
 
   // @TODO: fix this
   let iterator = climbersData.length;
@@ -281,8 +282,17 @@ export const KCLocalLegendsFinal = () => {
         })
       : arrAfterSecondSort;
 
+    const arrAfterFourthSort = shouldSortByPoints
+      ? arrAfterThirdSort.toSorted((climberA, climberB) => {
+          return climberA.completedBoulders.reduce(reduceBouldersToPoints, 0) >
+            climberB.completedBoulders.reduce(reduceBouldersToPoints, 0)
+            ? -1
+            : 1;
+        })
+      : arrAfterThirdSort;
+
     const arrAfterFiltering = hideDeletedClimbers
-      ? [...arrAfterThirdSort].filter((climber) => !climber.deleted)
+      ? [...arrAfterFourthSort].filter((climber) => !climber.deleted)
       : arrAfterThirdSort;
 
     return arrAfterFiltering;
@@ -340,6 +350,15 @@ export const KCLocalLegendsFinal = () => {
             </label>
             <br />
             <label>
+              Sort the climbers by total points
+              <input
+                type="checkbox"
+                checked={shouldSortByPoints}
+                onChange={() => setShouldSortByPoints(!shouldSortByPoints)}
+              />
+            </label>
+            <br />
+            <label>
               Sort the climbers by name
               <input
                 type="checkbox"
@@ -355,7 +374,7 @@ export const KCLocalLegendsFinal = () => {
               <input
                 type="checkbox"
                 checked={hideDeletedClimbers}
-                onChange={() => hideShowDeletedClimbers(!hideDeletedClimbers)}
+                onChange={() => setHideDeletedClimbers(!hideDeletedClimbers)}
               />
             </label>
           </form>

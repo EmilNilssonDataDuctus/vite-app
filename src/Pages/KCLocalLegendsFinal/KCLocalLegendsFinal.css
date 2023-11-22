@@ -1,11 +1,12 @@
 table {
   border: 1px solid grey;
-  margin: 40px;
+  margin: 40px 0;
+  width: 100%;
 }
 table td {
   text-align: center;
   border: 1px solid grey;
-  width: 100px;
+  min-width: 100px;
 }
 table td:nth-child(2) {
   width: 300px;

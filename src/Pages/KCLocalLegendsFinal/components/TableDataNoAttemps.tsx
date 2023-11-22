@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const TableDataNoAttemps = ({
   color,
@@ -9,6 +9,10 @@ export const TableDataNoAttemps = ({
 }) => {
   const [attemptsValue, setAttemptsValue] = useState(attempts);
   const colorA = color.includes("/") ? "white" : color;
+
+  useEffect(() => {
+    handleNoAttemptsChange(climberId, boulderId, attemptsValue);
+  }, [attemptsValue]);
 
   return (
     <label>
@@ -28,9 +32,6 @@ export const TableDataNoAttemps = ({
           type="number"
           value={attemptsValue}
           onChange={(e) => setAttemptsValue(() => parseInt(e.target.value, 10))}
-          onMouseUp={() =>
-            handleNoAttemptsChange(climberId, boulderId, attemptsValue)
-          }
         />
         attempts
       </div>
