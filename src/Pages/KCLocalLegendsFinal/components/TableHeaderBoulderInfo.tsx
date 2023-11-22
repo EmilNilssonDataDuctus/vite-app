@@ -1,6 +1,6 @@
 import React from "react";
 
-export const TableHeader = ({ boulderId, color, wall }) => {
+export const TableHeaderBoulderInfo = ({ boulderId, color, wall }) => {
   const colorA = color.includes("/") ? "white" : color;
   return (
     <th

@@ -4,7 +4,7 @@ import { MainWrapper } from "../../Shared/Page.styled";
 import "./KCLocalLegendsFinal.css";
 import { TableDataCheckbox } from "./components/TableDataCheckbox";
 import { TableDataRangeInput } from "./components/TableDataRangeInput";
-import { TableHeader } from "./components/TableHeader";
+import { TableHeaderBoulderInfo } from "./components/TableHeaderBoulderInfo";
 import { boulders } from "./data/boulders";
 import {
   Climber,
@@ -367,7 +367,7 @@ export const KCLocalLegendsFinal = () => {
                 {boulders
                   .filter((boulder) => boulder.boulderId.includes("W"))
                   .map(({ boulderId, wall, color }) => (
-                    <TableHeader
+                    <TableHeaderBoulderInfo
                       key={boulderId}
                       boulderId={boulderId}
                       wall={wall}
@@ -467,7 +467,7 @@ export const KCLocalLegendsFinal = () => {
                 {boulders
                   .filter((boulder) => boulder.boulderId.includes("M"))
                   .map(({ boulderId, wall, color }) => (
-                    <TableHeader
+                    <TableHeaderBoulderInfo
                       key={boulderId}
                       boulderId={boulderId}
                       wall={wall}
