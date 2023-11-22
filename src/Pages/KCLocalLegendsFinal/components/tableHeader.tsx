@@ -1,6 +1,6 @@
 import React from "react";
 
-function TableHeader({ boulderId, color, wall }) {
+export const TableHeader = ({ boulderId, color, wall }) => {
   const colorA = color.includes("/") ? "white" : color;
   return (
     <th
@@ -14,6 +14,4 @@ function TableHeader({ boulderId, color, wall }) {
       </span>
     </th>
   );
-}
-
-export default TableHeader;
+};

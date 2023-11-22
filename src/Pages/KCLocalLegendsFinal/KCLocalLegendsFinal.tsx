@@ -4,7 +4,7 @@ import { MainWrapper } from "../../Shared/Page.styled";
 import "./KCLocalLegendsFinal.css";
 import { TableDataCheckbox } from "./components/TableDataCheckbox";
 import { TableDataRangeInput } from "./components/TableDataRangeInput";
-import TableHeader from "./components/TableHeader";
+import { TableHeader } from "./components/TableHeader";
 import { boulders } from "./data/boulders";
 import {
   Climber,
