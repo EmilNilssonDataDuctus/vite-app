@@ -18,7 +18,7 @@ export const TableOfClimbers = ({
     handleRestoreDeletedClimber,
     handleDeletePermanent,
     handleDeleteWithOptionToRestore,
-    handleBoulderToggle
+    handleBoulderToggle,
   } = callbacks;
 
   const {
@@ -142,11 +142,11 @@ export const TableOfClimbers = ({
                       <>
                         {useSimpleScoring ? (
                           <TableDataCheckbox
-                          color={color}
-                          boulderId={boulderId}
-                          completed={completed}
-                          handleBoulderToggle={handleBoulderToggle}
-                          climberId={climberId}
+                            color={color}
+                            boulderId={boulderId}
+                            completed={completed}
+                            handleBoulderToggle={handleBoulderToggle}
+                            climberId={climberId}
                           />
                         ) : (
                           <TableDataRangeInput
