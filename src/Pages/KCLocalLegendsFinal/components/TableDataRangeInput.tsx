@@ -12,7 +12,7 @@ export const TableDataRangeInput = ({
   climberId,
 }) => {
   const colorA = color.includes("/") ? "white" : color;
-  const [pointsGained, setPointsGained] = useState<string>(points);
+  const [pointsGained, setPointsGained] = useState<string>(points || 0);
 
   const handleRangeChange = (e) => {
     let newValue = Math.ceil(parseInt(e.target.value, 10) / 10) * 10;

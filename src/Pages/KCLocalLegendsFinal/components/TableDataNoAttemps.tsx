@@ -7,7 +7,7 @@ export const TableDataNoAttemps = ({
   climberId,
   boulderId,
 }) => {
-  const [attemptsValue, setAttemptsValue] = useState(attempts);
+  const [attemptsValue, setAttemptsValue] = useState(attempts || 1);
   const colorA = color.includes("/") ? "white" : color;
 
   useEffect(() => {
