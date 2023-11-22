@@ -5,6 +5,20 @@ import { TableDataCheckbox } from "./TableDataCheckbox";
 import { TableDataRangeInput } from "./TableDataRangeInput";
 import { TableHeaderBoulderInfo } from "./TableHeaderBoulderInfo";
 
+const reduceBoulders = (accumulator, currentBoulder) => {
+  if (currentBoulder.completed) accumulator++;
+  return accumulator;
+};
+export const reduceBouldersToPoints = (accumulator, currentBoulder) => {
+  if (!currentBoulder.points || !currentBoulder.attempts) return accumulator;
+
+  const penaltyPoints = (currentBoulder.attempts - 1) * 0.1;
+  const formattedPoints = parseFloat(currentBoulder.points);
+  const totalPointsForBoulder = formattedPoints - penaltyPoints;
+
+  return accumulator + totalPointsForBoulder;
+};
+
 export const TableOfClimbers = ({
   climbersData,
   category,
@@ -29,19 +43,7 @@ export const TableOfClimbers = ({
     useSimpleScoring,
   } = modifiers;
 
-  const reduceBoulders = (accumulator, currentBoulder) => {
-    if (currentBoulder.completed) accumulator++;
-    return accumulator;
-  };
-  const reduceBouldersToPoints = (accumulator, currentBoulder) => {
-    if (!currentBoulder.points || !currentBoulder.attempts) return accumulator;
-
-    const penaltyPoints = (currentBoulder.attempts - 1) * 0.1;
-    const formattedPoints = parseFloat(currentBoulder.points);
-    const totalPointsForBoulder = formattedPoints - penaltyPoints;
-
-    return accumulator + totalPointsForBoulder;
-  };
+  
 
   const sortClimbersData = (array) => {
     const shouldSortByOrderAdded = true;

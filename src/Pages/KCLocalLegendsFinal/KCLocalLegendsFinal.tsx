@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { MainWrapper } from "../../Shared/Page.styled";
 import "./KCLocalLegendsFinal.css";
+import { MiniScoreBoard } from "./components/MiniScoreBoard";
 import { TableOfClimbers } from "./components/TableOfClimbers";
 import { boulders } from "./data/boulders";
 import {
@@ -372,6 +373,7 @@ export const KCLocalLegendsFinal = () => {
           />
         </section>
       </div>
+      <MiniScoreBoard climbersData={climbersData} />
     </MainWrapper>
   );
 };
