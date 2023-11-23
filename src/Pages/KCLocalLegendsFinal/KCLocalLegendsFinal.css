@@ -3,6 +3,13 @@ table {
   margin: 0 0 40px 0;
   width: 100%;
 }
+table tbody tr {
+  opacity: 0.5;
+}
+table tbody tr:hover,
+table tbody tr:focus-within {
+  opacity: 1;
+}
 table td {
   text-align: center;
   border: 1px solid grey;
