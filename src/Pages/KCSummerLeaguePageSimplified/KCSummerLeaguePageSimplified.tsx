@@ -32,6 +32,7 @@ export const KCSummerLeaguePageSimplified = () => {
         ...boulder,
         completed: false,
       })),
+      deleted: false,
       // @TODO: fix this
       orderAdded: ++iterator,
     };
