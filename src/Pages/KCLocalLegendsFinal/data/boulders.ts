@@ -66,7 +66,7 @@ export const boulders: Boulder[] = [
   },
   {
     color: "blue",
-    wall: "G1",
+    wall: "H2",
     boulderId: "W3",
   },
   {
