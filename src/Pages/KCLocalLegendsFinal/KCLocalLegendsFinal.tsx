@@ -31,7 +31,7 @@ export const KCLocalLegendsFinal = () => {
   const [inputValueGender, setInputValueGender] = useState("male");
 
   const [shouldSortByCompletions, setShouldSortByCompletions] = useState(false);
-  const [shouldSortByPoints, setShouldSortByPoints] = useState(true);
+  const [shouldSortByPoints, setShouldSortByPoints] = useState(false);
   const [sortAlphabetically, setSortAlphabetically] = useState(false);
   const [hideDeletedClimbers, setHideDeletedClimbers] = useState(true);
   const [useSimpleScoring, setUseSimpleScoring] = useState(false);
@@ -147,6 +147,12 @@ export const KCLocalLegendsFinal = () => {
         // Toggle the completed status of the selected boulder
         updatedBoulders[selectedBoulderIndex].completed =
           !updatedBoulders[selectedBoulderIndex].completed;
+
+        if (!updatedBoulders[selectedBoulderIndex].completed) {
+          updatedBoulders[selectedBoulderIndex].points = 0.0;
+        } else {
+          updatedBoulders[selectedBoulderIndex].points = 65.0;
+        }
 
         // Update the completedBoulders array of the selected climber
         selectedClimber.completedBoulders = updatedBoulders;
