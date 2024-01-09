@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { getRandomColor } from "./helperFunctions";
 
 const MAX_DOTS = 1000;
 
 export const Version1 = () => {
   const [noOfDots, setNoOfDots] = useState(10);
   const [isMouseDown, setIsMouseDown] = useState(false);
+  const [isMouseInCanvas, setIsMouseInCanvas] = useState(false);
 
   useEffect(() => {
     function init() {
@@ -26,16 +28,6 @@ export const Version1 = () => {
         color: getRandomColor(),
       }));
 
-      // Function to generate a random color
-      function getRandomColor() {
-        const letters = "0123456789ABCDEF";
-        let color = "#";
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
-
       // Function to draw a dot at a given position with a given color
       function drawDot(x, y, color) {
         ctx.beginPath();
@@ -48,6 +40,7 @@ export const Version1 = () => {
       // Function to move the dot in a random direction
       function moveDot(dot) {
         if (isMouseDown) return;
+
         dot.x += dot.speed * Math.cos(dot.angle);
         dot.y += dot.speed * Math.sin(dot.angle);
 
@@ -88,11 +81,17 @@ export const Version1 = () => {
 
       function handleMouseLeave() {
         setIsMouseDown(false);
+        setIsMouseInCanvas(false);
+      }
+
+      function handleMouseEnter() {
+        setIsMouseInCanvas(true);
       }
 
       canvas.addEventListener("mousedown", handleMouseDown);
       canvas.addEventListener("mouseup", handleMouseUp);
       canvas.addEventListener("mouseleave", handleMouseLeave);
+      canvas.addEventListener("mouseenter", handleMouseEnter);
 
       updateCanvas(); // Start the animation
 
@@ -101,12 +100,28 @@ export const Version1 = () => {
         canvas.removeEventListener("mousedown", handleMouseDown);
         canvas.removeEventListener("mouseup", handleMouseUp);
         canvas.removeEventListener("mouseleave", handleMouseLeave);
+        canvas.removeEventListener("mouseenter", handleMouseEnter);
       };
     }
     init();
   }, [noOfDots, isMouseDown]);
   return (
     <section>
+      <details>
+        <summary>Debug details</summary>
+        <table style={{ width: "200px" }}>
+          <tbody>
+            <tr>
+              <td>MouseIn?</td>
+              <td>{isMouseInCanvas.toString()}</td>
+            </tr>
+            <tr>
+              <td>MouseDown?</td>
+              <td>{isMouseDown.toString()}</td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
       <label>
         <span>No of dots: {noOfDots}</span>
         <br />
