@@ -1,5 +1,6 @@
 import { KCSummerLeaguePageSimplified } from "../Pages/KCSummerLeaguePageSimplified/KCSummerLeaguePageSimplified";
 import { ArrayMethods } from "./ArrayMethods/ArrayMethods";
+import { CanvasAnimation } from "./CanvasAnimation/CanvasAnimation";
 import { CanvasTestOktober } from "./CanvasTestOktober/CanvasTestOktober";
 import { CardBig } from "./CardBig/CardBig";
 import { Cards } from "./Cards/Cards";
@@ -69,6 +70,11 @@ export const pageRoutes = [
     path: "/grid-experiment-animation",
     element: <GridAnimation />,
     description: "Grid Animations",
+  },
+  {
+    path: "/canvas-animation",
+    element: <CanvasAnimation />,
+    description: "Canvas Animation",
   },
   {
     path: "/input-tests",
