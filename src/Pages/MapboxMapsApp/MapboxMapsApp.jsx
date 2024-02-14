@@ -2,14 +2,8 @@ import mapboxgl from "mapbox-gl"; // eslint-disable-line import/no-webpack-loade
 import React, { useEffect, useRef, useState } from "react";
 import { MainWrapper } from "../../Shared/Page.styled";
 import "./mapstyles.css";
-console.log(
-  "import.meta.env.VITE_MAPBOX_API_ACCESS_KEY",
-  import.meta.env.VITE_MAPBOX_API_ACCESS_KEY
-);
-console.log("import.meta.env.BASE_URL", import.meta.env.BASE_URL);
-console.log("import.meta.env.PROD", import.meta.env.PROD);
-console.log("import.meta.env.DEV", import.meta.env.DEV);
-console.log("import.meta.env.SSR", import.meta.env.SSR);
+
+console.log(import.meta.env.VITE_MAPBOX_API_ACCESS_KEY);
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_ACCESS_KEY;
 
 export const MapboxMapsApp = () => {
