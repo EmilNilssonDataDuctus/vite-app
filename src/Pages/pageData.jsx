@@ -1,5 +1,7 @@
 import { KCSummerLeaguePageSimplified } from "../Pages/KCSummerLeaguePageSimplified/KCSummerLeaguePageSimplified";
 import { ArrayMethods } from "./ArrayMethods/ArrayMethods";
+import { CanvasAnimation } from "./CanvasAnimation/CanvasAnimation";
+import { CanvasGame } from "./CanvasGame/CanvasGame";
 import { CanvasTestOktober } from "./CanvasTestOktober/CanvasTestOktober";
 import { CardBig } from "./CardBig/CardBig";
 import { Cards } from "./Cards/Cards";
@@ -20,7 +22,9 @@ import { HoverCardsPage } from "./HoverCardsPage/HoverCardsPage";
 import { HoverEffectsPage } from "./HoverEffectsPage/HoverEffectsPage";
 import { HoverEffectsPage2 } from "./HoverEffectsPage2/HoverEffectsPage2";
 import { InputElementTest } from "./InputElementTest/InputElementTest";
+import { KCLocalLegendsFinal } from "./KCLocalLegendsFinal/KCLocalLegendsFinal";
 import { KCSummerLeaguePage } from "./KCSummerLeaguePage/KCSummerLeaguePage";
+import { MapboxMapsApp } from "./MapboxMapsApp/MapboxMapsApp";
 import { MemoryGame } from "./MemoryGame/MemoryGame";
 import { MyCanvas } from "./MyCanvas/MyCanvas";
 import { MyChart } from "./MyChart/MyChart";
@@ -65,9 +69,24 @@ export const pageRoutes = [
     description: "Personnummer Calculator",
   },
   {
+    path: "/mapbox-maps-app",
+    element: <MapboxMapsApp />,
+    description: "Malmö by Bike maps",
+  },
+  {
     path: "/grid-experiment-animation",
     element: <GridAnimation />,
     description: "Grid Animations",
+  },
+  {
+    path: "/canvas-game",
+    element: <CanvasGame />,
+    description: "Canvas Game",
+  },
+  {
+    path: "/canvas-animation",
+    element: <CanvasAnimation />,
+    description: "Canvas Animation",
   },
   {
     path: "/input-tests",
@@ -98,6 +117,11 @@ export const pageRoutes = [
     path: "/kc-summer-league-simplified",
     element: <KCSummerLeaguePageSimplified />,
     description: "KCSummerLeaguePageSimplified",
+  },
+  {
+    path: "/kc-local-legends-final",
+    element: <KCLocalLegendsFinal />,
+    description: "KCLocalLegendsFinal",
   },
   {
     path: "/data-structures",
@@ -212,13 +236,13 @@ export const pageRoutes = [
   },
 ].map((obj) => {
   // temporarily WIP pages
-  if (WIPPages.find((page) => page === obj.path))
-    return { ...obj, active: false, featured: false };
-  if (obsoletePages.find((page) => page === obj.path))
-    return { ...obj, active: false, featured: false };
-  if (featuredPages.find((page) => page === obj.path))
-    return { ...obj, active: true, featured: true };
-  return { ...obj, active: true, featured: false };
+  return {
+    ...obj,
+    active:
+      !obsoletePages.find((page) => page === obj.page) &&
+      !WIPPages.find((page) => page === obj.path),
+    featured: !!featuredPages.find((page) => page === obj.path),
+  };
 });
 
 export const hideInactivePages = ({ active }) => active;
