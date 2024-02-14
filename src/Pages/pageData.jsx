@@ -24,6 +24,7 @@ import { HoverEffectsPage2 } from "./HoverEffectsPage2/HoverEffectsPage2";
 import { InputElementTest } from "./InputElementTest/InputElementTest";
 import { KCLocalLegendsFinal } from "./KCLocalLegendsFinal/KCLocalLegendsFinal";
 import { KCSummerLeaguePage } from "./KCSummerLeaguePage/KCSummerLeaguePage";
+import { MapboxMapsApp } from "./MapboxMapsApp/MapboxMapsApp";
 import { MemoryGame } from "./MemoryGame/MemoryGame";
 import { MyCanvas } from "./MyCanvas/MyCanvas";
 import { MyChart } from "./MyChart/MyChart";
@@ -66,6 +67,11 @@ export const pageRoutes = [
     path: "/personnummer-calc",
     element: <PersonnummerCalc />,
     description: "Personnummer Calculator",
+  },
+  {
+    path: "/mapbox-maps-app",
+    element: <MapboxMapsApp />,
+    description: "Malmö by Bike maps",
   },
   {
     path: "/grid-experiment-animation",
